@@ -1,0 +1,14 @@
+# IntelliJ IDEA project files
+.idea/
+*.iml
+
+# IntelliJ IDEA specific directories
+out/
+target/
+
+# Ignore all XML files
+*.xml
+
+# Logs and other OS-specific files
+*.log
+.DS_Store
