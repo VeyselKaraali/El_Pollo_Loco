@@ -15,7 +15,7 @@ class MovableObject {
         paths.forEach(path => {
             let img = new Image();
             img.src = path;
-            this.imgCache[path] = path;
+            this.imgCache[path] = img;
         })
     }
 
