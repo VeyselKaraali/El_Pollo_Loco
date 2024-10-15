@@ -4,10 +4,19 @@ class MovableObject {
     width = 100;
     height = 250;
     img;
+    imgCache = {};
 
     loadImage(path) {
         this.img = new Image()
         this.img.src = path;
+    }
+
+    loadImages(paths) {
+        paths.forEach(path => {
+            let img = new Image();
+            img.src = path;
+            this.imgCache[path] = path;
+        })
     }
 
     moveLeft() {
