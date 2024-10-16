@@ -16,10 +16,18 @@ class World {
     ];
     canvas;
     ctx;
-    constructor(canvas) {
+    keyboard;
+
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
-        this.canvas = canvas
+        this.canvas = canvas;
+        this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
+    }
+
+    setWorld(){
+        this.character.world = this;
     }
 
     draw() {
