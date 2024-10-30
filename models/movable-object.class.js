@@ -66,6 +66,17 @@ class MovableObject {
             this.y < mo.y + mo.height;
     }
 
+    hit() {
+        this.energy -= 5;
+        if(this.energy <0) {
+            this.energy = 0;
+        }
+    }
+
+    isDead() {
+        return this.energy === 0;
+    }
+
     moveLeft() {}
 
     moveRight() {}
