@@ -47,6 +47,15 @@ class World {
             mo.x = mo.x * -1;
         }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+
+        // TODO Start: Remove rectangle
+        this.ctx.beginPath();
+        this.ctx.lineWidth = "3";
+        this.ctx.strokeStyle = "red";
+        this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
+        this.ctx.stroke();
+        // End: Remove rectangle
+
         if(mo.otherDirection) {
             mo.x = mo.x * -1;
             this.ctx.restore();
