@@ -4,6 +4,8 @@
 }
 
 body {
+    margin: 0;
+    padding: 0;
     font-family: "zabars", sans-serif;
     display: grid;
     place-items: center;
@@ -19,4 +21,20 @@ h1 {
     font-size: 64px;
     letter-spacing: 3px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+
+    h1 {
+        display: none;
+    }
 }
