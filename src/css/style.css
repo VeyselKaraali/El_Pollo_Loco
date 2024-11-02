@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'zabars';
-    src: url('fonts/zabars.ttf') format('truetype')
+    src: url('../assets/fonts/zabars.ttf') format('truetype')
 }
 
 body {
@@ -9,7 +9,7 @@ body {
     font-family: "zabars", sans-serif;
     display: grid;
     place-items: center;
-    background-image: url("img/background/desert.png");
+    background-image: url("../assets/img/background/desert.png");
     background-position: center;
 }
 
