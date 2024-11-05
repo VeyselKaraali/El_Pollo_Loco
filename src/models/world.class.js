@@ -7,6 +7,10 @@ class World {
     camera_x = 0;
     statusBar = new StatusBar();
     throwableObjects = [];
+    startScreen = new StartScreen();
+
+
+    hasGameStarted = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -45,8 +49,27 @@ class World {
     }
 
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.clearCanvas();
 
+        if(this.hasGameStarted) {
+            this.drawGame();
+        } else {
+            this.drawStartScreen();
+        }
+
+        // Draw wird immer wieder aufgerufen
+        requestAnimationFrame(this.draw.bind(this));
+    }
+
+    clearCanvas(){
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    drawStartScreen() {
+        this.startScreen.draw(this.ctx);
+    }
+
+    drawGame() {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
 
@@ -62,12 +85,6 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
-
-        // Draw wird immer wieder aufgerufen
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
     }
 
     addObjectsToMap(objects) {

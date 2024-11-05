@@ -1,15 +1,37 @@
 class DrawableObject {
     img;
-    imgCache = {};
-    currentImage = 0;
     x = 120;
     y = 200;
     width = 100;
     height = 250;
+    imgCache = {};
+    currentImage = 0;
+
+    constructor(img, x, y, width, height) {
+        this.img = img;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+
+    getImageAsHTMLImageElement(path) {
+        let img = new Image();
+        img.src = path;
+        return img;
+    }
 
     loadImage(path) {
         this.img = new Image()
         this.img.src = path;
+    }
+
+    loadImages(paths) {
+        paths.forEach(path => {
+            let img = new Image();
+            img.src = path;
+            this.imgCache[path] = img;
+        })
     }
 
     draw(ctx) {
@@ -26,11 +48,5 @@ class DrawableObject {
         }
     }
 
-    loadImages(paths) {
-        paths.forEach(path => {
-            let img = new Image();
-            img.src = path;
-            this.imgCache[path] = img;
-        })
-    }
+
 }
