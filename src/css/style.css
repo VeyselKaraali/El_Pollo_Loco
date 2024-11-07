@@ -1,12 +1,12 @@
 @font-face {
-    font-family: 'zabars';
+    font-family: 'bangers';
     src: url('../assets/fonts/bangers.ttf') format('truetype')
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-family: "zabars", sans-serif;
+    font-family: "bangers", sans-serif;
     display: grid;
     place-items: center;
     background-image: url("../assets/img/custom/desert.png");
