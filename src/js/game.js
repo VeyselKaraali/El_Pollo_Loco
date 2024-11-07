@@ -1,69 +1,70 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+const CURSOR_POINTER = "pointer";
+const CURSOR_DEFAULT = "default";
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    setupEventListeners();
 }
 
-window.addEventListener("mousemove", (e) => {
-    let hovering = false;
+function setupEventListeners() {
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+}
+
+function handleMouseMove(e) {
     const rect = canvas.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const clickY = e.clientY - rect.top;
 
-    if(clickX >= window.VOLUME.X &&
-        clickX <= window.VOLUME.X + window.VOLUME.WIDTH &&
-        clickY >= window.VOLUME.Y &&
-        clickY <= window.VOLUME.Y + window.VOLUME.HEIGHT) {
-        hovering = true;
-        canvas.style.cursor="pointer"
+    if (isHovering(clickX, clickY, window.VOLUME) || isHovering(clickX, clickY, window.START_BTN)) {
+        canvas.style.cursor = CURSOR_POINTER;
+    } else {
+        canvas.style.cursor = CURSOR_DEFAULT;
     }
+}
 
-    if(clickX >= window.START_BTN.X &&
-        clickX <= window.START_BTN.X + window.START_BTN.WIDTH &&
-        clickY >= window.START_BTN.Y &&
-        clickY <= window.START_BTN.Y + window.START_BTN.HEIGHT) {
-        hovering = true;
-        canvas.style.cursor="pointer"
-    }
-    canvas.style.cursor = hovering ? "pointer" : "default";
+function isHovering(x, y, area) {
+    return (
+        x >= area.X && x <= area.X + area.WIDTH &&
+        y >= area.Y && y <= area.Y + area.HEIGHT
+    );
+}
 
-})
+function handleKeyDown(e) {
+    switch (e.key) {
+        case 'ArrowLeft':
+            keyboard.LEFT = true;
+            break;
+        case 'ArrowRight':
+            keyboard.RIGHT = true;
+            break;
+        case 'ArrowUp':
+            keyboard.UP = true;
+            break;
+        case ' ':
+            keyboard.SPACE = true;
+            break;
+    }
+}
 
-window.addEventListener("keydown", (e) => {
-    if(e.keyCode == 32) {
-        keyboard.SPACE = true;
+function handleKeyUp(e) {
+    switch (e.key) {
+        case ' ':
+            keyboard.SPACE = false;
+            break;
+        case 'ArrowLeft':
+            keyboard.LEFT = false;
+            break;
+        case 'ArrowRight':
+            keyboard.RIGHT = false;
+            break;
+        case 'ArrowUp':
+            keyboard.UP = false;
+            break;
     }
-    if(e.keyCode == 37) {
-        keyboard.LEFT = true;
-    }
-    if(e.keyCode == 38) {
-        keyboard.UP = true;
-    }
-    if(e.keyCode == 39) {
-        keyboard.RIGHT = true;
-    }
-    if(e.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
-})
-
-window.addEventListener("keyup", (e) => {
-    if(e.keyCode == 32) {
-        keyboard.SPACE = false;
-    }
-    if(e.keyCode == 37) {
-        keyboard.LEFT = false;
-    }
-    if(e.keyCode == 38) {
-        keyboard.UP = false;
-    }
-    if(e.keyCode == 39) {
-        keyboard.RIGHT = false;
-    }
-    if(e.keyCode == 40) {
-        keyboard.DOWN = false;
-    }
-})
+}
