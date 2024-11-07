@@ -10,7 +10,17 @@ window.CONTROLS = {
     Y: 10
 };
 
+window.HELP = {
+    X: 540,
+    Y: 10
+};
+
 window.VOLUME = {
+    X: 600,
+    Y: 10
+};
+
+window.FULLSCREEN = {
     X: 660,
     Y: 10
 };
