@@ -10,18 +10,17 @@ window.CONTROLS = {
     Y: 10
 };
 
-window.HELP = {
-    X: 540,
-    Y: 10
-};
-
 window.VOLUME = {
-    X: 600,
-    Y: 10
+    X: 660,
+    Y: 10,
+    WIDTH: 40,
+    HEIGHT: 40
 };
 
-window.FULLSCREEN = {
-    X: 660,
-    Y: 10
+window.START_BTN = {
+    X: 270,
+    Y: 65,
+    WIDTH: 180,
+    HEIGHT: 60
 };
 

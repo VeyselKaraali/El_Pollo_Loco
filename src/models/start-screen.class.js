@@ -1,24 +1,32 @@
 class StartScreen extends DrawableObject{
-    backgroundImg;
-    controlImg;
-    help;
-    volumeOn;
-    fullscreen
+    startScreen;
+    control;
+    volume;
+    startBtn;
+
+    isSoundOn = true;
 
     constructor() {
         super();
-        this.backgroundImg = new DrawableObject(this.getImageAsHTMLImageElement("assets/img/9_intro_outro_screens/start/startscreen_3.png"), window.CANVAS.X, window.CANVAS.Y, window.CANVAS.WIDTH, window.CANVAS.HEIGHT);
-        this.controlImg = new DrawableObject(this.getImageAsHTMLImageElement("assets/img/custom/controls.png"), window.CONTROLS.X,window.CONTROLS.Y);
-        this.help = new DrawableObject(this.getImageAsHTMLImageElement("assets/img/custom/help.png"), window.HELP.X, window.HELP.Y);
-        this.volumeOn = new DrawableObject(this.getImageAsHTMLImageElement("assets/img/custom/volume_on.png"), window.VOLUME.X, window.VOLUME.Y);
-        this.fullscreen = new DrawableObject(this.getImageAsHTMLImageElement("assets/img/custom/fullscreen.png"), window.FULLSCREEN.X, window.FULLSCREEN.Y);
+        this.startScreen = new DrawableObject(this.getImageAsHTMLImageElement("assets/img/9_intro_outro_screens/start/startscreen_3.png"), window.CANVAS.X, window.CANVAS.Y, window.CANVAS.WIDTH, window.CANVAS.HEIGHT);
+        this.control = new DrawableObject(this.getImageAsHTMLImageElement("assets/img/custom/controls.png"), window.CONTROLS.X,window.CONTROLS.Y);
+        this.startBtn = new DrawableObject(this.getImageAsHTMLImageElement("assets/img/custom/start_game.png"), window.START_BTN.X, window.START_BTN.Y, window.START_BTN.WIDTH, window.START_BTN.HEIGHT);
+
+        this.volumeOnSrc = "assets/img/custom/volume_on.png";
+        this.volumeOffSrc = "assets/img/custom/volume_off.png";
+        this.volume = new DrawableObject(this.getImageAsHTMLImageElement(this.volumeOffSrc), window.VOLUME.X, window.VOLUME.Y, window.VOLUME.WIDTH, window.VOLUME.HEIGHT);
     }
 
     draw(ctx) {
-        ctx.drawImage(this.backgroundImg.img, this.backgroundImg.x, this.backgroundImg.y, this.backgroundImg.width, this.backgroundImg.height);
-        ctx.drawImage(this.controlImg.img, this.controlImg.x, this.controlImg.y);
-        ctx.drawImage(this.help.img, this.help.x, this.help.y);
-        ctx.drawImage(this.volumeOn.img, this.volumeOn.x, this.volumeOn.y);
-        ctx.drawImage(this.fullscreen.img, this.fullscreen.x, this.fullscreen.y);
+        ctx.drawImage(this.startScreen.img, this.startScreen.x, this.startScreen.y, this.startScreen.width, this.startScreen.height);
+        ctx.drawImage(this.control.img, this.control.x, this.control.y);
+        ctx.drawImage(this.volume.img, this.volume.x, this.volume.y);
+        ctx.drawImage(this.startBtn.img, this.startBtn.x, this.startBtn.y);
+    }
+
+    toggleVolumeImage() {
+        this.isSoundOn = !this.isSoundOn;
+        this.volume.img.src = this.isSoundOn ? this.volumeOffSrc : this.volumeOnSrc;
     }
 }
+

@@ -9,8 +9,11 @@ class World {
     throwableObjects = [];
     startScreen = new StartScreen();
 
+    isListenerAdded = false;
+
 
     hasGameStarted = false;
+    backgroundMusic = new Audio("assets/audio/bg_1.mp3");
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -19,6 +22,47 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+
+        this.addClickListener();
+    }
+
+
+    addClickListener() {
+        if (!this.isListenerAdded) {
+            window.addEventListener("click", (e) => {
+                const rect = this.canvas.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const clickY = e.clientY - rect.top;
+
+                // Prüfen, ob der Klick auf das `volume`-Bild zielt
+                if (
+                    clickX >= window.VOLUME.X &&
+                    clickX <= window.VOLUME.X + window.VOLUME.WIDTH &&
+                    clickY >= window.VOLUME.Y &&
+                    clickY <= window.VOLUME.Y + window.VOLUME.HEIGHT
+                ) {
+                    console.log("Klick auf Volume-Bild");
+                    this.startScreen.toggleVolumeImage(); // Bild toggeln
+                    this.startScreen.draw(this.ctx); // Canvas neu zeichnen
+                    if(this.startScreen.isSoundOn) {
+                        this.backgroundMusic.pause();
+                    } else {
+                        this.backgroundMusic.play();
+                    }
+                }
+
+                if (
+                    clickX >= window.START_BTN.X &&
+                    clickX <= window.START_BTN.X + window.START_BTN.WIDTH &&
+                    clickY >= window.START_BTN.Y &&
+                    clickY <= window.START_BTN.Y + window.START_BTN.HEIGHT
+                ) {
+                    console.log("Klick auf Start-Game-Bild");
+                    this.hasGameStarted = true;
+                }
+            });
+            this.isListenerAdded = true;  // Setze das Flag, dass der Listener hinzugefügt wurde
+        }
     }
 
     setWorld(){
@@ -50,7 +94,6 @@ class World {
 
     draw() {
         this.clearCanvas();
-
         if(this.hasGameStarted) {
             this.drawGame();
         } else {
@@ -61,11 +104,14 @@ class World {
         requestAnimationFrame(this.draw.bind(this));
     }
 
+
+
     clearCanvas(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     drawStartScreen() {
+
         this.startScreen.draw(this.ctx);
     }
 
