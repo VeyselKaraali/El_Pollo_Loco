@@ -8,6 +8,7 @@ class World {
     statusBar = new StatusBar();
     throwableObjects = [];
     startScreen = new StartScreen();
+    gameElements = new GameElements();
 
     isListenerAdded = false;
     hasGameStarted = false;
@@ -56,9 +57,9 @@ class World {
     }
 
     toggleBackgroundMusic() {
-        this.startScreen.toggleVolumeImage();
-        this.startScreen.draw(this.ctx);
-        if (this.startScreen.isSoundOn) {
+        this.gameElements.toggleVolumeImage();
+        this.gameElements.draw(this.ctx);
+        if (this.gameElements.isSoundOn) {
             this.backgroundMusic.pause();
         } else {
             this.backgroundMusic.play();
@@ -67,7 +68,6 @@ class World {
 
     startGame() {
         this.hasGameStarted = true;
-        console.log("Spiel gestartet");
     }
 
     setWorld() {
@@ -104,6 +104,7 @@ class World {
         } else {
             this.startScreen.draw(this.ctx);
         }
+        this.gameElements.draw(this.ctx);
         requestAnimationFrame(this.draw.bind(this));
     }
 
