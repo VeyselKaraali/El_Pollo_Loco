@@ -1,7 +1,17 @@
-export const CONTROLS = {
-    x: 10,
-    y: 10
+window.CANVAS = {
+    X: 0,
+    Y: 0,
+    WIDTH: 720,
+    HEIGHT: 480
 };
 
-export const CONTROLS_X = 10;
-export const CONTROLS_Y = 10;
+window.CONTROLS = {
+    X: 10,
+    Y: 10
+};
+
+window.VOLUME = {
+    X: 660,
+    Y: 10
+};
+

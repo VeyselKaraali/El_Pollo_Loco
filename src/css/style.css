@@ -9,7 +9,7 @@ body {
     font-family: "zabars", sans-serif;
     display: grid;
     place-items: center;
-    background-image: url("../assets/img/background/desert.png");
+    background-image: url("../assets/img/custom/desert.png");
     background-position: center;
 }
 
