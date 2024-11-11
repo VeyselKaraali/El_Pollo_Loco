@@ -14,8 +14,9 @@ class World {
     gameElements = new GameElements();
 
     isListenerAdded = false;
-    hasGameStarted = false;
-    backgroundMusic = new Audio("assets/audio/bg_1.mp3");
+    hasGameStarted = true;
+    backgroundMusic = new Audio("assets/audio/bg_2.mp3");
+    collectedBottleSound = new Audio("assets/audio/bottle_collect.mp3")
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
@@ -29,6 +30,17 @@ class World {
         this.runGameLoop();
         this.addClickListener();
         this.draw();
+
+    }
+
+    handleBottleCollisions() {
+        this.level.bottles.forEach((bottle, index) => {
+            if (this.character.isColliding(bottle) && !this.statusBarBottle.isFull()) {
+                this.collectedBottleSound.play();
+                this.statusBarBottle.setPercentage(this.character.collectBottle(20));
+                this.level.bottles.splice(index, 1);
+            }
+        });
     }
 
     addClickListener() {
@@ -80,14 +92,22 @@ class World {
     runGameLoop() {
         setInterval(() => {
             this.checkCollisions();
+            this.handleBottleCollisions();
             this.checkThrowObjects();
         }, 200);
     }
 
     checkThrowObjects() {
-        if (this.keyboard.SPACE) {
-            const bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+        if (this.keyboard.SPACE && this.character.collectedBottles > 0) {
+            let otherDirection = false;
+            let xPosition = this.character.x + 100;
+            if(this.character.otherDirection) {
+                otherDirection = true;
+                xPosition = this.character.x;
+            }
+            const bottle = new ThrowableObject(xPosition, this.character.y + 100, otherDirection);
             this.throwableObjects.push(bottle);
+            this.statusBarBottle.setPercentage(this.character.collectBottle(-20));
         }
     }
 
@@ -120,10 +140,10 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
 
         // Moving elements
-
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.level.bottles);
 
         // SPACE FOR FIXED OBJECTS
         this.ctx.translate(-this.camera_x, 0);
@@ -133,6 +153,7 @@ class World {
         this.addToMap(this.statusBarEndboss);
         this.ctx.translate(this.camera_x, 0);
         // ===========================
+
 
         this.addToMap(this.character);
 
