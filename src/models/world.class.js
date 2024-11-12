@@ -32,6 +32,12 @@ class World {
         this.addClickListener();
         this.draw();
 
+        this.backgroundMusic.addEventListener('ended', () => {
+            this.backgroundMusic.volume = 0.05;
+            this.backgroundMusic.currentTime = 0;
+            this.backgroundMusic.play();
+        });
+
     }
 
     handleCoinCollisions() {
