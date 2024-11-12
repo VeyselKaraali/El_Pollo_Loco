@@ -38,6 +38,7 @@ class Character extends MovableObject {
     world;
     running_sound = new Audio("assets/audio/run.mp3");
     collectedBottles = 0;
+    collectedCoins = 0;
 
     constructor() {
         super("assets/img/2_character_pepe/2_walk/W-21.png", 120, 200, 100, 250);
@@ -52,6 +53,10 @@ class Character extends MovableObject {
 
     collectBottle(amount) {
         return this.collectedBottles+=amount;
+    }
+
+    collectCoin(amount) {
+        return this.collectedCoins+=amount;
     }
 
     animate() {

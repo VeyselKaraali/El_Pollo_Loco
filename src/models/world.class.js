@@ -17,6 +17,7 @@ class World {
     hasGameStarted = true;
     backgroundMusic = new Audio("assets/audio/bg_2.mp3");
     collectedBottleSound = new Audio("assets/audio/bottle_collect.mp3")
+    collectedCoinSound = new Audio("assets/audio/coin_collect.mp3")
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
@@ -31,6 +32,16 @@ class World {
         this.addClickListener();
         this.draw();
 
+    }
+
+    handleCoinCollisions() {
+        this.level.coins.forEach((coin, index) => {
+            if (this.character.isColliding(coin) && !this.statusBarCoin.isFull()) {
+                this.collectedCoinSound.play();
+                this.statusBarCoin.setPercentage(this.character.collectCoin(20));
+                this.level.coins.splice(index, 1);
+            }
+        });
     }
 
     handleBottleCollisions() {
@@ -77,6 +88,7 @@ class World {
         if (this.gameElements.isSoundOn) {
             this.backgroundMusic.pause();
         } else {
+            this.backgroundMusic.volume = 0.05;
             this.backgroundMusic.play();
         }
     }
@@ -93,6 +105,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.handleBottleCollisions();
+            this.handleCoinCollisions();
             this.checkThrowObjects();
         }, 200);
     }
@@ -144,6 +157,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.coins);
 
         // SPACE FOR FIXED OBJECTS
         this.ctx.translate(-this.camera_x, 0);
