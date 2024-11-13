@@ -6,6 +6,9 @@ class Chicken extends Enemy {
         height: 8
     };
 
+    static basePosition = 600;
+    static step = 1500 / 5;
+
     IMAGES_WALKING = [
         "assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
         "assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
@@ -16,13 +19,13 @@ class Chicken extends Enemy {
         "assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
     ]
 
-    constructor() {
+    constructor(index) {
         super(
-            200 + Math.random() * 500,
+            Chicken.basePosition + index * Chicken.step + (Math.random() * 100 - 50),
             354,
             80,
             60,
-            0.15 + Math.random() * 0.5,
+            0.25 + Math.random() * (0.75 - 0.25)
         );
         super.loadImages(this.IMAGES_WALKING);
         super.loadImages(this.IMAGES_DEAD);

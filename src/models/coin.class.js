@@ -6,6 +6,9 @@ class Coin extends MovableObject {
         height: 70
     };
 
+    static basePosition = 600;
+    static step = 1500 / 5;
+
     IMAGES_COIN = [
         'assets/img/8_coin/coin_1.png',
         'assets/img/8_coin/coin_2.png'
@@ -14,12 +17,11 @@ class Coin extends MovableObject {
     width = 100;
     height = 100;
 
-    constructor() {
+    constructor(index) {
         super();
-        this.loadImage(this.IMAGES_COIN[0]);
-        this.loadImages(this.IMAGES_COIN);
-        this.x = Math.random() * 1600 + 250;
+        this.x = Coin.basePosition + index * Coin.step + (Math.random() * 100 - 50);
         this.y = Math.floor(Math.random() * (180 - 20 + 1)) + 20;
+        this.loadImages(this.IMAGES_COIN);
         this.animate();
     }
 

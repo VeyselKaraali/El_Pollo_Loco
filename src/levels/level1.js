@@ -1,13 +1,8 @@
 const level1 = new Level(
     [
-        new Chick(),
-        new Chick(),
-        new Chick(),
+        ...Array(6).fill().map((_, i) => new Chick(i)),
 
-
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
+        ...Array(6).fill().map((_, i) => new Chicken(i)),
 
         new Endboss(),
     ],
@@ -41,18 +36,9 @@ const level1 = new Level(
         new BackgroundObject("assets/img/5_background/layers/1_first_layer/2.png", 719*3),
     ],
     [
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle()
+        ...Array(6).fill().map((_, i) => new Bottle(i)),
     ],
     [
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin()
+        ...Array(5).fill().map((_, i) => new Coin(i)),
     ]
 )
