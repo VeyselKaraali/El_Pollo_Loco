@@ -1,10 +1,15 @@
 class MovableObject extends DrawableObject {
-    speed = 0.15;
+    speed = 0;
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
+
+    constructor(x, y, width, height, speed) {
+        super(x, y, width, height);
+        this.speed = speed;
+    }
 
     applyGravity() {
         setInterval(() => {
@@ -16,11 +21,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if(this instanceof ThrowableObject){
-            return true;
-        } else {
-            return this.y < 150;
-        }
+        return (this instanceof ThrowableObject) ? true : (this.y < 150);
     }
 
     playAnimation(images) {
@@ -38,24 +39,38 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        this.energy -= 5;
-        if(this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+        this.energy = Math.max(this.energy - 5, 0);
+        if (this.energy > 0) {
+            this.lastHit = Date.now();
         }
     }
 
     isHurt() {
-        let timePassed = (new Date().getTime() - this.lastHit) / 1000;
-        return timePassed < 1;
+        return (Date.now() - this.lastHit) / 1000 < 1;
     }
 
     isDead() {
-        return this.energy === 0;
+        return this.energy <= 0;
     }
 
-    moveLeft() {}
+    moveLeft() {
+        this.x -= this.speed;
+        this.otherDirection = true; // Markiert, dass das Objekt nach links schaut
+    }
 
-    moveRight() {}
+    moveRight() {
+        this.x += this.speed;
+        this.otherDirection = false; // Markiert, dass das Objekt nach rechts schaut
+    }
+
+    animate() {
+        setInterval(() => {
+            this.moveLeft(); // Bewegung nach links
+        }, 1000 / 60);
+
+
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_WALKING);
+        }, 200)
+    }
 }

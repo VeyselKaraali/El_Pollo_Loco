@@ -1,7 +1,9 @@
 class Character extends MovableObject {
-    height = 280;
-    y = 0;
-    speed=10;
+    world;
+    running_sound = new Audio("assets/audio/run.mp3");
+    collectedBottles = 0;
+    collectedCoins = 0;
+
     IMAGES_WALKING = [
         "assets/img/2_character_pepe/2_walk/W-21.png",
         "assets/img/2_character_pepe/2_walk/W-22.png",
@@ -21,6 +23,12 @@ class Character extends MovableObject {
         "assets/img/2_character_pepe/3_jump/J-38.png",
         "assets/img/2_character_pepe/3_jump/J-39.png",
     ];
+    IMAGES_HURT = [
+        "assets/img/2_character_pepe/4_hurt/H-41.png",
+        "assets/img/2_character_pepe/4_hurt/H-42.png",
+        "assets/img/2_character_pepe/4_hurt/H-43.png",
+    ];
+
     IMAGES_DEAD = [
         "assets/img/2_character_pepe/5_dead/D-51.png",
         "assets/img/2_character_pepe/5_dead/D-52.png",
@@ -30,23 +38,19 @@ class Character extends MovableObject {
         "assets/img/2_character_pepe/5_dead/D-56.png",
         "assets/img/2_character_pepe/5_dead/D-57.png"
     ];
-    IMAGES_HURT = [
-        "assets/img/2_character_pepe/4_hurt/H-41.png",
-        "assets/img/2_character_pepe/4_hurt/H-42.png",
-        "assets/img/2_character_pepe/4_hurt/H-43.png",
-    ];
-    world;
-    running_sound = new Audio("assets/audio/run.mp3");
-    collectedBottles = 0;
-    collectedCoins = 0;
 
     constructor() {
-        super("assets/img/2_character_pepe/2_walk/W-21.png", 120, 200, 100, 250);
-        this.loadImage("assets/img/2_character_pepe/2_walk/W-21.png");
-        this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_JUMPING);
-        this.loadImages(this.IMAGES_HURT);
+        super(
+            120,
+            200,
+            100,
+            250,
+            10
+        );
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_WALKING);
         this.applyGravity();
         this.animate();
     }
@@ -96,14 +100,12 @@ class Character extends MovableObject {
     }
 
     moveLeft() {
-        this.otherDirection = true;
-        this.x -= this.speed;
-        this.running_sound.play();
+        super.moveLeft();
+        this.running_sound.play().then(r => {});
     }
 
     moveRight() {
-        this.otherDirection = false;
-        this.x += this.speed;
-        this.running_sound.play();
+        super.moveRight();
+        this.running_sound.play().then(r => {});
     }
 }

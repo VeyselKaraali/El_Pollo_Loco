@@ -12,8 +12,8 @@ class GameElements extends DrawableObject{
     }
 
     draw(ctx) {
-        ctx.drawImage(this.control.img, this.control.x, this.control.y);
-        ctx.drawImage(this.volume.img, this.volume.x, this.volume.y);
+        //ctx.drawImage(this.control.img, this.control.x, this.control.y);
+        //ctx.drawImage(this.volume.img, this.volume.x, this.volume.y);
     }
 
     toggleVolumeImage() {
