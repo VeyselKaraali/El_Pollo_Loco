@@ -1,4 +1,11 @@
 class Chicken extends Enemy {
+    offset = {
+        x: 0,
+        y: 3,
+        width: 0,
+        height: 8
+    };
+
     IMAGES_WALKING = [
         "assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
         "assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
@@ -12,7 +19,7 @@ class Chicken extends Enemy {
     constructor() {
         super(
             200 + Math.random() * 500,
-            360,
+            354,
             80,
             60,
             0.15 + Math.random() * 0.5,

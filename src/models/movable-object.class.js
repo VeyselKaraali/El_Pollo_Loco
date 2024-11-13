@@ -32,10 +32,10 @@ class MovableObject extends DrawableObject {
     }
 
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height;
+        return this.x + this.offset.x + this.width - this.offset.width >= mo.x &&
+            this.y + this.offset.y + this.height - this.offset.height >= mo.y &&
+            this.x <= mo.x + mo.offset.x + mo.width - mo.offset.width &&
+            this.y + this.offset.y <= mo.y + mo.offset.y + mo.height - mo.offset.height;
     }
 
     hit() {
@@ -61,16 +61,5 @@ class MovableObject extends DrawableObject {
     moveRight() {
         this.x += this.speed;
         this.otherDirection = false; // Markiert, dass das Objekt nach rechts schaut
-    }
-
-    animate() {
-        setInterval(() => {
-            this.moveLeft(); // Bewegung nach links
-        }, 1000 / 60);
-
-
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 200)
     }
 }

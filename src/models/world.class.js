@@ -35,9 +35,34 @@ class World {
         this.backgroundMusic.addEventListener('ended', () => {
             this.backgroundMusic.volume = 0.05;
             this.backgroundMusic.currentTime = 0;
-            this.backgroundMusic.play();
+            this.backgroundMusic.play().then(r => {});
         });
 
+    }
+
+    /*checkCollisions() {
+        this.level.enemies.forEach(enemy => {
+            if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
+                this.character.hit();
+                this.statusBarHealth.setPercentage(this.character.energy);
+            }
+        });
+    }*/
+
+    handleCharacterWithEnemyCollision() {
+        this.level.enemies.forEach((enemy, index) => {
+            if(this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() && !enemy.isHurt()) {
+                enemy.energy = 0;
+                console.log(enemy.energy);
+                //this.character.bounce();
+                // Sound
+            }
+
+            if(!this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
+                    this.character.hit();
+                    this.statusBarHealth.setPercentage(this.character.energy);
+            }
+        })
     }
 
     handleBottleWithEndbossCollision() {
@@ -121,10 +146,11 @@ class World {
 
     runGameLoop() {
         setInterval(() => {
-            this.checkCollisions();
+            //this.checkCollisions();
             this.handleBottleCollisions();
             this.handleCoinCollisions();
             this.handleBottleWithEndbossCollision();
+            this.handleCharacterWithEnemyCollision();
             this.checkThrowObjects();
         }, 200);
     }
@@ -143,14 +169,7 @@ class World {
         }
     }
 
-    checkCollisions() {
-        this.level.enemies.forEach(enemy => {
-            if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusBarHealth.setPercentage(this.character.energy);
-            }
-        });
-    }
+
 
     draw() {
         this.clearCanvas();

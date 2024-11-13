@@ -3,6 +3,12 @@ class DrawableObject {
     y = 0;
     width = 0;
     height = 0;
+    offset = {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0
+    };
     img;
     imgCache = {};
     currentImage = 0;
@@ -42,11 +48,18 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if(this instanceof Character || this instanceof Chicken || this instanceof Bottle || this instanceof Coin){
+        if(
+            this instanceof Character ||
+            this instanceof Chick ||
+            this instanceof Chicken ||
+            this instanceof Endboss ||
+            this instanceof Bottle ||
+            this instanceof Coin
+        ){
             ctx.beginPath();
-            ctx.lineWidth = "3";
+            ctx.lineWidth = "1";
             ctx.strokeStyle = "red";
-            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.rect(this.x + this.offset.x, this.y+this.offset.y, this.width-this.offset.width, this.height-this.offset.height);
             ctx.stroke();
         }
     }

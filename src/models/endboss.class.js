@@ -1,4 +1,11 @@
 class Endboss extends Enemy {
+    offset = {
+        x: 10,
+        y: 62,
+        width: 15,
+        height: 75
+    };
+
     IMAGES_WALKING = [
         "assets/img/4_enemie_boss_chicken/2_alert/G5.png",
         "assets/img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -19,7 +26,7 @@ class Endboss extends Enemy {
     constructor() {
         super(
             2500,
-            60,
+            45,
             250,
             400,
             0.1

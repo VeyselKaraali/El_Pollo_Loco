@@ -1,12 +1,19 @@
 class Bottle extends MovableObject {
+    offset = {
+        x: 27,
+        y: 13,
+        width: 45,
+        height: 20
+    };
+
     IMAGES_BOTTLE=[
         "assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png",
         "assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png",
     ]
 
-    width = 76;
-    height = 100;
-    y = 320;
+    width = 90;
+    height = 75;
+    y = 340;
 
     static bottlePositions = [];
     static zones = [

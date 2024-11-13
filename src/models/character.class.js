@@ -1,5 +1,11 @@
 class Character extends MovableObject {
     world;
+    offset = {
+        x: 13,
+        y: 97,
+        width: 25,
+        height: 110
+    };
     running_sound = new Audio("assets/audio/run.mp3");
     collectedBottles = 0;
     collectedCoins = 0;
@@ -42,7 +48,7 @@ class Character extends MovableObject {
     constructor() {
         super(
             120,
-            200,
+            172,
             100,
             250,
             10
@@ -97,6 +103,10 @@ class Character extends MovableObject {
 
     jump() {
         this.speedY = 30;
+    }
+
+    bounce() {
+        this.speedY = 15;
     }
 
     moveLeft() {

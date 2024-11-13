@@ -1,5 +1,5 @@
 class Enemy extends MovableObject {
-    constructor(x, y, width, height, speed/*, walkingImages, deadImages*/) {
+    constructor(x, y, width, height, speed) {
         super(x, y, width, height, speed);
         this.animate();
     }
@@ -12,5 +12,28 @@ class Enemy extends MovableObject {
     moveRight() {
         super.moveRight();
         this.otherDirection = true;
+    }
+
+    animate() {
+        setInterval(() => {
+            if(!super.isDead()) {
+                this.moveLeft();
+            }
+        }, 1000 / 60);
+
+        setInterval(() => {
+            if(!super.isDead()) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }, 200)
+
+        setInterval(() => {
+            if(super.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+                setTimeout(() => {
+                    this.y = 1000;
+                }, 1000);
+            }
+        }, 200)
     }
 }
