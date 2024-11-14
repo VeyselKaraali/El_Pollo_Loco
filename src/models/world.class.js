@@ -51,7 +51,7 @@ class World {
 
     handleCharacterWithEnemyCollision() {
         this.level.enemies.forEach((enemy, index) => {
-            if(this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() && !enemy.isHurt()) {
+            if(this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
                 enemy.energy = 0;
                 console.log(enemy.energy);
                 //this.character.bounce();
