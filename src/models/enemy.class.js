@@ -15,19 +15,19 @@ class Enemy extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if(!super.isDead()) {
                 this.moveLeft();
             }
         }, 1000 / 60);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if(!super.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 200)
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if(super.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {

@@ -145,7 +145,7 @@ class World {
     }
 
     runGameLoop() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             //this.checkCollisions();
             this.handleBottleCollisions();
             this.handleCoinCollisions();
