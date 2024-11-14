@@ -53,12 +53,11 @@ class World {
         this.level.enemies.forEach((enemy, index) => {
             if(this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
                 enemy.energy = 0;
-                console.log(enemy.energy);
-                //this.character.bounce();
-                // Sound
+                this.character.bounce();
+                // ToDo Sound
             }
 
-            if(!this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
+            else if (!this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
                     this.character.hit();
                     this.statusBarHealth.setPercentage(this.character.energy);
             }
@@ -152,7 +151,7 @@ class World {
             this.handleBottleWithEndbossCollision();
             this.handleCharacterWithEnemyCollision();
             this.checkThrowObjects();
-        }, 200);
+        }, 20);
     }
 
     checkThrowObjects() {
