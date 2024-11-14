@@ -6,9 +6,9 @@ class Character extends MovableObject {
         width: 25,
         height: 110
     };
-    running_sound = new Audio("assets/audio/run.mp3");
     collectedBottles = 0;
     collectedCoins = 0;
+    running_sound = new Audio("assets/audio/run.mp3");
 
     IMAGES_WALKING = [
         "assets/img/2_character_pepe/2_walk/W-21.png",
@@ -18,6 +18,20 @@ class Character extends MovableObject {
         "assets/img/2_character_pepe/2_walk/W-25.png",
         "assets/img/2_character_pepe/2_walk/W-26.png",
     ];
+
+    IMAGES_IDLE = [
+        "assets/img/2_character_pepe/1_idle/idle/I-1.png",
+        "assets/img/2_character_pepe/1_idle/idle/I-2.png",
+        "assets/img/2_character_pepe/1_idle/idle/I-3.png",
+        "assets/img/2_character_pepe/1_idle/idle/I-4.png",
+        "assets/img/2_character_pepe/1_idle/idle/I-5.png",
+        "assets/img/2_character_pepe/1_idle/idle/I-6.png",
+        "assets/img/2_character_pepe/1_idle/idle/I-7.png",
+        "assets/img/2_character_pepe/1_idle/idle/I-8.png",
+        "assets/img/2_character_pepe/1_idle/idle/I-9.png",
+        "assets/img/2_character_pepe/1_idle/idle/I-10.png",
+    ];
+
     IMAGES_JUMPING = [
         "assets/img/2_character_pepe/3_jump/J-31.png",
         "assets/img/2_character_pepe/3_jump/J-32.png",
@@ -54,6 +68,7 @@ class Character extends MovableObject {
             10
         );
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_WALKING);
@@ -93,12 +108,13 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
             } else if(this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
+            else {
+                this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 50)
+        }, 100)
     }
 
     jump() {
