@@ -33,5 +33,26 @@ class Endboss extends Enemy {
         );
         super.loadImages(this.IMAGES_WALKING);
         super.loadImages(this.IMAGES_DEAD);
+        this.animate();
+    }
+
+    animate() {
+        setStoppableInterval(() => {
+            if(!super.isDead()) {
+                this.moveLeft();
+            }
+        }, 1000 / 60);
+
+        setStoppableInterval(() => {
+            if(!super.isDead()) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }, 200)
+
+        setStoppableInterval(() => {
+            if(super.isDead()) {
+
+            }
+        }, 200)
     }
 }

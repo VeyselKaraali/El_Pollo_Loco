@@ -1,13 +1,10 @@
-class Chicken extends Enemy {
+class Chicken extends BasicChicken {
     offset = {
         x: 0,
         y: 3,
         width: 0,
         height: 8
     };
-
-    static basePosition = 600;
-    static step = 1500 / 5;
 
     IMAGES_WALKING = [
         "assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -21,7 +18,7 @@ class Chicken extends Enemy {
 
     constructor(index) {
         super(
-            Chicken.basePosition + index * Chicken.step + (Math.random() * 100 - 50),
+            BasicChicken.basePosition + index * BasicChicken.step + (Math.random() * 100 - 50),
             354,
             80,
             60,
@@ -29,5 +26,6 @@ class Chicken extends Enemy {
         );
         super.loadImages(this.IMAGES_WALKING);
         super.loadImages(this.IMAGES_DEAD);
+        super.animate();
     }
 }
