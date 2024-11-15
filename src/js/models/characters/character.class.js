@@ -134,7 +134,7 @@ class Character extends MovableObject {
             }
             else if(super.isInactive()) {
                 this.playAnimation(this.IMAGES_IDLE_LONG);
-                this.audioSnore.play().then(() => {})
+                //this.audioSnore.play().then(() => {})
             }
             else {
                 this.playAnimation(this.IMAGES_IDLE);

@@ -11,10 +11,10 @@ class World {
     statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
     startScreen = new StartScreen();
-    gameElements = new GameElements();
+    //gameElements = new GameElements();
 
     isListenerAdded = false;
-    hasGameStarted = true;
+    hasGameStarted = false;
 
     backgroundMusic = new Audio("assets/audio/music/2.mp3");
     collectedBottleSound = new Audio("assets/audio/collectables/bottle/collect.mp3")
@@ -117,14 +117,14 @@ class World {
     }
 
     toggleBackgroundMusic() {
-        this.gameElements.toggleVolumeImage();
+        /*this.gameElements.toggleVolumeImage();
         this.gameElements.draw(this.ctx);
         if (this.gameElements.isSoundOn) {
             this.backgroundMusic.pause();
         } else {
             this.backgroundMusic.volume = 0.05;
             this.backgroundMusic.play();
-        }
+        }*/
     }
 
     startGame() {
@@ -133,6 +133,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        //this.startScreen.world = this;
     }
 
     runGameLoop() {
@@ -163,12 +164,8 @@ class World {
 
     draw() {
         this.clearCanvas();
-        if (this.hasGameStarted) {
-            this.drawGameElements();
-        } else {
-            this.startScreen.draw(this.ctx);
-        }
-        this.gameElements.draw(this.ctx);
+        this.drawGameElements();
+        //this.gameElements.draw(this.ctx);
         requestAnimationFrame(this.draw.bind(this));
     }
 
@@ -178,26 +175,33 @@ class World {
 
     drawGameElements() {
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.backgroundObjects);
+        if(this.hasGameStarted) {
+            this.addObjectsToMap(this.level.backgroundObjects);
 
-        // Moving elements
-        this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.throwableObjects);
-        this.addObjectsToMap(this.level.bottles);
-        this.addObjectsToMap(this.level.coins);
+            // Moving elements
+            this.addObjectsToMap(this.level.clouds);
+            this.addObjectsToMap(this.level.enemies);
+            this.addObjectsToMap(this.throwableObjects);
+            this.addObjectsToMap(this.level.bottles);
+            this.addObjectsToMap(this.level.coins);
 
-        // SPACE FOR FIXED OBJECTS
-        this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBarHealth);
-        this.addToMap(this.statusBarCoin);
-        this.addToMap(this.statusBarBottle);
-        this.addToMap(this.statusBarEndboss);
-        this.ctx.translate(this.camera_x, 0);
-        // ===========================
+            // SPACE FOR FIXED OBJECTS
+            this.ctx.translate(-this.camera_x, 0);
+            this.addToMap(this.statusBarHealth);
+            this.addToMap(this.statusBarCoin);
+            this.addToMap(this.statusBarBottle);
+            this.addToMap(this.statusBarEndboss);
+            this.ctx.translate(this.camera_x, 0);
+            // ===========================
 
 
-        this.addToMap(this.character);
+            this.addToMap(this.character);
+
+
+        }
+        else {
+            this.startScreen.draw(this.ctx);
+        }
 
         this.ctx.translate(-this.camera_x, 0);
     }
