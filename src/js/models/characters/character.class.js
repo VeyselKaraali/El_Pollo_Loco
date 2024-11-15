@@ -139,13 +139,25 @@ class Character extends MovableObject {
         this.speedY = 15;
     }
 
+    playWalkingSound() {
+        if (!super.isAboveGround()) {
+            this.soundWalk.play()
+                .then(() => {
+
+                })
+                .catch(error => {
+                    console.error("Error when playing the sound:", error);
+                });
+        }
+    }
+
     moveLeft() {
         super.moveLeft();
-        this.soundWalk.play().then(r => {});
+        this.playWalkingSound();
     }
 
     moveRight() {
         super.moveRight();
-        this.soundWalk.play().then(r => {});
+        this.playWalkingSound();
     }
 }
