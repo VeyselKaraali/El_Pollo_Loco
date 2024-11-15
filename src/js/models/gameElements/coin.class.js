@@ -10,8 +10,8 @@ class Coin extends MovableObject {
     static step = 1500 / 5;
 
     IMAGES_COIN = [
-        'assets/img/8_coin/coin_1.png',
-        'assets/img/8_coin/coin_2.png'
+        'assets/img/6_coin/1.png',
+        'assets/img/6_coin/2.png'
     ];
 
     width = 100;

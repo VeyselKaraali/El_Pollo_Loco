@@ -2,7 +2,7 @@ class ThrowableObject extends MovableObject {
 
     isLeftDirection = false;
     constructor(x, y, otherDirection) {
-        super().loadImage("assets/img/7_statusbars/3_icons/icon_salsa_bottle.png");
+        super().loadImage("assets/img/7_bottle/2_rotation/1.png");
         this.x = x;
         this.y = y;
         this.width = 75;

@@ -15,7 +15,7 @@ class BasicChicken extends Enemy {
 
         setStoppableInterval(() => {
             if(!super.isDead()) {
-                this.playAnimation(this.IMAGES_WALKING);
+                this.playAnimation(this.IMAGES_WALK);
             }
         }, 200)
 

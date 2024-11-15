@@ -6,45 +6,45 @@ class Endboss extends Enemy {
         height: 75
     };
 
-    IMAGES_WALKING = [
-        "assets/img/4_enemie_boss_chicken/1_walk/G1.png",
-        "assets/img/4_enemie_boss_chicken/1_walk/G2.png",
-        "assets/img/4_enemie_boss_chicken/1_walk/G3.png",
-        "assets/img/4_enemie_boss_chicken/1_walk/G4.png"
+    IMAGES_WALK = [
+        "assets/img/5_enemies/3_chicken_big/1_walk/1.png",
+        "assets/img/5_enemies/3_chicken_big/1_walk/2.png",
+        "assets/img/5_enemies/3_chicken_big/1_walk/3.png",
+        "assets/img/5_enemies/3_chicken_big/1_walk/4.png",
     ]
 
     IMAGES_ALERT = [
-        "assets/img/4_enemie_boss_chicken/2_alert/G5.png",
-        "assets/img/4_enemie_boss_chicken/2_alert/G6.png",
-        "assets/img/4_enemie_boss_chicken/2_alert/G7.png",
-        "assets/img/4_enemie_boss_chicken/2_alert/G8.png",
-        "assets/img/4_enemie_boss_chicken/2_alert/G9.png",
-        "assets/img/4_enemie_boss_chicken/2_alert/G10.png",
-        "assets/img/4_enemie_boss_chicken/2_alert/G11.png",
-        "assets/img/4_enemie_boss_chicken/2_alert/G12.png"
+        "assets/img/5_enemies/3_chicken_big/2_alert/1.png",
+        "assets/img/5_enemies/3_chicken_big/2_alert/2.png",
+        "assets/img/5_enemies/3_chicken_big/2_alert/3.png",
+        "assets/img/5_enemies/3_chicken_big/2_alert/4.png",
+        "assets/img/5_enemies/3_chicken_big/2_alert/5.png",
+        "assets/img/5_enemies/3_chicken_big/2_alert/6.png",
+        "assets/img/5_enemies/3_chicken_big/2_alert/7.png",
+        "assets/img/5_enemies/3_chicken_big/2_alert/8.png",
     ]
 
     IMAGES_ATTACK = [
-        "assets/img/4_enemie_boss_chicken/3_attack/G13.png",
-        "assets/img/4_enemie_boss_chicken/3_attack/G14.png",
-        "assets/img/4_enemie_boss_chicken/3_attack/G15.png",
-        "assets/img/4_enemie_boss_chicken/3_attack/G16.png",
-        "assets/img/4_enemie_boss_chicken/3_attack/G17.png",
-        "assets/img/4_enemie_boss_chicken/3_attack/G18.png",
-        "assets/img/4_enemie_boss_chicken/3_attack/G19.png",
-        "assets/img/4_enemie_boss_chicken/3_attack/G20.png",
+        "assets/img/5_enemies/3_chicken_big/3_attack/1.png",
+        "assets/img/5_enemies/3_chicken_big/3_attack/2.png",
+        "assets/img/5_enemies/3_chicken_big/3_attack/3.png",
+        "assets/img/5_enemies/3_chicken_big/3_attack/4.png",
+        "assets/img/5_enemies/3_chicken_big/3_attack/5.png",
+        "assets/img/5_enemies/3_chicken_big/3_attack/6.png",
+        "assets/img/5_enemies/3_chicken_big/3_attack/7.png",
+        "assets/img/5_enemies/3_chicken_big/3_attack/8.png",
     ]
 
     IMAGES_HURT = [
-        "assets/img/4_enemie_boss_chicken/4_hurt/G21.png",
-        "assets/img/4_enemie_boss_chicken/4_hurt/G22.png",
-        "assets/img/4_enemie_boss_chicken/4_hurt/G23.png",
+        "assets/img/5_enemies/3_chicken_big/4_hurt/1.png",
+        "assets/img/5_enemies/3_chicken_big/4_hurt/2.png",
+        "assets/img/5_enemies/3_chicken_big/4_hurt/3.png",
     ]
 
     IMAGES_DEAD = [
-        "assets/img/4_enemie_boss_chicken/5_dead/G24.png",
-        "assets/img/4_enemie_boss_chicken/5_dead/G25.png",
-        "assets/img/4_enemie_boss_chicken/5_dead/G26.png",
+        "assets/img/5_enemies/3_chicken_big/5_dead/1.png",
+        "assets/img/5_enemies/3_chicken_big/5_dead/2.png",
+        "assets/img/5_enemies/3_chicken_big/5_dead/3.png",
     ]
 
     constructor() {
@@ -55,7 +55,7 @@ class Endboss extends Enemy {
             400,
             0.1
         );
-        super.loadImages(this.IMAGES_WALKING);
+        super.loadImages(this.IMAGES_WALK);
         super.loadImages(this.IMAGES_DEAD);
         this.animate();
     }
@@ -69,7 +69,7 @@ class Endboss extends Enemy {
 
         setStoppableInterval(() => {
             if(!super.isDead()) {
-                this.playAnimation(this.IMAGES_WALKING);
+                this.playAnimation(this.IMAGES_WALK);
             }
         }, 200)
 

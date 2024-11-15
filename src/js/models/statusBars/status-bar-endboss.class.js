@@ -1,11 +1,11 @@
 class StatusBarEndboss extends StatusBar {
     IMAGES = [
-        "assets/img/7_statusbars/2_statusbar_endboss/orange/orange0.png",
-        "assets/img/7_statusbars/2_statusbar_endboss/orange/orange20.png",
-        "assets/img/7_statusbars/2_statusbar_endboss/orange/orange40.png",
-        "assets/img/7_statusbars/2_statusbar_endboss/orange/orange60.png",
-        "assets/img/7_statusbars/2_statusbar_endboss/orange/orange80.png",
-        "assets/img/7_statusbars/2_statusbar_endboss/orange/orange100.png",
+        "assets/img/8_statusbars/2_chicken_big/1_health/1.png",
+        "assets/img/8_statusbars/2_chicken_big/1_health/2.png",
+        "assets/img/8_statusbars/2_chicken_big/1_health/3.png",
+        "assets/img/8_statusbars/2_chicken_big/1_health/4.png",
+        "assets/img/8_statusbars/2_chicken_big/1_health/5.png",
+        "assets/img/8_statusbars/2_chicken_big/1_health/6.png"
     ];
 
     constructor() {

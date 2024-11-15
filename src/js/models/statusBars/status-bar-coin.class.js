@@ -1,11 +1,11 @@
 class StatusBarCoin extends StatusBar {
     IMAGES = [
-        "assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png",
-        "assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png",
-        "assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/40.png",
-        "assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/60.png",
-        "assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/80.png",
-        "assets/img/7_statusbars/1_statusbar/1_statusbar_coin/orange/100.png"
+        "assets/img/8_statusbars/1_character/2_coin/1.png",
+        "assets/img/8_statusbars/1_character/2_coin/2.png",
+        "assets/img/8_statusbars/1_character/2_coin/3.png",
+        "assets/img/8_statusbars/1_character/2_coin/4.png",
+        "assets/img/8_statusbars/1_character/2_coin/5.png",
+        "assets/img/8_statusbars/1_character/2_coin/6.png",
     ];
 
     constructor() {

@@ -15,9 +15,10 @@ class World {
 
     isListenerAdded = false;
     hasGameStarted = true;
-    backgroundMusic = new Audio("assets/audio/bg_2.mp3");
-    collectedBottleSound = new Audio("assets/audio/bottle_collect.mp3")
-    collectedCoinSound = new Audio("assets/audio/coin_collect.mp3")
+
+    backgroundMusic = new Audio("assets/audio/music/2.mp3");
+    collectedBottleSound = new Audio("assets/audio/collectables/bottle/collect.mp3")
+    collectedCoinSound = new Audio("assets/audio/collectables/coin/collect.mp3")
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;

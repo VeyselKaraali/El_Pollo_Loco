@@ -6,14 +6,14 @@ class Chick extends BasicChicken {
         height: 108
     };
 
-    IMAGES_WALKING = [
-        "assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
-        "assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
-        "assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
+    IMAGES_WALK = [
+        "assets/img/5_enemies/1_chicken_small/1_walk/1.png",
+        "assets/img/5_enemies/1_chicken_small/1_walk/2.png",
+        "assets/img/5_enemies/1_chicken_small/1_walk/3.png",
     ]
 
     IMAGES_DEAD = [
-        "assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png"
+        "assets/img/5_enemies/1_chicken_small/2_dead/1.png"
     ]
 
     constructor(index) {
@@ -24,7 +24,7 @@ class Chick extends BasicChicken {
             60,
             0.25 + Math.random() * (0.75 - 0.25)
         );
-        super.loadImages(this.IMAGES_WALKING);
+        super.loadImages(this.IMAGES_WALK);
         super.loadImages(this.IMAGES_DEAD);
         super.animate();
     }
