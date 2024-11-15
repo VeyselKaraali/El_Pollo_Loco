@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
+    lastActivityTime = Date.now();
 
     constructor(x, y, width, height, speed) {
         super(x, y, width, height);
@@ -41,6 +42,11 @@ class MovableObject extends DrawableObject {
             this.y + this.offset.y + this.height - this.offset.height >= mo.y &&
             this.x <= mo.x + mo.offset.x + mo.width - mo.offset.width &&
             this.y + this.offset.y <= mo.y + mo.offset.y + mo.height - mo.offset.height;
+    }
+
+    isInactive() {
+        const inactivityDuration = 2000;
+        return Date.now() - this.lastActivityTime > inactivityDuration;
     }
 
     hit() {

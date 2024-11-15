@@ -41,15 +41,6 @@ class World {
 
     }
 
-    /*checkCollisions() {
-        this.level.enemies.forEach(enemy => {
-            if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
-                this.character.hit();
-                this.statusBarHealth.setPercentage(this.character.energy);
-            }
-        });
-    }*/
-
     handleCharacterWithEnemyCollision() {
         this.level.enemies.forEach((enemy, index) => {
             if(this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
@@ -146,7 +137,6 @@ class World {
 
     runGameLoop() {
         setStoppableInterval(() => {
-            //this.checkCollisions();
             this.handleBottleCollisions();
             this.handleCoinCollisions();
             this.handleBottleWithEndbossCollision();
@@ -156,7 +146,7 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.SPACE && this.character.collectedBottles > 0) {
+        if (this.keyboard.SPACE && this.character.collectedBottles > 0 && !this.character.isInactive()) {
             let otherDirection = false;
             let xPosition = this.character.x + 100;
             if(this.character.otherDirection) {

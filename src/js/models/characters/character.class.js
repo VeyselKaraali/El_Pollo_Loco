@@ -8,7 +8,8 @@ class Character extends MovableObject {
     };
     collectedBottles = 0;
     collectedCoins = 0;
-    soundWalk = new Audio("assets/audio/characters/character/walk.mp3");
+    audioWalk = new Audio("assets/audio/characters/character/walk.mp3");
+    audioSnore = new Audio("assets/audio/characters/character/snore.mp3");
 
     IMAGES_WALK = [
         "assets/img/4_character/1_walk/1.png",
@@ -83,6 +84,7 @@ class Character extends MovableObject {
         );
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_IDLE_LONG);
         this.loadImages(this.IMAGES_JUMP);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
@@ -100,7 +102,9 @@ class Character extends MovableObject {
 
     animate() {
         setStoppableInterval(() => {
-            this.soundWalk.pause();
+            this.audioWalk.pause();
+            this.audioSnore.pause();
+
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
             }
@@ -118,13 +122,20 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             if(this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
-            } else if(this.isHurt()) {
+            }
+            else if(this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            } else if(this.isAboveGround()) {
+            }
+            else if(this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);
-            } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            }
+            else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALK);
-                }
+            }
+            else if(super.isInactive()) {
+                this.playAnimation(this.IMAGES_IDLE_LONG);
+                this.audioSnore.play().then(() => {})
+            }
             else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
@@ -134,6 +145,7 @@ class Character extends MovableObject {
     jump() {
         if(!super.isDead()) {
             this.speedY = 30;
+            super.lastActivityTime = Date.now();
         }
     }
 
@@ -145,7 +157,7 @@ class Character extends MovableObject {
 
     playWalkingSound() {
         if (!super.isAboveGround() && !super.isDead()) {
-            this.soundWalk.play()
+            this.audioWalk.play()
                 .then(() => {
 
                 })
@@ -158,10 +170,12 @@ class Character extends MovableObject {
     moveLeft() {
         super.moveLeft();
         this.playWalkingSound();
+        super.lastActivityTime = Date.now();
     }
 
     moveRight() {
         super.moveRight();
         this.playWalkingSound();
+        super.lastActivityTime = Date.now();
     }
 }

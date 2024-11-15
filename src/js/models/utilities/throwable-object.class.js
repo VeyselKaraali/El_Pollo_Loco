@@ -11,7 +11,7 @@ class ThrowableObject extends MovableObject {
     }
 
     throw(isLeftDirection) {
-        if(!super.isDead()) {
+        if(!super.isDead() && !super.isInactive()) {
             this.isLeftDirection = isLeftDirection
             this.speedY = 30;
             this.applyGravity();
