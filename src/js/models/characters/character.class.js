@@ -132,15 +132,19 @@ class Character extends MovableObject {
     }
 
     jump() {
-        this.speedY = 30;
+        if(!super.isDead()) {
+            this.speedY = 30;
+        }
     }
 
     bounce() {
-        this.speedY = 15;
+        if(!super.isDead()) {
+            this.speedY = 15;
+        }
     }
 
     playWalkingSound() {
-        if (!super.isAboveGround()) {
+        if (!super.isAboveGround() && !super.isDead()) {
             this.soundWalk.play()
                 .then(() => {
 

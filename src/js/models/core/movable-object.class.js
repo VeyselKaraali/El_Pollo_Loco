@@ -59,12 +59,16 @@ class MovableObject extends DrawableObject {
     }
 
     moveLeft() {
-        this.x -= this.speed;
-        this.otherDirection = true; // Markiert, dass das Objekt nach links schaut
+        if(!this.isDead()) {
+            this.x -= this.speed;
+            this.otherDirection = true; // Markiert, dass das Objekt nach links schaut
+        }
     }
 
     moveRight() {
-        this.x += this.speed;
-        this.otherDirection = false; // Markiert, dass das Objekt nach rechts schaut
+        if(!this.isDead()) {
+            this.x += this.speed;
+            this.otherDirection = false; // Markiert, dass das Objekt nach rechts schaut
+        }
     }
 }

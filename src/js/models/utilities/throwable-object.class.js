@@ -11,16 +11,18 @@ class ThrowableObject extends MovableObject {
     }
 
     throw(isLeftDirection) {
-        this.isLeftDirection = isLeftDirection
-        this.speedY = 30;
-        this.applyGravity();
-        setStoppableInterval(() => {
-            if(isLeftDirection) {
-                this.x -=10;
-            } else {
-                this.x +=10;
-            }
+        if(!super.isDead()) {
+            this.isLeftDirection = isLeftDirection
+            this.speedY = 30;
+            this.applyGravity();
+            setStoppableInterval(() => {
+                if(isLeftDirection) {
+                    this.x -=10;
+                } else {
+                    this.x +=10;
+                }
 
-        }, 25);
+            }, 25);
+        }
     }
 }
