@@ -32,6 +32,19 @@ class Character extends MovableObject {
         "assets/img/2_character_pepe/1_idle/idle/I-10.png",
     ];
 
+    IMAGES_IDLE_LONG = [
+        "assets/img/2_character_pepe/1_idle/long_idle/I-11.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-12.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-13.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-14.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-15.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-16.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-17.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-18.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-19.png",
+        "assets/img/2_character_pepe/1_idle/long_idle/I-20.png",
+    ];
+
     IMAGES_JUMPING = [
         "assets/img/2_character_pepe/3_jump/J-31.png",
         "assets/img/2_character_pepe/3_jump/J-32.png",
