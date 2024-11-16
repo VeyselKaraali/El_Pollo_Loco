@@ -83,6 +83,31 @@ body {
     padding: 0 20px;
 }
 
+#mobile-left-btn,
+#mobile-right-btn,
+#mobile-up-btn,
+#mobile-throw-btn {
+    position: absolute;
+    cursor: pointer;
+    bottom: 10px;
+}
+
+#mobile-left-btn {
+    left: 10px;
+}
+
+#mobile-right-btn {
+    left: 70px;
+}
+
+#mobile-up-btn {
+    right: 70px;
+}
+
+#mobile-throw-btn {
+    right: 10px;
+}
+
 @media screen and (max-width: 720px) and (orientation: portrait) {
     #rotate-message-container {
         display: flex;
@@ -100,7 +125,10 @@ body {
         z-index: 99;
     }
 
-    #start-screen-container, canvas {
+    #start-screen-container,
+    #win-screen-container,
+    #lose-screen-container,
+    canvas {
         display: none;
     }
 }

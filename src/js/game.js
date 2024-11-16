@@ -19,6 +19,19 @@ function startGame() {
     document.getElementById('start-screen-container').classList.add('d-none');
     hasGameStarted = true;
     document.getElementById('pause-game').classList.remove('d-none');
+    toggleMobileControls();
+}
+
+function toggleMobileControls() {
+    if (window.innerWidth <= 720 && hasGameStarted) {
+        document.querySelectorAll('.mobile-control').forEach((button) => {
+            button.classList.remove('d-none');
+        });
+    } else {
+        document.querySelectorAll('.mobile-control').forEach((button) => {
+            button.classList.add('d-none');
+        });
+    }
 }
 
 function pauseOrResumeGame() {
@@ -68,8 +81,47 @@ function updateVolumeIcons() {
 }
 
 function setupEventListeners() {
+    window.addEventListener('resize', toggleMobileControls);
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
+
+    const options = { passive: true };
+
+    // Left
+    document.getElementById('mobile-left-btn').addEventListener('mousedown', () => keyboard.LEFT = true);
+    document.getElementById('mobile-left-btn').addEventListener('mouseup', () => keyboard.LEFT = false);
+    document.getElementById('mobile-left-btn').addEventListener('mouseleave', () => keyboard.LEFT = false);
+
+    document.getElementById('mobile-left-btn').addEventListener('touchstart', () => keyboard.LEFT = true, options);
+    document.getElementById('mobile-left-btn').addEventListener('touchend', () => keyboard.LEFT = false, options);
+    document.getElementById('mobile-left-btn').addEventListener('touchcancel', () => keyboard.LEFT = false, options);
+
+    // Right
+    document.getElementById('mobile-right-btn').addEventListener('mousedown', () => keyboard.RIGHT = true);
+    document.getElementById('mobile-right-btn').addEventListener('mouseup', () => keyboard.RIGHT = false);
+    document.getElementById('mobile-right-btn').addEventListener('mouseleave', () => keyboard.RIGHT = false);
+
+    document.getElementById('mobile-right-btn').addEventListener('touchstart', () => keyboard.RIGHT = true, options);
+    document.getElementById('mobile-right-btn').addEventListener('touchend', () => keyboard.RIGHT = false, options);
+    document.getElementById('mobile-right-btn').addEventListener('touchcancel', () => keyboard.RIGHT = false, options);
+
+    // Up
+    document.getElementById('mobile-up-btn').addEventListener('mousedown', () => keyboard.UP = true);
+    document.getElementById('mobile-up-btn').addEventListener('mouseup', () => keyboard.UP = false);
+    document.getElementById('mobile-up-btn').addEventListener('mouseleave', () => keyboard.UP = false);
+
+    document.getElementById('mobile-up-btn').addEventListener('touchstart', () => keyboard.UP = true, options);
+    document.getElementById('mobile-up-btn').addEventListener('touchend', () => keyboard.UP = false, options);
+    document.getElementById('mobile-up-btn').addEventListener('touchcancel', () => keyboard.UP = false, options);
+
+    // Throw
+    document.getElementById('mobile-throw-btn').addEventListener('mousedown', () => keyboard.SPACE = true);
+    document.getElementById('mobile-throw-btn').addEventListener('mouseup', () => keyboard.SPACE = false);
+    document.getElementById('mobile-throw-btn').addEventListener('mouseleave', () => keyboard.SPACE = false);
+
+    document.getElementById('mobile-throw-btn').addEventListener('touchstart', () => keyboard.SPACE = true, options);
+    document.getElementById('mobile-throw-btn').addEventListener('touchend', () => keyboard.SPACE = false, options);
+    document.getElementById('mobile-throw-btn').addEventListener('touchcancel', () => keyboard.SPACE = false, options);
 }
 
 function handleKeyDown(e) {
