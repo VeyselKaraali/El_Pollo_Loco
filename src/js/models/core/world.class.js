@@ -10,15 +10,6 @@ class World {
     statusBarBottle = new StatusBarBottle();
     statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
-    startScreen = new StartScreen();
-    //gameElements = new GameElements();
-
-    isListenerAdded = false;
-
-
-    backgroundMusic = new Audio("assets/audio/music/2.mp3");
-    collectedBottleSound = new Audio("assets/audio/collectables/bottle/collect.mp3")
-    collectedCoinSound = new Audio("assets/audio/collectables/coin/collect.mp3")
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
@@ -30,15 +21,7 @@ class World {
     init() {
         this.setWorld();
         this.runGameLoop();
-        this.addClickListener();
         this.draw();
-
-        this.backgroundMusic.addEventListener('ended', () => {
-            this.backgroundMusic.volume = 0.05;
-            this.backgroundMusic.currentTime = 0;
-            this.backgroundMusic.play().then(r => {});
-        });
-
     }
 
     handleCharacterWithEnemyCollision() {
@@ -46,7 +29,6 @@ class World {
             if(this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
                 enemy.energy = 0;
                 this.character.bounce();
-                // ToDo Sound
             }
 
             else if (!this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
@@ -71,7 +53,6 @@ class World {
     handleCoinCollisions() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin) && !this.statusBarCoin.isFull()) {
-                this.collectedCoinSound.play();
                 this.statusBarCoin.setPercentage(this.character.collectCoin(20));
                 this.level.coins.splice(index, 1);
             }
@@ -81,59 +62,14 @@ class World {
     handleBottleCollisions() {
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle) && !this.statusBarBottle.isFull()) {
-                this.collectedBottleSound.play();
                 this.statusBarBottle.setPercentage(this.character.collectBottle(20));
                 this.level.bottles.splice(index, 1);
             }
         });
     }
 
-    addClickListener() {
-        if (!this.isListenerAdded) {
-            window.addEventListener("click", this.handleClick.bind(this));
-            this.isListenerAdded = true;
-        }
-    }
-
-    handleClick(e) {
-        const clickPosition = this.getRelativeClickPosition(e);
-        if (this.isClickOnElement(clickPosition, window.VOLUME)) {
-            this.toggleBackgroundMusic();
-        } else if (this.isClickOnElement(clickPosition, window.START_BTN)) {
-            this.startGame();
-        }
-    }
-
-    getRelativeClickPosition(e) {
-        const rect = this.canvas.getBoundingClientRect();
-        return { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    }
-
-    isClickOnElement({ x, y }, element) {
-        return (
-            x >= element.X && x <= element.X + element.WIDTH &&
-            y >= element.Y && y <= element.Y + element.HEIGHT
-        );
-    }
-
-    toggleBackgroundMusic() {
-        /*this.gameElements.toggleVolumeImage();
-        this.gameElements.draw(this.ctx);
-        if (this.gameElements.isSoundOn) {
-            this.backgroundMusic.pause();
-        } else {
-            this.backgroundMusic.volume = 0.05;
-            this.backgroundMusic.play();
-        }*/
-    }
-
-    startGame() {
-        this.hasGameStarted = true;
-    }
-
     setWorld() {
         this.character.world = this;
-        //this.startScreen.world = this;
     }
 
     runGameLoop() {
@@ -165,7 +101,6 @@ class World {
     draw() {
         this.clearCanvas();
         this.drawGameElements();
-        //this.gameElements.draw(this.ctx);
         requestAnimationFrame(this.draw.bind(this));
     }
 
@@ -175,30 +110,25 @@ class World {
 
     drawGameElements() {
         this.ctx.translate(this.camera_x, 0);
-        if(hasGameStarted) {
-            this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.backgroundObjects);
 
-            // Moving elements
-            this.addObjectsToMap(this.level.clouds);
-            this.addObjectsToMap(this.level.enemies);
-            this.addObjectsToMap(this.throwableObjects);
-            this.addObjectsToMap(this.level.bottles);
-            this.addObjectsToMap(this.level.coins);
+        // Moving elements
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.coins);
 
-            // SPACE FOR FIXED OBJECTS
-            this.ctx.translate(-this.camera_x, 0);
-            this.addToMap(this.statusBarHealth);
-            this.addToMap(this.statusBarCoin);
-            this.addToMap(this.statusBarBottle);
-            this.addToMap(this.statusBarEndboss);
-            this.ctx.translate(this.camera_x, 0);
-            // ===========================
+        // START: SPACE FOR FIXED OBJECTS
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBarHealth);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
+        this.addToMap(this.statusBarEndboss);
+        this.ctx.translate(this.camera_x, 0);
+        // END: SPACE FOR FIXED OBJECTS
 
-
-            this.addToMap(this.character);
-
-
-        }
+        this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
     }
 

@@ -8,8 +8,11 @@ class Character extends MovableObject {
     };
     collectedBottles = 0;
     collectedCoins = 0;
+
     audioWalk = new Audio("assets/audio/characters/character/walk.mp3");
     audioSnore = new Audio("assets/audio/characters/character/snore.mp3");
+    audioCollectBottle = new Audio("assets/audio/collectables/bottle/collect.mp3")
+    audioCollectCoin = new Audio("assets/audio/collectables/coin/collect.mp3")
 
     IMAGES_WALK = [
         "assets/img/4_character/1_walk/1.png",
@@ -93,10 +96,12 @@ class Character extends MovableObject {
     }
 
     collectBottle(amount) {
+        this.audioCollectBottle.play().then(() => {});
         return this.collectedBottles+=amount;
     }
 
     collectCoin(amount) {
+        this.audioCollectCoin.play().then(() => {});
         return this.collectedCoins+=amount;
     }
 

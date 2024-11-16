@@ -4,6 +4,8 @@ let keyboard = new Keyboard();
 let hasGameStarted = false;
 let isVolumeOn = false;
 
+audioMusic = new Audio("assets/audio/music/2.mp3");
+
 function startGame() {
     document.getElementById('canvas').classList.remove('d-none');
     canvas = document.getElementById('canvas');
@@ -25,9 +27,12 @@ function updateVolumeIcons() {
     if (isVolumeOn) {
         volumeOnIcon.classList.remove('d-none');
         volumeOffIcon.classList.add('d-none');
+        audioMusic.volume = 0.05;
+        audioMusic.play().then(() => {});
     } else {
         volumeOnIcon.classList.add('d-none');
         volumeOffIcon.classList.remove('d-none');
+        audioMusic.pause();
     }
 }
 
