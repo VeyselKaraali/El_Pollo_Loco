@@ -1,38 +1,39 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-const CURSOR_POINTER = "pointer";
-const CURSOR_DEFAULT = "default";
+let hasGameStarted = false;
+let isVolumeOn = false;
 
-function init() {
+function startGame() {
+    document.getElementById('canvas').classList.remove('d-none');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     setupEventListeners();
+    document.getElementById('start-screen-container').classList.add('d-none');
+    hasGameStarted = true;
 }
 
-function setupEventListeners() {
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
+function toggleVolume() {
+    isVolumeOn = !isVolumeOn;
+    updateVolumeIcons();
 }
 
-function handleMouseMove(e) {
-    const rect = canvas.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const clickY = e.clientY - rect.top;
+function updateVolumeIcons() {
+    const volumeOnIcon = document.getElementById('volume-on');
+    const volumeOffIcon = document.getElementById('volume-off');
 
-    if (isHovering(clickX, clickY, window.VOLUME) || isHovering(clickX, clickY, window.START_BTN)) {
-        canvas.style.cursor = CURSOR_POINTER;
+    if (isVolumeOn) {
+        volumeOnIcon.classList.remove('d-none');
+        volumeOffIcon.classList.add('d-none');
     } else {
-        canvas.style.cursor = CURSOR_DEFAULT;
+        volumeOnIcon.classList.add('d-none');
+        volumeOffIcon.classList.remove('d-none');
     }
 }
 
-function isHovering(x, y, area) {
-    return (
-        x >= area.X && x <= area.X + area.WIDTH &&
-        y >= area.Y && y <= area.Y + area.HEIGHT
-    );
+function setupEventListeners() {
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
 }
 
 function handleKeyDown(e) {

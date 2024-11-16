@@ -14,7 +14,7 @@ class World {
     //gameElements = new GameElements();
 
     isListenerAdded = false;
-    hasGameStarted = false;
+
 
     backgroundMusic = new Audio("assets/audio/music/2.mp3");
     collectedBottleSound = new Audio("assets/audio/collectables/bottle/collect.mp3")
@@ -175,7 +175,7 @@ class World {
 
     drawGameElements() {
         this.ctx.translate(this.camera_x, 0);
-        if(this.hasGameStarted) {
+        if(hasGameStarted) {
             this.addObjectsToMap(this.level.backgroundObjects);
 
             // Moving elements
@@ -199,10 +199,6 @@ class World {
 
 
         }
-        else {
-            this.startScreen.draw(this.ctx);
-        }
-
         this.ctx.translate(-this.camera_x, 0);
     }
 
