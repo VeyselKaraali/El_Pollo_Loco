@@ -110,8 +110,6 @@ class Character extends MovableObject {
 
     animate() {
         setStoppableInterval(() => {
-            this.audioWalk.pause();
-
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
             }
@@ -137,7 +135,6 @@ class Character extends MovableObject {
             }
             else if(this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);
-                this.audioJump.play().then(r => {});
             }
             else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALK);
@@ -156,6 +153,7 @@ class Character extends MovableObject {
         if(!super.isDead()) {
             this.speedY = 30;
             super.lastActivityTime = Date.now();
+            this.audioJump.play().then(() => {});
         }
     }
 

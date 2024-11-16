@@ -11,6 +11,8 @@ class World {
     statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
 
+    audioBottleSplash = new Audio("assets/audio/collectables/bottle/splash.mp3");
+
     constructor(canvas, keyboard) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
@@ -42,6 +44,7 @@ class World {
         this.throwableObjects.forEach((bottle, bottleIndex) => {
             this.level.enemies.forEach((enemy, enemyIndex) => {
                 if (bottle.isColliding(enemy)) {
+                    this.audioBottleSplash.play().then(() => {});
                     if(enemy instanceof Endboss) {
                         this.statusBarEndboss.setPercentage(this.statusBarEndboss.percentage - 20);
                     } else {
