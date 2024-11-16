@@ -5,6 +5,9 @@ class Endboss extends Enemy {
         width: 15,
         height: 75
     };
+    audioCluck = new Audio("assets/audio/characters/chickenBig/cluck.mp3");
+    audioScream = new Audio("assets/audio/characters/chickenBig/scream.mp3");
+    audioDead = new Audio("assets/audio/characters/chickenBig/dead.mp3");
 
     IMAGES_WALK = [
         "assets/img/5_enemies/3_chicken_big/1_walk/1.png",
@@ -61,6 +64,7 @@ class Endboss extends Enemy {
     }
 
     animate() {
+        //this.audioScream.play().then(() => {});
         setStoppableInterval(() => {
             if(!super.isDead()) {
                 this.moveLeft();
@@ -70,12 +74,13 @@ class Endboss extends Enemy {
         setStoppableInterval(() => {
             if(!super.isDead()) {
                 this.playAnimation(this.IMAGES_WALK);
+                //this.audioCluck.play().then(() => {});
             }
         }, 200)
 
         setStoppableInterval(() => {
             if(super.isDead()) {
-
+                //this.audioDead.play().then(() => {});
             }
         }, 200)
     }

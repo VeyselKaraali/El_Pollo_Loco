@@ -10,7 +10,10 @@ class Character extends MovableObject {
     collectedCoins = 0;
 
     audioWalk = new Audio("assets/audio/characters/character/walk.mp3");
+    audioJump = new Audio("assets/audio/characters/character/jump.mp3");
     audioSnore = new Audio("assets/audio/characters/character/snore.mp3");
+    audioHurt = new Audio("assets/audio/characters/character/hurt.mp3");
+    audioDead = new Audio("assets/audio/characters/character/dead.mp3");
     audioCollectBottle = new Audio("assets/audio/collectables/bottle/collect.mp3")
     audioCollectCoin = new Audio("assets/audio/collectables/coin/collect.mp3")
 
@@ -108,7 +111,6 @@ class Character extends MovableObject {
     animate() {
         setStoppableInterval(() => {
             this.audioWalk.pause();
-            this.audioSnore.pause();
 
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
@@ -127,19 +129,22 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             if(this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.audioDead.play().then(() => {});
             }
             else if(this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                this.audioHurt.play().then(() => {});
             }
             else if(this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);
+                this.audioJump.play().then(r => {});
             }
             else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALK);
             }
             else if(super.isInactive()) {
                 this.playAnimation(this.IMAGES_IDLE_LONG);
-                //this.audioSnore.play().then(() => {})
+                this.audioSnore.play().then(() => {})
             }
             else {
                 this.playAnimation(this.IMAGES_IDLE);
@@ -162,13 +167,7 @@ class Character extends MovableObject {
 
     playWalkingSound() {
         if (!super.isAboveGround() && !super.isDead()) {
-            this.audioWalk.play()
-                .then(() => {
-
-                })
-                .catch(error => {
-                    console.error("Error when playing the sound:", error);
-                });
+            this.audioWalk.play().then(() => {});
         }
     }
 
