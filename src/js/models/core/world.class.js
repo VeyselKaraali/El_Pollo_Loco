@@ -78,7 +78,11 @@ class World {
     }
 
     runGameLoop() {
-        setStoppableInterval(() => {
+        if (gameInterval) {
+            clearInterval(gameInterval);
+        }
+
+        gameInterval = setInterval(() => {
             this.handleBottleCollisions();
             this.handleCoinCollisions();
             this.handleBottleWithEnemyCollision();
@@ -104,9 +108,12 @@ class World {
 
 
     draw() {
-        this.clearCanvas();
-        this.drawGameElements();
-        requestAnimationFrame(this.draw.bind(this));
+        if (!isGamePaused) {
+            this.clearCanvas();
+            this.drawGameElements();
+            requestAnimationFrame(this.draw.bind(this));
+        }
+
     }
 
     clearCanvas() {

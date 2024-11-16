@@ -49,19 +49,30 @@ body {
 }
 
 #volume-on,
-#volume-off {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    z-index: 99;
-}
-
+#volume-off,
+#pause-game,
+#resume-game,
 #controls {
     position: absolute;
     top: 10px;
-    left: 10px;
     z-index: 99;
+}
+
+#volume-on,
+#volume-off {
+    right: 10px;
+    cursor: pointer;
+
+}
+
+#pause-game,
+#resume-game {
+    right: 60px;
+    cursor: pointer;
+}
+
+#controls {
+    left: 10px;
 }
 
 #rotate-message-container {

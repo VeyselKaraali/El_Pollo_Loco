@@ -46,7 +46,8 @@ class MovableObject extends DrawableObject {
 
     isInactive() {
         const inactivityDuration = 5000;
-        return Date.now() - this.lastActivityTime > inactivityDuration;
+        const adjustedTime = Date.now() - totalPausedDuration;
+        return adjustedTime - this.lastActivityTime > inactivityDuration;
     }
 
     hit() {

@@ -1,8 +1,13 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let gameInterval;
 let hasGameStarted = false;
 let isVolumeOn = false;
+
+let pauseStartTime = null;
+let totalPausedDuration = 0;
+let isGamePaused = false;
 
 audioMusic = new Audio("assets/audio/music/2.mp3");
 
@@ -13,6 +18,32 @@ function startGame() {
     setupEventListeners();
     document.getElementById('start-screen-container').classList.add('d-none');
     hasGameStarted = true;
+    document.getElementById('pause-game').classList.remove('d-none');
+}
+
+function pauseOrResumeGame() {
+    const pauseIcon = document.getElementById('pause-game');
+    const resumeIcon = document.getElementById('resume-game');
+
+    if(isGamePaused) {
+        pauseIcon.classList.remove('d-none');
+        resumeIcon.classList.add('d-none');
+        isGamePaused=false;
+
+        if (pauseStartTime !== null) {
+            totalPausedDuration += Date.now() - pauseStartTime;
+            pauseStartTime = null;
+        }
+
+        world.runGameLoop();
+        requestAnimationFrame(() => world.draw());
+    } else {
+        resumeIcon.classList.remove('d-none');
+        pauseIcon.classList.add('d-none');
+        isGamePaused=true;
+        clearInterval(gameInterval);
+        pauseStartTime = Date.now();
+    }
 }
 
 function toggleVolume() {
