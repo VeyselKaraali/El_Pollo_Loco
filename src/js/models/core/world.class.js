@@ -38,12 +38,14 @@ class World {
         })
     }
 
-    handleBottleWithEndbossCollision() {
+    handleBottleWithEnemyCollision() {
         this.throwableObjects.forEach((bottle, bottleIndex) => {
             this.level.enemies.forEach((enemy, enemyIndex) => {
                 if (bottle.isColliding(enemy)) {
                     if(enemy instanceof Endboss) {
                         this.statusBarEndboss.setPercentage(this.statusBarEndboss.percentage - 20);
+                    } else {
+                        enemy.energy=0;
                     }
                 }
             });
@@ -76,7 +78,7 @@ class World {
         setStoppableInterval(() => {
             this.handleBottleCollisions();
             this.handleCoinCollisions();
-            this.handleBottleWithEndbossCollision();
+            this.handleBottleWithEnemyCollision();
             this.handleCharacterWithEnemyCollision();
             this.checkThrowObjects();
         }, 20);
