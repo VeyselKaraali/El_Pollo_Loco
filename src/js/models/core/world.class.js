@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    //endboss = new Endboss();
     level = level1;
     canvas;
     ctx;
@@ -115,7 +116,7 @@ class World {
 
 
     draw() {
-        if (!isGamePaused && !this.character.isDead()) {
+        if (!isGamePaused && !this.character.isDead() && this.statusBarEndboss.percentage > 0) {
             this.clearCanvas();
             this.drawGameElements();
             requestAnimationFrame(this.draw.bind(this));
@@ -125,6 +126,14 @@ class World {
             this.showLoseScreen();
         }
 
+        if(this.statusBarEndboss.percentage <= 0 && !this.character.isDead()) {
+            this.showWinScreen();
+        }
+
+    }
+
+    showWinScreen() {
+        document.getElementById('win-screen-container').classList.remove('d-none');
     }
 
     showLoseScreen() {

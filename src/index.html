@@ -48,15 +48,19 @@
 
         <canvas id="canvas" class="d-none" width="720" height="480"></canvas>
 
-        <div id="win-screen-container">
-
+        <div id="win-screen-container" class="d-none">
+            <img id="win-screen" src="assets/img/2_intro_outro_screens/2_win/4.png" alt="">
+            <div class="btn-container">
+                <img onclick="goToStartScreen()" src="assets/img/9_ui/home.png" alt="">
+                <img onclick="restartGame()" src="assets/img/9_ui/restart.png" alt="">
+            </div>
         </div>
 
         <div id="lose-screen-container" class="d-none">
             <img id="lose-screen" src="assets/img/2_intro_outro_screens/3_game_over/4.png" alt="">
-            <div class="lose-btn-container">
-                <img onclick="goToStartScreen()" id="go-to-start-btn" src="assets/img/9_ui/home.png" alt="">
-                <img onclick="restartGame()" id="restart-btn" src="assets/img/9_ui/restart.png" alt="">
+            <div class="btn-container">
+                <img onclick="goToStartScreen()" src="assets/img/9_ui/home.png" alt="">
+                <img onclick="restartGame()" src="assets/img/9_ui/restart.png" alt="">
             </div>
         </div>
 
