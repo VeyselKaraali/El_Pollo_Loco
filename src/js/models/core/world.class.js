@@ -10,6 +10,7 @@ class World {
     statusBarBottle = new StatusBarBottle();
     statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
+    isCharacterNearEndboss = false;
 
     audioBottleSplash = new Audio("assets/audio/collectables/bottle/splash.mp3");
 
@@ -24,6 +25,13 @@ class World {
         this.setWorld();
         this.runGameLoop();
         this.draw();
+    }
+
+    handleCharacterNearEndboss() {
+        if (this.character.x >= 2160 - 300) {
+            this.isCharacterNearEndboss = true;
+            this.statusBarEndboss.y = 30;
+        }
     }
 
     handleCharacterWithEnemyCollision() {
@@ -87,6 +95,7 @@ class World {
             this.handleCoinCollisions();
             this.handleBottleWithEnemyCollision();
             this.handleCharacterWithEnemyCollision();
+            this.handleCharacterNearEndboss();
             this.checkThrowObjects();
         }, 20);
     }
