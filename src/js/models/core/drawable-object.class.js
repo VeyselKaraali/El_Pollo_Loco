@@ -20,12 +20,6 @@ class DrawableObject {
         this.height = height;
     }
 
-    getImageAsHTMLImageElement(path) {
-        let img = new Image();
-        img.src = path;
-        return img;
-    }
-
     loadImage(path) {
         this.img = new Image()
         this.img.src = path;
