@@ -10,7 +10,6 @@ class World {
     statusBarBottle = new StatusBarBottle();
     statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
-    isCharacterNearEndboss = false;
 
     audioBottleSplash = new Audio("assets/audio/collectables/bottle/splash.mp3");
 
@@ -29,7 +28,6 @@ class World {
 
     handleCharacterNearEndboss() {
         if (this.character.x >= 2160 - 300) {
-            this.isCharacterNearEndboss = true;
             this.statusBarEndboss.y = 30;
         }
     }
@@ -117,12 +115,20 @@ class World {
 
 
     draw() {
-        if (!isGamePaused) {
+        if (!isGamePaused && !this.character.isDead()) {
             this.clearCanvas();
             this.drawGameElements();
             requestAnimationFrame(this.draw.bind(this));
         }
 
+        if(this.character.isDead()) {
+            this.showLoseScreen();
+        }
+
+    }
+
+    showLoseScreen() {
+        document.getElementById('lose-screen-container').classList.remove('d-none');
     }
 
     clearCanvas() {

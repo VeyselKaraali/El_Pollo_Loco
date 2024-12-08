@@ -17,9 +17,20 @@ function startGame() {
     world = new World(canvas, keyboard);
     setupEventListeners();
     document.getElementById('start-screen-container').classList.add('d-none');
+    document.getElementById('lose-screen-container').classList.add('d-none');
     hasGameStarted = true;
     document.getElementById('pause-game').classList.remove('d-none');
     toggleMobileControls();
+}
+
+function restartGame() {
+    this.startGame();
+}
+
+function goToStartScreen() {
+    document.getElementById('canvas').classList.add('d-none');
+    document.getElementById('lose-screen-container').classList.add('d-none');
+    document.getElementById('start-screen-container').classList.remove('d-none');
 }
 
 function toggleMobileControls() {
