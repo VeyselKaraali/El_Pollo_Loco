@@ -98,6 +98,36 @@ class Character extends MovableObject {
         this.animate();
     }
 
+    moveLeft() {
+        super.moveLeft();
+        this.playAudioWalk();
+    }
+
+    moveRight() {
+        super.moveRight();
+        this.playAudioWalk();
+    }
+
+    playAudioWalk() {
+        if (!super.isAboveGround() && !super.isDead()) {
+            this.audioWalk.play().then(() => {});
+        }
+    }
+
+    jump() {
+        if(!super.isDead()) {
+            super.jump();
+            super.speedY = 30;
+            this.audioJump.play().then(() => {});
+        }
+    }
+
+    bounce() {
+        if(!super.isDead()) {
+            this.speedY = 15;
+        }
+    }
+
     collectBottle(amount) {
         this.audioCollectBottle.play().then(() => {});
         return this.collectedBottles+=amount;
@@ -127,7 +157,7 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             if(this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
-                this.audioDead.play().then(() => {});
+                //this.audioDead.play().then(() => {});
             }
             else if(this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
@@ -147,37 +177,5 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }, 100)
-    }
-
-    jump() {
-        if(!super.isDead()) {
-            this.speedY = 30;
-            super.lastActivityTime = Date.now();
-            this.audioJump.play().then(() => {});
-        }
-    }
-
-    bounce() {
-        if(!super.isDead()) {
-            this.speedY = 15;
-        }
-    }
-
-    playWalkingSound() {
-        if (!super.isAboveGround() && !super.isDead()) {
-            this.audioWalk.play().then(() => {});
-        }
-    }
-
-    moveLeft() {
-        super.moveLeft();
-        this.playWalkingSound();
-        super.lastActivityTime = Date.now();
-    }
-
-    moveRight() {
-        super.moveRight();
-        this.playWalkingSound();
-        super.lastActivityTime = Date.now();
     }
 }

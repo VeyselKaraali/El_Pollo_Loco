@@ -41,7 +41,7 @@ class World {
             }
 
             else if (!this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
-                    this.character.hit();
+                    this.character.reduceEnergy();
                     this.statusBarHealth.setPercentage(this.character.energy);
             }
         })

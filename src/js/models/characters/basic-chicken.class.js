@@ -4,8 +4,8 @@ class BasicChicken extends Enemy {
     audioCluck = new Audio("assets/audio/characters/chicken/cluck.mp3");
     audioDead = new Audio("assets/audio/characters/chicken/dead.mp3");
 
-    constructor(x, y, width, height, speed) {
-        super(x, y, width, height, speed);
+    constructor(x, y, width, height, speedX) {
+        super(x, y, width, height, speedX);
     }
 
     animate() {

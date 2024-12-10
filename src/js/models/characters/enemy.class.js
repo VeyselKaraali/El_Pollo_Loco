@@ -1,6 +1,6 @@
 class Enemy extends MovableObject {
-    constructor(x, y, width, height, speed) {
-        super(x, y, width, height, speed);
+    constructor(x, y, width, height, speedX) {
+        super(x, y, width, height, speedX);
     }
 
     moveLeft() {

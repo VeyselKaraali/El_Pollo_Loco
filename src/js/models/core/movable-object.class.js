@@ -1,15 +1,15 @@
 class MovableObject extends DrawableObject {
-    speed = 0;
-    otherDirection = false;
+    speedX = 0;
     speedY = 0;
     acceleration = 2.5;
+    otherDirection = false;
     energy = 100;
     lastHit = 0;
     lastActivityTime = Date.now();
 
-    constructor(x, y, width, height, speed) {
+    constructor(x, y, width, height, speedX) {
         super(x, y, width, height);
-        this.speed = speed;
+        this.speedX = speedX;
     }
 
     applyGravity() {
@@ -45,12 +45,10 @@ class MovableObject extends DrawableObject {
     }
 
     isInactive() {
-        const inactivityDuration = 5000;
-        const adjustedTime = Date.now() - totalPausedDuration;
-        return adjustedTime - this.lastActivityTime > inactivityDuration;
+        return Date.now() >= this.lastActivityTime + 5000;
     }
 
-    hit() {
+    reduceEnergy() {
         this.energy = Math.max(this.energy - 5, 0);
         if (this.energy > 0) {
             this.lastHit = Date.now();
@@ -67,15 +65,22 @@ class MovableObject extends DrawableObject {
 
     moveLeft() {
         if(!this.isDead()) {
-            this.x -= this.speed;
+            this.x -= this.speedX;
             this.otherDirection = true; // Markiert, dass das Objekt nach links schaut
+            this.lastActivityTime = Date.now();
         }
     }
 
     moveRight() {
         if(!this.isDead()) {
-            this.x += this.speed;
+            this.x += this.speedX;
             this.otherDirection = false; // Markiert, dass das Objekt nach rechts schaut
+            this.lastActivityTime = Date.now();
         }
+    }
+
+    jump() {
+        this.speedY = 0;
+        this.lastActivityTime = Date.now();
     }
 }
