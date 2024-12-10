@@ -1,10 +1,10 @@
 class MovableObject extends DrawableObject {
-    speedX = 0;
-    speedY = 0;
-    acceleration = 2.5;
-    otherDirection = false;
-    energy = 100;
-    lastHit = 0;
+    speedX = MOVABLE_OBJECT.SPEED_X;
+    speedY = MOVABLE_OBJECT.SPEED_Y;
+    acceleration = MOVABLE_OBJECT.ACCELERATION;
+    otherDirection = MOVABLE_OBJECT.OTHER_DIRECTION;
+    energy = MOVABLE_OBJECT.ENERGY;
+    lastHit = MOVABLE_OBJECT.SPEED_X;
     lastActivityTime = Date.now();
 
     constructor(x, y, width, height, speedX) {
@@ -49,7 +49,7 @@ class MovableObject extends DrawableObject {
     }
 
     reduceEnergy() {
-        this.energy = Math.max(this.energy - 5, 0);
+        this.energy = Math.max(this.energy - 0.05, 0);
         if (this.energy > 0) {
             this.lastHit = Date.now();
         }

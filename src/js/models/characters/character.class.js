@@ -128,14 +128,19 @@ class Character extends MovableObject {
         }
     }
 
-    collectBottle(amount) {
+    collectBottle() {
         this.audioCollectBottle.play().then(() => {});
-        return this.collectedBottles+=amount;
+        return ++this.collectedBottles;
     }
 
-    collectCoin(amount) {
+    throwBottle() {
+        // ToDo Audio
+        return --this.collectedBottles;
+    }
+
+    collectCoin() {
         this.audioCollectCoin.play().then(() => {});
-        return this.collectedCoins+=amount;
+        return ++this.collectedCoins;
     }
 
     animate() {

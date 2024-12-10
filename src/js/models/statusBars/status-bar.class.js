@@ -1,6 +1,6 @@
 class StatusBar extends DrawableObject {
     IMAGES = [];
-    percentage = 0;
+    value = 0;
 
     constructor() {
         super();
@@ -9,29 +9,29 @@ class StatusBar extends DrawableObject {
         this.y = 0;
         this.width = 200;
         this.height = 60;
-        this.setPercentage(0);
+        this.setValue(0);
     }
 
-    setPercentage(percentage) {
-        this.percentage = percentage;
+    setValue(value) {
+        this.value = value;
         let path = this.IMAGES[this.resolveImageIndex()]
         this.img = this.imgCache[path];
     }
 
     isFull() {
-        return this.percentage === 100;
+        return this.value === 5;
     }
 
     resolveImageIndex() {
-        if(this.percentage >= 100) {
+        if(this.value >= 5) {
             return 5;
-        } else if(this.percentage >= 80) {
+        } else if(this.value >= 4) {
             return 4;
-        } else if(this.percentage >= 60) {
+        } else if(this.value >= 3) {
             return 3;
-        } else if(this.percentage >= 40) {
+        } else if(this.value >= 2) {
             return 2;
-        } else if(this.percentage >= 20) {
+        } else if(this.value >= 1) {
             return 1;
         } else {
             return 0;

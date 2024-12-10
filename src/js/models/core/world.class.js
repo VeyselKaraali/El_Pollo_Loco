@@ -42,7 +42,7 @@ class World {
 
             else if (!this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
                     this.character.reduceEnergy();
-                    this.statusBarHealth.setPercentage(this.character.energy);
+                    this.statusBarHealth.setValue(this.character.energy);
             }
         })
     }
@@ -53,7 +53,7 @@ class World {
                 if (bottle.isColliding(enemy)) {
                     this.audioBottleSplash.play().then(() => {});
                     if(enemy instanceof Endboss) {
-                        this.statusBarEndboss.setPercentage(this.statusBarEndboss.percentage - 20);
+                        this.statusBarEndboss.setValue(--this.statusBarEndboss.value);
                     } else {
                         enemy.energy=0;
                     }
@@ -65,7 +65,7 @@ class World {
     handleCoinCollisions() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin) && !this.statusBarCoin.isFull()) {
-                this.statusBarCoin.setPercentage(this.character.collectCoin(20));
+                this.statusBarCoin.setValue(this.character.collectCoin());
                 this.level.coins.splice(index, 1);
             }
         });
@@ -74,7 +74,7 @@ class World {
     handleBottleCollisions() {
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle) && !this.statusBarBottle.isFull()) {
-                this.statusBarBottle.setPercentage(this.character.collectBottle(20));
+                this.statusBarBottle.setValue(this.character.collectBottle());
                 this.level.bottles.splice(index, 1);
             }
         });
@@ -109,14 +109,14 @@ class World {
             }
             const bottle = new ThrowableObject(xPosition, this.character.y + 100, otherDirection);
             this.throwableObjects.push(bottle);
-            this.statusBarBottle.setPercentage(this.character.collectBottle(-20));
+            this.statusBarBottle.setValue(this.character.throwBottle());
         }
     }
 
 
 
     draw() {
-        if (!isGamePaused && !this.character.isDead() && this.statusBarEndboss.percentage > 0) {
+        if (!isGamePaused && !this.character.isDead() && this.statusBarEndboss.value > 0) {
             this.clearCanvas();
             this.drawGameElements();
             requestAnimationFrame(this.draw.bind(this));
@@ -126,7 +126,7 @@ class World {
             this.showLoseScreen();
         }
 
-        if(this.statusBarEndboss.percentage <= 0 && !this.character.isDead()) {
+        if(this.statusBarEndboss.value <= 0 && !this.character.isDead()) {
             this.showWinScreen();
         }
 
