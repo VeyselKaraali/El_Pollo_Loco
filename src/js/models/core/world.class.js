@@ -101,13 +101,13 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.SPACE && this.character.collectedBottles > 0 && !this.character.isInactive()) {
-            let otherDirection = false;
+            let isFacingOtherDirection = false;
             let xPosition = this.character.x + 100;
-            if(this.character.otherDirection) {
-                otherDirection = true;
+            if(this.character.isFacingOtherDirection) {
+                isFacingOtherDirection = true;
                 xPosition = this.character.x;
             }
-            const bottle = new ThrowableObject(xPosition, this.character.y + 100, otherDirection);
+            const bottle = new ThrowableObject(xPosition, this.character.y + 100, isFacingOtherDirection);
             this.throwableObjects.push(bottle);
             this.statusBarBottle.setValue(this.character.throwBottle());
         }
@@ -173,12 +173,12 @@ class World {
     }
 
     addToMap(mo) {
-        if (mo.otherDirection) {
+        if (mo.isFacingOtherDirection) {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
-        if (mo.otherDirection) {
+        if (mo.isFacingOtherDirection) {
             this.flipImageBack(mo);
         }
     }

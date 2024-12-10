@@ -2,7 +2,7 @@ class MovableObject extends DrawableObject {
     speedX = MOVABLE_OBJECT.SPEED_X;
     speedY = MOVABLE_OBJECT.SPEED_Y;
     acceleration = MOVABLE_OBJECT.ACCELERATION;
-    otherDirection = MOVABLE_OBJECT.OTHER_DIRECTION;
+    isFacingOtherDirection = MOVABLE_OBJECT.IS_FACING_OTHER_DIRECTION;
     energy = MOVABLE_OBJECT.ENERGY;
     lastHit = MOVABLE_OBJECT.SPEED_X;
     lastActivityTime = Date.now();
@@ -15,7 +15,7 @@ class MovableObject extends DrawableObject {
     moveLeft() {
         if(!this.isDead()) {
             this.x -= this.speedX;
-            this.otherDirection = true; // Markiert, dass das Objekt nach links schaut
+            this.isFacingOtherDirection = true;
             this.lastActivityTime = Date.now();
         }
     }
@@ -23,7 +23,7 @@ class MovableObject extends DrawableObject {
     moveRight() {
         if(!this.isDead()) {
             this.x += this.speedX;
-            this.otherDirection = false; // Markiert, dass das Objekt nach rechts schaut
+            this.isFacingOtherDirection = false;
             this.lastActivityTime = Date.now();
         }
     }

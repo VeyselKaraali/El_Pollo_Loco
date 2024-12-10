@@ -5,11 +5,11 @@ class Enemy extends MovableObject {
 
     moveLeft() {
         super.moveLeft();
-        this.otherDirection = false;
+        this.isFacingOtherDirection = false;
     }
 
     moveRight() {
         super.moveRight();
-        this.otherDirection = true;
+        this.isFacingOtherDirection = true;
     }
 }

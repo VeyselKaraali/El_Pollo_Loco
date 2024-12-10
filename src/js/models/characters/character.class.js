@@ -200,7 +200,7 @@ class Character extends MovableObject {
 
     handleInactiveState() {
         this.playAnimation(this.IMAGES_IDLE_LONG);
-        this.audioSnore.play().then(() => {});
+        //this.audioSnore.play().then(() => {});
     }
 
     handleHurt() {

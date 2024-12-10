@@ -1,13 +1,13 @@
 class ThrowableObject extends MovableObject {
 
     isLeftDirection = false;
-    constructor(x, y, otherDirection) {
+    constructor(x, y, isFacingOtherDirection) {
         super().loadImage("assets/img/7_bottle/2_rotation/1.png");
         this.x = x;
         this.y = y;
         this.width = 75;
         this.height = 100;
-        this.throw(otherDirection);
+        this.throw(isFacingOtherDirection);
     }
 
     throw(isLeftDirection) {
