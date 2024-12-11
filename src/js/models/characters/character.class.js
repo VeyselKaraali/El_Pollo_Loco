@@ -118,7 +118,7 @@ class Character extends MovableObject {
 
     bounce() {
         if(!super.isDead()) {
-            this.speedY = 15;
+            super.speedY = 15;
         }
     }
 
@@ -187,15 +187,15 @@ class Character extends MovableObject {
     }
 
     playAudioJump() {
-        this.audioJump.play().then(() => {});
+        //this.audioJump.play().then(() => {});
     }
 
     playAudioCollectCoin() {
-        this.audioCollectCoin.play().then(() => {});
+        //this.audioCollectCoin.play().then(() => {});
     }
 
     playAudioCollectBottle() {
-        this.audioCollectBottle.play().then(() => {});
+        //this.audioCollectBottle.play().then(() => {});
     }
 
     handleInactiveState() {

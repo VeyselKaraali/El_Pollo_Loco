@@ -33,6 +33,10 @@ class MovableObject extends DrawableObject {
         this.lastActivityTime = Date.now();
     }
 
+    bounce() {
+        this.speedY = 0;
+    }
+
     isAboveGround() {
         if(this instanceof ThrowableObject) {
             return true;
