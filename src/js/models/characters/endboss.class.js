@@ -55,9 +55,9 @@ class Endboss extends Enemy {
             2500,
             45,
             250,
-            400,
-            0.1
+            400
         );
+        this.speedX = 0.1;
         super.loadImages(this.IMAGES_WALK);
         super.loadImages(this.IMAGES_DEAD);
         this.animate();

@@ -1,6 +1,5 @@
 class World {
     character = new Character();
-    //endboss = new Endboss();
     level = level1;
     canvas;
     ctx;
@@ -12,7 +11,7 @@ class World {
     statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
 
-    audioBottleSplash = new Audio("assets/audio/collectables/bottle/splash.mp3");
+
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
@@ -51,7 +50,7 @@ class World {
         this.throwableObjects.forEach((bottle, bottleIndex) => {
             this.level.enemies.forEach((enemy, enemyIndex) => {
                 if (bottle.isColliding(enemy)) {
-                    this.audioBottleSplash.play().then(() => {});
+                    //this.audioBottleSplash.play().then(() => {});
                     if(enemy instanceof Endboss) {
                         this.statusBarEndboss.setValue(--this.statusBarEndboss.value);
                     } else {
@@ -65,7 +64,8 @@ class World {
     handleCoinCollisions() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin) && !this.statusBarCoin.isFull()) {
-                this.statusBarCoin.setValue(this.character.collectCoin());
+                this.character.collectCoin();
+                this.statusBarCoin.setValue(this.character.collectedCoins);
                 this.level.coins.splice(index, 1);
             }
         });
@@ -74,7 +74,8 @@ class World {
     handleBottleCollisions() {
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle) && !this.statusBarBottle.isFull()) {
-                this.statusBarBottle.setValue(this.character.collectBottle());
+                this.character.collectBottle();
+                this.statusBarBottle.setValue(this.character.collectedBottles);
                 this.level.bottles.splice(index, 1);
             }
         });
@@ -100,17 +101,23 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.SPACE && this.character.collectedBottles > 0 && !this.character.isInactive()) {
-            let isFacingOtherDirection = false;
-            let xPosition = this.character.x + 100;
-            if(this.character.isFacingOtherDirection) {
-                isFacingOtherDirection = true;
-                xPosition = this.character.x;
-            }
-            const bottle = new ThrowableObject(xPosition, this.character.y + 100, isFacingOtherDirection);
+        /*if (this.keyboard.SPACE && this.character.collectedBottles > 0 && !this.character.isInactive()) {
+            //let isFacingOtherDirection = false;
+            //let xPosition = this.character.x + 100;
+            //if(this.character.isFacingOtherDirection) {
+                //isFacingOtherDirection = true;
+              //  xPosition = this.character.x;
+            //}
+            //debugger;
+            const bottle = new ThrowableObject(this.character.x, this.character.y + 100, 75, 100);
             this.throwableObjects.push(bottle);
-            this.statusBarBottle.setValue(this.character.throwBottle());
-        }
+            bottle.throw();
+            //this.character.throwBottle();
+
+            //debugger;
+            //this.character.throwBottle();
+            this.statusBarBottle.setValue(this.character.collectedBottles);
+        }*/
     }
 
 

@@ -1,15 +1,14 @@
 class MovableObject extends DrawableObject {
-    speedX = MOVABLE_OBJECT.SPEED_X;
-    speedY = MOVABLE_OBJECT.SPEED_Y;
-    acceleration = MOVABLE_OBJECT.ACCELERATION;
-    isFacingOtherDirection = MOVABLE_OBJECT.IS_FACING_OTHER_DIRECTION;
-    energy = MOVABLE_OBJECT.ENERGY;
-    lastHit = MOVABLE_OBJECT.SPEED_X;
-    lastActivityTime = Date.now();
 
-    constructor(x, y, width, height, speedX) {
+    constructor(x, y, width, height) {
         super(x, y, width, height);
-        this.speedX = speedX;
+        this.speedX = 0;
+        this.speedY = 0;
+        this.acceleration = 0;
+        this.isFacingOtherDirection = false;
+        this.energy = 5;
+        this.lastHit = 0;
+        this.lastActivityTime = Date.now();
     }
 
     moveLeft() {
@@ -35,6 +34,7 @@ class MovableObject extends DrawableObject {
 
     bounce() {
         this.speedY = 0;
+        this.lastActivityTime = Date.now();
     }
 
     isAboveGround() {

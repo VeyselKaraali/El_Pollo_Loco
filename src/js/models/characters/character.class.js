@@ -6,8 +6,6 @@ class Character extends MovableObject {
         width: 25,
         height: 110
     };
-    collectedBottles = 0;
-    collectedCoins = 0;
 
     audioWalk = new Audio("assets/audio/characters/character/walk.mp3");
     audioJump = new Audio("assets/audio/characters/character/jump.mp3");
@@ -85,9 +83,12 @@ class Character extends MovableObject {
             120,
             172,
             100,
-            250,
-            10
+            250
         );
+        super.speedX = 10;
+        super.acceleration = 2.5;
+        this.collectedBottles = 0;
+        this.collectedCoins = 0;
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_IDLE_LONG);
@@ -123,18 +124,27 @@ class Character extends MovableObject {
     }
 
     collectCoin() {
+        this.collectedCoins++;
         this.playAudioCollectCoin();
-        return ++this.collectedCoins;
     }
 
     collectBottle() {
+        this.collectedBottles++;
         this.playAudioCollectBottle();
-        return ++this.collectedBottles;
     }
 
     throwBottle() {
         // ToDo Audio
-        return --this.collectedBottles;
+        if(this.collectedBottles) {
+            const throwableBottle = new ThrowableBottle(this.x, this.y + 100, 75, 100);
+            throwableBottle.isFacingOtherDirection = this.isFacingOtherDirection;
+            this.world.throwableObjects.push(throwableBottle);
+
+            throwableBottle.throw();
+            this.collectedBottles--;
+            this.world.statusBarBottle.setValue(this.collectedBottles);
+            this.lastActivityTime = Date.now();
+        }
     }
 
     animate() {
@@ -148,6 +158,10 @@ class Character extends MovableObject {
 
             if(this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
+            }
+
+            if(this.world.keyboard.SPACE) {
+                this.throwBottle();
             }
 
             this.world.camera_x = -this.x + 100;

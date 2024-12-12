@@ -1,4 +1,4 @@
-class Bottle extends MovableObject {
+class Bottle extends ThrowableObject {
     offset = {
         x: 27,
         y: 13,
@@ -14,29 +14,14 @@ class Bottle extends MovableObject {
         "assets/img/7_bottle/1_ground/2.png",
     ]
 
-    IMAGES_BOTTLE_ROTATION=[
-        "assets/img/7_bottle/2_rotation/1.png",
-        "assets/img/7_bottle/2_rotation/2.png",
-        "assets/img/7_bottle/2_rotation/3.png",
-        "assets/img/7_bottle/2_rotation/4.png",
-    ]
-
-    IMAGES_BOTTLE_SPLASH=[
-        "assets/img/7_bottle/3_splash/1.png",
-        "assets/img/7_bottle/3_splash/2.png",
-        "assets/img/7_bottle/3_splash/3.png",
-        "assets/img/7_bottle/3_splash/4.png",
-        "assets/img/7_bottle/3_splash/5.png",
-        "assets/img/7_bottle/3_splash/6.png",
-    ]
-
     constructor(index) {
-        super();
-        this.x = Bottle.basePosition + index * Bottle.step + (Math.random() * 100 - 50);
-        this.y = 340;
-        this.width = 90;
-        this.height = 75;
-        this.loadImages(this.IMAGES_BOTTLE);
+        super(
+            Bottle.basePosition + index * Bottle.step + (Math.random() * 100 - 50),
+            340,
+            90,
+            75
+        );
+        super.loadImages(this.IMAGES_BOTTLE);
         this.animate();
     }
 

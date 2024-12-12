@@ -21,8 +21,7 @@ class Chick extends BasicChicken {
             BasicChicken.basePosition + index * BasicChicken.step + (Math.random() * 100 - 50),
             355,
             60,
-            60,
-            0.25 + Math.random() * (0.75 - 0.25)
+            60
         );
         super.loadImages(this.IMAGES_WALK);
         super.loadImages(this.IMAGES_DEAD);
