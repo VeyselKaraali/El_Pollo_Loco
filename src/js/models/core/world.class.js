@@ -8,7 +8,7 @@ class World {
     statusBarHealth = new StatusBarHealth();
     statusBarCoin = new StatusBarCoin();
     statusBarBottle = new StatusBarBottle();
-    statusBarEndboss = new StatusBarEndboss();
+    statusBarEndBoss = new StatusBarEndBoss();
     throwableObjects = [];
 
 
@@ -26,9 +26,9 @@ class World {
         this.draw();
     }
 
-    handleCharacterNearEndboss() {
+    handleCharacterNearEndBoss() {
         if (this.character.x >= 2160 - 300) {
-            this.statusBarEndboss.y = 30;
+            this.statusBarEndBoss.y = 30;
         }
     }
 
@@ -51,8 +51,8 @@ class World {
             this.level.enemies.forEach((enemy, enemyIndex) => {
                 if (bottle.isColliding(enemy)) {
                     //this.audioBottleSplash.play().then(() => {});
-                    if(enemy instanceof Endboss) {
-                        this.statusBarEndboss.setValue(--this.statusBarEndboss.value);
+                    if(enemy instanceof EndBoss) {
+                        this.statusBarEndBoss.setValue(--this.statusBarEndBoss.value);
                     } else {
                         enemy.energy=0;
                     }
@@ -95,8 +95,8 @@ class World {
             this.handleCoinCollisions();
             this.handleBottleWithEnemyCollision();
             this.handleCharacterWithEnemyCollision();
-            this.handleCharacterNearEndboss();
-            this.checkThrowObjects();
+            this.handleCharacterNearEndBoss();
+            //this.checkThrowObjects();
         }, 20);
     }
 
@@ -123,7 +123,7 @@ class World {
 
 
     draw() {
-        if (!isGamePaused && !this.character.isDead() && this.statusBarEndboss.value > 0) {
+        if (!isGamePaused && !this.character.isDead() && this.statusBarEndBoss.value > 0) {
             this.clearCanvas();
             this.drawGameElements();
             requestAnimationFrame(this.draw.bind(this));
@@ -133,7 +133,7 @@ class World {
             this.showLoseScreen();
         }
 
-        if(this.statusBarEndboss.value <= 0 && !this.character.isDead()) {
+        if(this.statusBarEndBoss.value <= 0 && !this.character.isDead()) {
             this.showWinScreen();
         }
 
@@ -167,7 +167,7 @@ class World {
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
-        this.addToMap(this.statusBarEndboss);
+        this.addToMap(this.statusBarEndBoss);
         this.ctx.translate(this.camera_x, 0);
         // END: SPACE FOR FIXED OBJECTS
 

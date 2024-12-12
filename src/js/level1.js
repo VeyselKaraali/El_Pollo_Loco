@@ -4,7 +4,7 @@ const level1 = new Level(
 
         ...Array(6).fill().map((_, i) => new Chicken(i)),
 
-        new Endboss(),
+        new EndBoss(),
     ],
     [
         new Cloud()

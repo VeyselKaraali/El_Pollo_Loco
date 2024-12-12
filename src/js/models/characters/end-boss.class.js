@@ -1,4 +1,4 @@
-class Endboss extends Enemy {
+class EndBoss extends Enemy {
     offset = {
         x: 10,
         y: 62,
