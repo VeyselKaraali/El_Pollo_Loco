@@ -11,8 +11,6 @@ class World {
     statusBarEndBoss = new StatusBarEndBoss();
     throwableObjects = [];
 
-
-
     constructor(canvas, keyboard) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
@@ -26,10 +24,19 @@ class World {
         this.draw();
     }
 
-    handleCharacterNearEndBoss() {
-        if (this.character.x >= 2160 - 300) {
-            this.statusBarEndBoss.y = 30;
-        }
+    handleEnemyWithThrowableBottleCollision() {
+        this.throwableObjects.forEach((bottle, bottleIndex) => {
+            this.level.enemies.forEach((enemy, enemyIndex) => {
+                if (bottle.isColliding(enemy)) {
+                    //this.audioBottleSplash.play().then(() => {});
+                    if(enemy instanceof EndBoss) {
+                        this.statusBarEndBoss.setValue(--this.statusBarEndBoss.value);
+                    } else {
+                        enemy.energy=0;
+                    }
+                }
+            });
+        });
     }
 
     handleCharacterWithEnemyCollision() {
@@ -46,22 +53,7 @@ class World {
         })
     }
 
-    handleBottleWithEnemyCollision() {
-        this.throwableObjects.forEach((bottle, bottleIndex) => {
-            this.level.enemies.forEach((enemy, enemyIndex) => {
-                if (bottle.isColliding(enemy)) {
-                    //this.audioBottleSplash.play().then(() => {});
-                    if(enemy instanceof EndBoss) {
-                        this.statusBarEndBoss.setValue(--this.statusBarEndBoss.value);
-                    } else {
-                        enemy.energy=0;
-                    }
-                }
-            });
-        });
-    }
-
-    handleCoinCollisions() {
+    handleCharacterWithCoinCollision() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin) && !this.statusBarCoin.isFull()) {
                 this.character.collectCoin();
@@ -71,7 +63,7 @@ class World {
         });
     }
 
-    handleBottleCollisions() {
+    handleCharacterWithBottleCollision() {
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle) && !this.statusBarBottle.isFull()) {
                 this.character.collectBottle();
@@ -79,6 +71,12 @@ class World {
                 this.level.bottles.splice(index, 1);
             }
         });
+    }
+
+    handleCharacterNearEndBoss() {
+        if (this.character.x >= 2160 - 300) {
+            this.statusBarEndBoss.y = 30;
+        }
     }
 
     setWorld() {
@@ -91,35 +89,13 @@ class World {
         }
 
         gameInterval = setInterval(() => {
-            this.handleBottleCollisions();
-            this.handleCoinCollisions();
-            this.handleBottleWithEnemyCollision();
+            this.handleEnemyWithThrowableBottleCollision();
+            this.handleCharacterWithBottleCollision();
+            this.handleCharacterWithCoinCollision();
             this.handleCharacterWithEnemyCollision();
             this.handleCharacterNearEndBoss();
-            //this.checkThrowObjects();
         }, 20);
     }
-
-    checkThrowObjects() {
-        /*if (this.keyboard.SPACE && this.character.collectedBottles > 0 && !this.character.isInactive()) {
-            //let isFacingOtherDirection = false;
-            //let xPosition = this.character.x + 100;
-            //if(this.character.isFacingOtherDirection) {
-                //isFacingOtherDirection = true;
-              //  xPosition = this.character.x;
-            //}
-            //debugger;
-            const bottle = new ThrowableObject(this.character.x, this.character.y + 100, 75, 100);
-            this.throwableObjects.push(bottle);
-            bottle.throw();
-            //this.character.throwBottle();
-
-            //debugger;
-            //this.character.throwBottle();
-            this.statusBarBottle.setValue(this.character.collectedBottles);
-        }*/
-    }
-
 
 
     draw() {
