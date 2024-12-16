@@ -1,4 +1,4 @@
-class Bottle extends ThrowableObject {
+class Bottle extends MovableObject {
     offset = {
         x: 27,
         y: 13,
