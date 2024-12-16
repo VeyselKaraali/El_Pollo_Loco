@@ -1,4 +1,4 @@
-class EndBoss extends Enemy {
+class ChickenBig extends Enemy {
     audioCluck = new Audio("assets/audio/characters/chickenBig/cluck.mp3");
     audioScream = new Audio("assets/audio/characters/chickenBig/scream.mp3");
     audioDead = new Audio("assets/audio/characters/chickenBig/dead.mp3");

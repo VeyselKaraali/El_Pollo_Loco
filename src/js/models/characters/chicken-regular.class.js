@@ -1,4 +1,4 @@
-class BasicChicken extends Enemy {
+class ChickenRegular extends Enemy {
     static basePosition = 600;
     static step = 1500 / 5;
     audioCluck = new Audio("assets/audio/characters/chicken/cluck.mp3");

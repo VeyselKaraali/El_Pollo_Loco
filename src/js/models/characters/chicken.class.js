@@ -1,4 +1,4 @@
-class Chicken extends BasicChicken {
+class Chicken extends ChickenRegular {
     IMAGES_WALK = [
         "assets/img/5_enemies/2_chicken_normal/1_walk/1.png",
         "assets/img/5_enemies/2_chicken_normal/1_walk/2.png",
@@ -11,7 +11,7 @@ class Chicken extends BasicChicken {
 
     constructor(index) {
         super(
-            BasicChicken.basePosition + index * BasicChicken.step + (Math.random() * 100 - 50),
+            ChickenRegular.basePosition + index * ChickenRegular.step + (Math.random() * 100 - 50),
             354,
             80,
             60

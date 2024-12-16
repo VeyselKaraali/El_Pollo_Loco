@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    endBoss = new EndBoss();
+    endBoss = new ChickenBig();
     level = level1;
     canvas;
     ctx;
@@ -30,7 +30,7 @@ class World {
             this.level.enemies.forEach((enemy, enemyIndex) => {
                 if (bottle.isColliding(enemy)) {
                     //this.audioBottleSplash.play().then(() => {});
-                    if(enemy instanceof EndBoss) {
+                    if(enemy instanceof ChickenBig) {
                         this.statusBarEndBoss.setValue(--this.statusBarEndBoss.value);
                     } else {
                         enemy.energy=0;
