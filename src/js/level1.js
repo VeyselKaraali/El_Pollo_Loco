@@ -5,7 +5,17 @@ const level1 = new Level(
         ...Array(6).fill().map((_, i) => new Chicken(i))
     ],
     [
-        new Cloud()
+        new Cloud1(),
+        new Cloud2(),
+        new Cloud1(),
+        new Cloud2(),
+        new Cloud1(),
+        new Cloud2(),
+        new Cloud1(),
+        new Cloud2(),
+        new Cloud1(),
+        new Cloud2()
+
     ],
     [
         new BackgroundObject(-719, "assets/img/3_background/layers/4_fourth/1.png"),
