@@ -19,6 +19,12 @@ class ThrowableBottle extends ThrowableObject {
 
     constructor(x, y, width, height) {
         super(x, y, width, height);
+        this.offset = {
+            x: 0,
+            y: 0,
+            width: 0,
+            height: 0
+        };
         this.speedX = 20;
         this.speedY = 30;
         this.acceleration = 2.5;

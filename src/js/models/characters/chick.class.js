@@ -1,10 +1,4 @@
 class Chick extends BasicChicken {
-    offset = {
-        x: 7,
-        y: 53,
-        width: 15,
-        height: 108
-    };
 
     IMAGES_WALK = [
         "assets/img/5_enemies/1_chicken_small/1_walk/1.png",
@@ -23,6 +17,12 @@ class Chick extends BasicChicken {
             60,
             60
         );
+        this.offset = {
+            x: 7,
+            y: 53,
+            width: 15,
+            height: 108
+        };
         super.loadImages(this.IMAGES_WALK);
         super.loadImages(this.IMAGES_DEAD);
         super.animate();

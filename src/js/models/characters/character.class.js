@@ -1,11 +1,5 @@
 class Character extends MovableObject {
     world;
-    offset = {
-        x: 13,
-        y: 97,
-        width: 25,
-        height: 110
-    };
 
     audioWalk = AudioManager.load("assets/audio/characters/character/walk.mp3");
     audioJump = AudioManager.load("assets/audio/characters/character/jump.mp3");
@@ -87,6 +81,12 @@ class Character extends MovableObject {
         );
         super.speedX = 10;
         super.acceleration = 2.5;
+        this.offset = {
+            x: 13,
+            y: 97,
+            width: 25,
+            height: 110
+        };
         this.collectedBottles = 0;
         this.collectedCoins = 0;
         this.loadImages(this.IMAGES_WALK);

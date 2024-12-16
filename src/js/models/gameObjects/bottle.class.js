@@ -1,11 +1,4 @@
 class Bottle extends MovableObject {
-    offset = {
-        x: 27,
-        y: 13,
-        width: 45,
-        height: 20
-    };
-
     static basePosition = 600;
     static step = 1500 / 5;
 
@@ -21,6 +14,12 @@ class Bottle extends MovableObject {
             90,
             75
         );
+        this.offset = {
+            x: 27,
+            y: 13,
+            width: 45,
+            height: 20
+        };
         super.loadImages(this.IMAGES_BOTTLE);
         this.animate();
     }

@@ -1,14 +1,4 @@
 class DrawableObject {
-    x = 0;
-    y = 0;
-    width = 0;
-    height = 0;
-    offset = {
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0
-    };
     img;
     imgCache = {};
     currentImage = 0;
@@ -18,6 +8,12 @@ class DrawableObject {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.offset = {
+            x: 0,
+            y: 0,
+            width: 0,
+            height: 0
+        };
     }
 
     loadImage(path) {

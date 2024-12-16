@@ -1,10 +1,4 @@
 class EndBoss extends Enemy {
-    offset = {
-        x: 10,
-        y: 62,
-        width: 15,
-        height: 75
-    };
     audioCluck = new Audio("assets/audio/characters/chickenBig/cluck.mp3");
     audioScream = new Audio("assets/audio/characters/chickenBig/scream.mp3");
     audioDead = new Audio("assets/audio/characters/chickenBig/dead.mp3");
@@ -57,6 +51,12 @@ class EndBoss extends Enemy {
             250,
             400
         );
+        this.offset = {
+            x: 10,
+            y: 62,
+            width: 15,
+            height: 75
+        };
         this.speedX = 0.1;
         super.loadImages(this.IMAGES_WALK);
         super.loadImages(this.IMAGES_DEAD);
