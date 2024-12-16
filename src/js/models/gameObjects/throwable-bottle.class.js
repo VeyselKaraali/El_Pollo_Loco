@@ -1,5 +1,4 @@
 class ThrowableBottle extends ThrowableObject {
-
     IMAGES_BOTTLE_ROTATION=[
         "assets/img/7_bottle/2_rotation/1.png",
         "assets/img/7_bottle/2_rotation/2.png",
@@ -15,7 +14,6 @@ class ThrowableBottle extends ThrowableObject {
         "assets/img/7_bottle/3_splash/5.png",
         "assets/img/7_bottle/3_splash/6.png",
     ]
-
 
     constructor(x, y, width, height) {
         super(x, y, width, height);
