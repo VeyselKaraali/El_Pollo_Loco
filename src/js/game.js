@@ -9,7 +9,7 @@ let pauseStartTime = null;
 let totalPausedDuration = 0;
 let isGamePaused = false;
 
-audioMusic = new Audio("assets/audio/music/2.mp3");
+audioMusic = AudioManager.load("assets/audio/music/2.mp3", { loop: true, volume: 0.05 });
 
 function startGame() {
     document.getElementById('canvas').classList.remove('d-none');
@@ -80,16 +80,17 @@ function toggleVolume() {
 function updateVolumeIcons() {
     const volumeOnIcon = document.getElementById('volume-on');
     const volumeOffIcon = document.getElementById('volume-off');
+    const audioManager = new AudioManager();
 
     if (isVolumeOn) {
         volumeOnIcon.classList.remove('d-none');
         volumeOffIcon.classList.add('d-none');
-        audioMusic.volume = 0.05;
-        audioMusic.play().then(() => {});
+
+        audioManager.play(this.audioMusic);
     } else {
+        this.audioMusic.pause();
         volumeOnIcon.classList.add('d-none');
         volumeOffIcon.classList.remove('d-none');
-        audioMusic.pause();
     }
 }
 

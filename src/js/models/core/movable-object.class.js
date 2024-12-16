@@ -9,6 +9,7 @@ class MovableObject extends DrawableObject {
         this.energy = 5;
         this.lastHit = 0;
         this.lastActivityTime = Date.now();
+        this.audioManager = new AudioManager();
     }
 
     moveLeft() {

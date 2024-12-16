@@ -7,13 +7,13 @@ class Character extends MovableObject {
         height: 110
     };
 
-    audioWalk = new Audio("assets/audio/characters/character/walk.mp3");
-    audioJump = new Audio("assets/audio/characters/character/jump.mp3");
-    audioSnore = new Audio("assets/audio/characters/character/snore.mp3");
-    audioHurt = new Audio("assets/audio/characters/character/hurt.mp3");
-    audioDead = new Audio("assets/audio/characters/character/dead.mp3");
-    audioCollectBottle = new Audio("assets/audio/collectables/bottle/collect.mp3")
-    audioCollectCoin = new Audio("assets/audio/collectables/coin/collect.mp3")
+    audioWalk = AudioManager.load("assets/audio/characters/character/walk.mp3");
+    audioJump = AudioManager.load("assets/audio/characters/character/jump.mp3");
+    audioSnore = AudioManager.load("assets/audio/characters/character/snore.mp3");
+    audioHurt = AudioManager.load("assets/audio/characters/character/hurt.mp3");
+    audioDead = AudioManager.load("assets/audio/characters/character/dead.mp3");
+    audioCollectBottle = AudioManager.load("assets/audio/collectables/bottle/collect.mp3")
+    audioCollectCoin = AudioManager.load("assets/audio/collectables/coin/collect.mp3")
 
     IMAGES_WALK = [
         "assets/img/4_character/1_walk/1.png",
@@ -113,7 +113,7 @@ class Character extends MovableObject {
         if(!super.isDead()) {
             super.jump();
             super.speedY = 30;
-            this.playAudioJump()
+            this.playAudioJump();
         }
     }
 
@@ -196,34 +196,34 @@ class Character extends MovableObject {
 
     playAudioWalk() {
         if (!super.isAboveGround() && !super.isDead()) {
-            this.audioWalk.play().then(() => {});
+            this.audioManager.play(this.audioWalk);
         }
     }
 
     playAudioJump() {
-        //this.audioJump.play().then(() => {});
+        //this.audioManager.play(this.audioJump);
     }
 
     playAudioCollectCoin() {
-        //this.audioCollectCoin.play().then(() => {});
+        //this.audioManager.play(this.audioCollectCoin);
     }
 
     playAudioCollectBottle() {
-        //this.audioCollectBottle.play().then(() => {});
+        //this.audioManager.play(this.audioCollectBottle);
     }
 
     handleInactiveState() {
         this.playAnimation(this.IMAGES_IDLE_LONG);
-        //this.audioSnore.play().then(() => {});
+        //this.audioManager.play(this.audioSnore);
     }
 
     handleHurt() {
         this.playAnimation(this.IMAGES_HURT);
-        //this.audioHurt.play().then(() => {});
+        //this.audioManager.play(this.audioHurt);
     }
 
     handleDeath() {
         this.playAnimation(this.IMAGES_DEAD);
-        //this.audioDead.play().then(() => {});
+        //this.audioManager.play(this.audioDead);
     }
 }

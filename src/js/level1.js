@@ -2,9 +2,7 @@ const level1 = new Level(
     [
         ...Array(6).fill().map((_, i) => new Chick(i)),
 
-        ...Array(6).fill().map((_, i) => new Chicken(i)),
-
-        new EndBoss(),
+        ...Array(6).fill().map((_, i) => new Chicken(i))
     ],
     [
         new Cloud()

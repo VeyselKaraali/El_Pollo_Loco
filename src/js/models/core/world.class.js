@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    endBoss = new EndBoss();
     level = level1;
     canvas;
     ctx;
@@ -148,6 +149,7 @@ class World {
         // END: SPACE FOR FIXED OBJECTS
 
         this.addToMap(this.character);
+        this.addToMap(this.endBoss);
         this.ctx.translate(-this.camera_x, 0);
     }
 
