@@ -26,17 +26,23 @@ class World {
     }
 
     handleEnemyWithThrowableBottleCollision() {
-        this.throwableObjects.forEach((bottle, bottleIndex) => {
-            this.level.enemies.forEach((enemy, enemyIndex) => {
+        this.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy)) {
-                    //this.audioBottleSplash.play().then(() => {});
-                    if(enemy instanceof ChickenBig) {
-                        this.statusBarEndBoss.setValue(--this.statusBarEndBoss.value);
-                    } else {
-                        enemy.energy=0;
-                    }
+                    bottle.splash();
+                    enemy.energy=0;
                 }
             });
+        });
+    }
+
+    handleChickenBigWithThrowableBottleCollision() {
+        this.throwableObjects.forEach((bottle) => {
+            if(this.chickenBig.isColliding(bottle)) {
+                this.chickenBig.reduceEnergy();
+                this.statusBarEndBoss.setValue(this.chickenBig.energy);
+                bottle.splash();
+            }
         });
     }
 
@@ -75,7 +81,7 @@ class World {
     }
 
     handleCharacterNearEndBoss() {
-        if (this.character.x >= 2160 - 300) {
+        if (this.chickenBig.x - this.character.x < (CANVAS.WIDTH / 3 * 2) ) {
             this.statusBarEndBoss.y = 30;
         }
     }
@@ -91,6 +97,7 @@ class World {
 
         gameInterval = setInterval(() => {
             this.handleEnemyWithThrowableBottleCollision();
+            this.handleChickenBigWithThrowableBottleCollision();
             this.handleCharacterWithBottleCollision();
             this.handleCharacterWithCoinCollision();
             this.handleCharacterWithEnemyCollision();
@@ -135,10 +142,8 @@ class World {
         // Moving elements
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
-
         // START: SPACE FOR FIXED OBJECTS
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBarHealth);
@@ -150,6 +155,7 @@ class World {
 
         this.addToMap(this.character);
         this.addToMap(this.chickenBig);
+        this.addObjectsToMap(this.throwableObjects);
         this.ctx.translate(-this.camera_x, 0);
     }
 

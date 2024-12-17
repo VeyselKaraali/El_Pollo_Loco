@@ -228,6 +228,6 @@ class Character extends MovableObject {
 
     handleDeath() {
         this.playAnimation(this.IMAGES_DEAD);
-        //this.audioManager.play(this.audioDead);
+        this.audioManager.play(this.audioDead);
     }
 }
