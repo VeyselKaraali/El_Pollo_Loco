@@ -26,22 +26,30 @@ class ThrowableBottle extends ThrowableObject {
         this.speedX = 20;
         this.speedY = 30;
         this.acceleration = 2.5;
-        super.loadImage("assets/img/7_bottle/2_rotation/1.png");
+        this.loadImages(this.IMAGES_BOTTLE_ROTATION);
+        this.loadImages(this.IMAGES_BOTTLE_SPLASH);
     }
 
     throw() {
         super.throw();
         this.speedY = 30;
+        this.rotate();
         setStoppableInterval(() => {
             this.isFacingOtherDirection ? this.x -=10 : this.x +=10;
         }, 25)
     }
 
     rotate() {
-
+        setStoppableInterval(() => {
+            this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
+        }, 1000 / 60)
     }
 
     splash() {
-        //audioBottleSplash = new Audio("assets/audio/collectables/bottle/splash.mp3");
+        setStoppableInterval(() => {
+            this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+            //audioBottleSplash = new Audio("assets/audio/collectables/bottle/splash.mp3");
+        }, 1000 / 60)
+
     }
 }
