@@ -11,36 +11,6 @@ function init() {
     new World(canvas);
 }
 
-
-
-function restartGame() {
-    this.init();
-}
-
-function goToStartScreen() {
-    document.getElementById('canvas').classList.add('d-none');
-    document.getElementById('win-screen-container').classList.add('d-none');
-    document.getElementById('lose-screen-container').classList.add('d-none');
-    document.getElementById('start-screen-container').classList.remove('d-none');
-}
-
-/*
-function toggleMobileControls() {
-    if (window.innerWidth <= 720 && World.hasGameStarted) {
-        document.querySelectorAll('.mobile-control').forEach((button) => {
-            button.classList.remove('d-none');
-        });
-    } else {
-        document.querySelectorAll('.mobile-control').forEach((button) => {
-            button.classList.add('d-none');
-        });
-    }
-}
-
- */
-
-
-
 function toggleVolume() {
     isVolumeOn = !isVolumeOn;
     updateVolumeIcons();

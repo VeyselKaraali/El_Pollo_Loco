@@ -1,6 +1,7 @@
 class World {
     static hasGameStarted = true;
     static isGamePaused = false;
+    static isGameOver = false;
     static level_end_x = 2200;
     static camera_x = 0;
 
@@ -34,6 +35,33 @@ class World {
         document.getElementById('pause-game').classList.remove('d-none');
         //toggleMobileControls();
     }
+
+    restartGame() {
+        this.clearCanvas();
+        this.init();
+    }
+
+    goToStartScreen() {
+        this.clearCanvas();
+        document.getElementById('canvas').classList.add('d-none');
+        document.getElementById('win-screen-container').classList.add('d-none');
+        document.getElementById('lose-screen-container').classList.add('d-none');
+        document.getElementById('start-screen-container').classList.remove('d-none');
+    }
+
+    /*
+    toggleMobileControls() {
+        if (window.innerWidth <= 720 && World.hasGameStarted) {
+            document.querySelectorAll('.mobile-control').forEach((button) => {
+                button.classList.remove('d-none');
+            });
+        } else {
+            document.querySelectorAll('.mobile-control').forEach((button) => {
+                button.classList.add('d-none');
+            });
+        }
+    }
+     */
 
     static pauseOrResumeGame() {
         const pauseIcon = document.getElementById('pause-game');
