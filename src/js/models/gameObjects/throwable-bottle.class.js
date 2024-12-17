@@ -15,13 +15,13 @@ class ThrowableBottle extends ThrowableObject {
         "assets/img/7_bottle/3_splash/6.png",
     ]
 
-    constructor(x, y, width, height) {
-        super(x, y, width, height);
+    constructor(x, y) {
+        super(x, y, 75, 100);
         this.offset = {
-            x: 0,
-            y: 0,
-            width: 0,
-            height: 0
+            x: 27,
+            y: 13,
+            width: 45,
+            height: 20
         };
         this.speedX = 20;
         this.speedY = 30;

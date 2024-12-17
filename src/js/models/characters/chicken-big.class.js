@@ -58,6 +58,7 @@ class ChickenBig extends Enemy {
             height: 75
         };
         this.speedX = 0.1;
+        this.statusBarHealth = new StatusBarEndBoss();
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_DEAD);
         this.animate();

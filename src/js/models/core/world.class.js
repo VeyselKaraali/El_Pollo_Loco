@@ -1,16 +1,11 @@
 class World {
+    canvas;
+    ctx;
     character = new Character();
     chickenBig = new ChickenBig();
     level = level1;
-    canvas;
-    ctx;
     keyboard;
     camera_x = 0;
-    statusBarHealth = new StatusBarHealth();
-    statusBarCoin = new StatusBarCoin();
-    statusBarBottle = new StatusBarBottle();
-    statusBarEndBoss = new StatusBarEndBoss();
-    throwableObjects = [];
 
     constructor(canvas, keyboard) {
         this.canvas = canvas;
@@ -26,7 +21,7 @@ class World {
     }
 
     handleEnemyWithThrowableBottleCollision() {
-        this.throwableObjects.forEach((bottle) => {
+        this.character.throwableBottles.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy)) {
                     bottle.splash();
@@ -37,10 +32,10 @@ class World {
     }
 
     handleChickenBigWithThrowableBottleCollision() {
-        this.throwableObjects.forEach((bottle) => {
+        this.character.throwableBottles.forEach((bottle) => {
             if(this.chickenBig.isColliding(bottle)) {
                 this.chickenBig.reduceEnergy();
-                this.statusBarEndBoss.setValue(this.chickenBig.energy);
+                this.chickenBig.statusBarHealth.setValue(this.chickenBig.energy);
                 bottle.splash();
             }
         });
@@ -55,16 +50,16 @@ class World {
 
             else if (!this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
                     this.character.reduceEnergy();
-                    this.statusBarHealth.setValue(this.character.energy);
+                    this.character.statusBarHealth.setValue(this.character.energy);
             }
         })
     }
 
     handleCharacterWithCoinCollision() {
         this.level.coins.forEach((coin, index) => {
-            if (this.character.isColliding(coin) && !this.statusBarCoin.isFull()) {
+            if (this.character.isColliding(coin) && !this.character.statusBarCoin.isFull()) {
                 this.character.collectCoin();
-                this.statusBarCoin.setValue(this.character.collectedCoins);
+                this.character.statusBarCoin.setValue(this.character.collectedCoins);
                 this.level.coins.splice(index, 1);
             }
         });
@@ -72,9 +67,9 @@ class World {
 
     handleCharacterWithBottleCollision() {
         this.level.bottles.forEach((bottle, index) => {
-            if (this.character.isColliding(bottle) && !this.statusBarBottle.isFull()) {
+            if (this.character.isColliding(bottle) && !this.character.statusBarBottle.isFull()) {
                 this.character.collectBottle();
-                this.statusBarBottle.setValue(this.character.collectedBottles);
+                this.character.statusBarBottle.setValue(this.character.collectedBottles);
                 this.level.bottles.splice(index, 1);
             }
         });
@@ -82,7 +77,7 @@ class World {
 
     handleCharacterNearEndBoss() {
         if (this.chickenBig.x - this.character.x < (CANVAS.WIDTH / 3 * 2) ) {
-            this.statusBarEndBoss.y = 30;
+            this.chickenBig.statusBarHealth.y = 30;
         }
     }
 
@@ -107,7 +102,7 @@ class World {
 
 
     draw() {
-        if (!isGamePaused && !this.character.isDead() && this.statusBarEndBoss.value > 0) {
+        if (!isGamePaused && !this.character.isDead() && this.chickenBig.statusBarHealth.value > 0) {
             this.clearCanvas();
             this.drawGameElements();
             requestAnimationFrame(this.draw.bind(this));
@@ -117,7 +112,7 @@ class World {
             this.showLoseScreen();
         }
 
-        if(this.statusBarEndBoss.value <= 0 && !this.character.isDead()) {
+        if(this.chickenBig.statusBarHealth.value <= 0 && !this.character.isDead()) {
             this.showWinScreen();
         }
 
@@ -146,16 +141,16 @@ class World {
         this.addObjectsToMap(this.level.coins);
         // START: SPACE FOR FIXED OBJECTS
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBarHealth);
-        this.addToMap(this.statusBarCoin);
-        this.addToMap(this.statusBarBottle);
-        this.addToMap(this.statusBarEndBoss);
+        this.addToMap(this.character.statusBarHealth);
+        this.addToMap(this.character.statusBarCoin);
+        this.addToMap(this.character.statusBarBottle);
+        this.addToMap(this.chickenBig.statusBarHealth);
         this.ctx.translate(this.camera_x, 0);
         // END: SPACE FOR FIXED OBJECTS
 
         this.addToMap(this.character);
         this.addToMap(this.chickenBig);
-        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.character.throwableBottles);
         this.ctx.translate(-this.camera_x, 0);
     }
 
