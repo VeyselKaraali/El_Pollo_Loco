@@ -30,6 +30,12 @@ class ThrowableBottle extends ThrowableObject {
         this.loadImages(this.IMAGES_BOTTLE_SPLASH);
     }
 
+    isAboveGround() {
+        // ToDo
+        //return this.y < 330;
+        return true;
+    }
+
     throw() {
         super.throw();
         this.speedY = 30;

@@ -1,5 +1,4 @@
 class MovableObject extends DrawableObject {
-
     constructor(x, y, width, height) {
         super(x, y, width, height);
         this.speedX = 0;
@@ -39,12 +38,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if(this instanceof ThrowableObject) {
-            return true;
-        }
-        if(this instanceof Character) {
-            return this.y < 172
-        }
+        return this.y < 0;
     }
 
     applyGravity() {

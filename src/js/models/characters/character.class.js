@@ -123,6 +123,10 @@ class Character extends MovableObject {
         }
     }
 
+    isAboveGround() {
+        return this.y < 172;
+    }
+
     collectCoin() {
         this.collectedCoins++;
         this.playAudioCollectCoin();
