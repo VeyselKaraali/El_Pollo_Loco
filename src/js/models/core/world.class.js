@@ -1,16 +1,12 @@
 class World {
-    canvas;
-    ctx;
-    character = new Character();
-    chickenBig = new ChickenBig();
-    level = level1;
-    keyboard;
-    camera_x = 0;
-
     constructor(canvas, keyboard) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
+        this.camera_x = 0;
         this.keyboard = keyboard;
+        this.character = new Character();
+        this.chickenBig = new ChickenBig();
+        this.level = level1;
         this.init();
     }
 
