@@ -7,8 +7,9 @@ class MovableObject extends DrawableObject {
         this.isFacingOtherDirection = false;
         this.energy = 5;
         this.lastHit = 0;
-        this.lastActivityTime = Date.now();
+        this.keyboardInput = new KeyboardInput();
         this.audioManager = new AudioManager();
+        this.lastActivityTime = Date.now();
     }
 
     moveLeft() {

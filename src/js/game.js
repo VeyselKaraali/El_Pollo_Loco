@@ -1,6 +1,5 @@
 let canvas;
 let world;
-let keyboard = new Keyboard();
 let gameInterval;
 let hasGameStarted = false;
 let isVolumeOn = false;
@@ -14,7 +13,7 @@ audioMusic = AudioManager.load("assets/audio/music/2.mp3", { loop: true, volume:
 function startGame() {
     document.getElementById('canvas').classList.remove('d-none');
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    world = new World(canvas);
     setupEventListeners();
     document.getElementById('start-screen-container').classList.add('d-none');
     document.getElementById('win-screen-container').classList.add('d-none');
@@ -102,55 +101,55 @@ function setupEventListeners() {
     const options = { passive: true };
 
     // Left
-    document.getElementById('mobile-left-btn').addEventListener('mousedown', () => keyboard.LEFT = true);
-    document.getElementById('mobile-left-btn').addEventListener('mouseup', () => keyboard.LEFT = false);
-    document.getElementById('mobile-left-btn').addEventListener('mouseleave', () => keyboard.LEFT = false);
+    document.getElementById('mobile-left-btn').addEventListener('mousedown', () => world.character.keyboardInput.LEFT = true);
+    document.getElementById('mobile-left-btn').addEventListener('mouseup', () => world.character.keyboardInput.LEFT = false);
+    document.getElementById('mobile-left-btn').addEventListener('mouseleave', () => world.character.keyboardInput.LEFT = false);
 
-    document.getElementById('mobile-left-btn').addEventListener('touchstart', () => keyboard.LEFT = true, options);
-    document.getElementById('mobile-left-btn').addEventListener('touchend', () => keyboard.LEFT = false, options);
-    document.getElementById('mobile-left-btn').addEventListener('touchcancel', () => keyboard.LEFT = false, options);
+    document.getElementById('mobile-left-btn').addEventListener('touchstart', () => world.character.keyboardInput.LEFT = true, options);
+    document.getElementById('mobile-left-btn').addEventListener('touchend', () => world.character.keyboardInput.LEFT = false, options);
+    document.getElementById('mobile-left-btn').addEventListener('touchcancel', () => world.character.keyboardInput.LEFT = false, options);
 
     // Right
-    document.getElementById('mobile-right-btn').addEventListener('mousedown', () => keyboard.RIGHT = true);
-    document.getElementById('mobile-right-btn').addEventListener('mouseup', () => keyboard.RIGHT = false);
-    document.getElementById('mobile-right-btn').addEventListener('mouseleave', () => keyboard.RIGHT = false);
+    document.getElementById('mobile-right-btn').addEventListener('mousedown', () => world.character.keyboardInput.RIGHT = true);
+    document.getElementById('mobile-right-btn').addEventListener('mouseup', () => world.character.keyboardInput.RIGHT = false);
+    document.getElementById('mobile-right-btn').addEventListener('mouseleave', () => world.character.keyboardInput.RIGHT = false);
 
-    document.getElementById('mobile-right-btn').addEventListener('touchstart', () => keyboard.RIGHT = true, options);
-    document.getElementById('mobile-right-btn').addEventListener('touchend', () => keyboard.RIGHT = false, options);
-    document.getElementById('mobile-right-btn').addEventListener('touchcancel', () => keyboard.RIGHT = false, options);
+    document.getElementById('mobile-right-btn').addEventListener('touchstart', () => world.character.keyboardInput.RIGHT = true, options);
+    document.getElementById('mobile-right-btn').addEventListener('touchend', () => world.character.keyboardInput.RIGHT = false, options);
+    document.getElementById('mobile-right-btn').addEventListener('touchcancel', () => world.character.keyboardInput.RIGHT = false, options);
 
     // Up
-    document.getElementById('mobile-up-btn').addEventListener('mousedown', () => keyboard.UP = true);
-    document.getElementById('mobile-up-btn').addEventListener('mouseup', () => keyboard.UP = false);
-    document.getElementById('mobile-up-btn').addEventListener('mouseleave', () => keyboard.UP = false);
+    document.getElementById('mobile-up-btn').addEventListener('mousedown', () => world.character.keyboardInput.UP = true);
+    document.getElementById('mobile-up-btn').addEventListener('mouseup', () => world.character.keyboardInput.UP = false);
+    document.getElementById('mobile-up-btn').addEventListener('mouseleave', () => world.character.keyboardInput.UP = false);
 
-    document.getElementById('mobile-up-btn').addEventListener('touchstart', () => keyboard.UP = true, options);
-    document.getElementById('mobile-up-btn').addEventListener('touchend', () => keyboard.UP = false, options);
-    document.getElementById('mobile-up-btn').addEventListener('touchcancel', () => keyboard.UP = false, options);
+    document.getElementById('mobile-up-btn').addEventListener('touchstart', () => world.character.keyboardInput.UP = true, options);
+    document.getElementById('mobile-up-btn').addEventListener('touchend', () => world.character.keyboardInput.UP = false, options);
+    document.getElementById('mobile-up-btn').addEventListener('touchcancel', () => world.character.keyboardInput.UP = false, options);
 
     // Throw
-    document.getElementById('mobile-throw-btn').addEventListener('mousedown', () => keyboard.SPACE = true);
-    document.getElementById('mobile-throw-btn').addEventListener('mouseup', () => keyboard.SPACE = false);
-    document.getElementById('mobile-throw-btn').addEventListener('mouseleave', () => keyboard.SPACE = false);
+    document.getElementById('mobile-throw-btn').addEventListener('mousedown', () => world.character.keyboardInput.SPACE = true);
+    document.getElementById('mobile-throw-btn').addEventListener('mouseup', () => world.character.keyboardInput.SPACE = false);
+    document.getElementById('mobile-throw-btn').addEventListener('mouseleave', () => world.character.keyboardInput.SPACE = false);
 
-    document.getElementById('mobile-throw-btn').addEventListener('touchstart', () => keyboard.SPACE = true, options);
-    document.getElementById('mobile-throw-btn').addEventListener('touchend', () => keyboard.SPACE = false, options);
-    document.getElementById('mobile-throw-btn').addEventListener('touchcancel', () => keyboard.SPACE = false, options);
+    document.getElementById('mobile-throw-btn').addEventListener('touchstart', () => world.character.keyboardInput.SPACE = true, options);
+    document.getElementById('mobile-throw-btn').addEventListener('touchend', () => world.character.keyboardInput.SPACE = false, options);
+    document.getElementById('mobile-throw-btn').addEventListener('touchcancel', () => world.character.keyboardInput.SPACE = false, options);
 }
 
 function handleKeyDown(e) {
     switch (e.key) {
         case 'ArrowLeft':
-            keyboard.LEFT = true;
+            world.character.keyboardInput.LEFT = true;
             break;
         case 'ArrowRight':
-            keyboard.RIGHT = true;
+            world.character.keyboardInput.RIGHT = true;
             break;
         case 'ArrowUp':
-            keyboard.UP = true;
+            world.character.keyboardInput.UP = true;
             break;
         case ' ':
-            keyboard.SPACE = true;
+            world.character.keyboardInput.SPACE = true;
             break;
     }
 }
@@ -158,16 +157,16 @@ function handleKeyDown(e) {
 function handleKeyUp(e) {
     switch (e.key) {
         case ' ':
-            keyboard.SPACE = false;
+            world.character.keyboardInput.SPACE = false;
             break;
         case 'ArrowLeft':
-            keyboard.LEFT = false;
+            world.character.keyboardInput.LEFT = false;
             break;
         case 'ArrowRight':
-            keyboard.RIGHT = false;
+            world.character.keyboardInput.RIGHT = false;
             break;
         case 'ArrowUp':
-            keyboard.UP = false;
+            world.character.keyboardInput.UP = false;
             break;
     }
 }

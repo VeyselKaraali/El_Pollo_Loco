@@ -1,9 +1,8 @@
 class World {
-    constructor(canvas, keyboard) {
+    constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.camera_x = 0;
-        this.keyboard = keyboard;
         this.character = new Character();
         this.chickenBig = new ChickenBig();
         this.level = level1;
