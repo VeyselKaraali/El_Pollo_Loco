@@ -2,6 +2,7 @@ class World {
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
+        KeyboardInput.setupEventListeners();
         this.camera_x = 0;
         this.character = new Character();
         this.chickenBig = new ChickenBig();

@@ -14,13 +14,12 @@ function startGame() {
     document.getElementById('canvas').classList.remove('d-none');
     canvas = document.getElementById('canvas');
     world = new World(canvas);
-    setupEventListeners();
     document.getElementById('start-screen-container').classList.add('d-none');
     document.getElementById('win-screen-container').classList.add('d-none');
     document.getElementById('lose-screen-container').classList.add('d-none');
     hasGameStarted = true;
     document.getElementById('pause-game').classList.remove('d-none');
-    toggleMobileControls();
+    //toggleMobileControls();
 }
 
 function restartGame() {
@@ -34,6 +33,7 @@ function goToStartScreen() {
     document.getElementById('start-screen-container').classList.remove('d-none');
 }
 
+/*
 function toggleMobileControls() {
     if (window.innerWidth <= 720 && hasGameStarted) {
         document.querySelectorAll('.mobile-control').forEach((button) => {
@@ -45,6 +45,8 @@ function toggleMobileControls() {
         });
     }
 }
+
+ */
 
 function pauseOrResumeGame() {
     const pauseIcon = document.getElementById('pause-game');
@@ -93,80 +95,5 @@ function updateVolumeIcons() {
     }
 }
 
-function setupEventListeners() {
-    window.addEventListener('resize', toggleMobileControls);
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
 
-    const options = { passive: true };
 
-    // Left
-    document.getElementById('mobile-left-btn').addEventListener('mousedown', () => world.character.keyboardInput.LEFT = true);
-    document.getElementById('mobile-left-btn').addEventListener('mouseup', () => world.character.keyboardInput.LEFT = false);
-    document.getElementById('mobile-left-btn').addEventListener('mouseleave', () => world.character.keyboardInput.LEFT = false);
-
-    document.getElementById('mobile-left-btn').addEventListener('touchstart', () => world.character.keyboardInput.LEFT = true, options);
-    document.getElementById('mobile-left-btn').addEventListener('touchend', () => world.character.keyboardInput.LEFT = false, options);
-    document.getElementById('mobile-left-btn').addEventListener('touchcancel', () => world.character.keyboardInput.LEFT = false, options);
-
-    // Right
-    document.getElementById('mobile-right-btn').addEventListener('mousedown', () => world.character.keyboardInput.RIGHT = true);
-    document.getElementById('mobile-right-btn').addEventListener('mouseup', () => world.character.keyboardInput.RIGHT = false);
-    document.getElementById('mobile-right-btn').addEventListener('mouseleave', () => world.character.keyboardInput.RIGHT = false);
-
-    document.getElementById('mobile-right-btn').addEventListener('touchstart', () => world.character.keyboardInput.RIGHT = true, options);
-    document.getElementById('mobile-right-btn').addEventListener('touchend', () => world.character.keyboardInput.RIGHT = false, options);
-    document.getElementById('mobile-right-btn').addEventListener('touchcancel', () => world.character.keyboardInput.RIGHT = false, options);
-
-    // Up
-    document.getElementById('mobile-up-btn').addEventListener('mousedown', () => world.character.keyboardInput.UP = true);
-    document.getElementById('mobile-up-btn').addEventListener('mouseup', () => world.character.keyboardInput.UP = false);
-    document.getElementById('mobile-up-btn').addEventListener('mouseleave', () => world.character.keyboardInput.UP = false);
-
-    document.getElementById('mobile-up-btn').addEventListener('touchstart', () => world.character.keyboardInput.UP = true, options);
-    document.getElementById('mobile-up-btn').addEventListener('touchend', () => world.character.keyboardInput.UP = false, options);
-    document.getElementById('mobile-up-btn').addEventListener('touchcancel', () => world.character.keyboardInput.UP = false, options);
-
-    // Throw
-    document.getElementById('mobile-throw-btn').addEventListener('mousedown', () => world.character.keyboardInput.SPACE = true);
-    document.getElementById('mobile-throw-btn').addEventListener('mouseup', () => world.character.keyboardInput.SPACE = false);
-    document.getElementById('mobile-throw-btn').addEventListener('mouseleave', () => world.character.keyboardInput.SPACE = false);
-
-    document.getElementById('mobile-throw-btn').addEventListener('touchstart', () => world.character.keyboardInput.SPACE = true, options);
-    document.getElementById('mobile-throw-btn').addEventListener('touchend', () => world.character.keyboardInput.SPACE = false, options);
-    document.getElementById('mobile-throw-btn').addEventListener('touchcancel', () => world.character.keyboardInput.SPACE = false, options);
-}
-
-function handleKeyDown(e) {
-    switch (e.key) {
-        case 'ArrowLeft':
-            world.character.keyboardInput.LEFT = true;
-            break;
-        case 'ArrowRight':
-            world.character.keyboardInput.RIGHT = true;
-            break;
-        case 'ArrowUp':
-            world.character.keyboardInput.UP = true;
-            break;
-        case ' ':
-            world.character.keyboardInput.SPACE = true;
-            break;
-    }
-}
-
-function handleKeyUp(e) {
-    switch (e.key) {
-        case ' ':
-            world.character.keyboardInput.SPACE = false;
-            break;
-        case 'ArrowLeft':
-            world.character.keyboardInput.LEFT = false;
-            break;
-        case 'ArrowRight':
-            world.character.keyboardInput.RIGHT = false;
-            break;
-        case 'ArrowUp':
-            world.character.keyboardInput.UP = false;
-            break;
-    }
-}
