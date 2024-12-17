@@ -1,27 +1,20 @@
-let canvas;
-let world;
-let gameInterval;
 let isVolumeOn = false;
 
-let pauseStartTime = null;
-let totalPausedDuration = 0;
+
 
 
 audioMusic = AudioManager.load("assets/audio/music/2.mp3", { loop: true, volume: 0.05 });
 
-function startGame() {
-    document.getElementById('canvas').classList.remove('d-none');
-    canvas = document.getElementById('canvas');
-    world = new World(canvas);
-    document.getElementById('start-screen-container').classList.add('d-none');
-    document.getElementById('win-screen-container').classList.add('d-none');
-    document.getElementById('lose-screen-container').classList.add('d-none');
-    document.getElementById('pause-game').classList.remove('d-none');
-    //toggleMobileControls();
+function init() {
+    const canvas = document.getElementById('canvas');
+    canvas.classList.remove('d-none');
+    new World(canvas);
 }
 
+
+
 function restartGame() {
-    this.startGame();
+    this.init();
 }
 
 function goToStartScreen() {

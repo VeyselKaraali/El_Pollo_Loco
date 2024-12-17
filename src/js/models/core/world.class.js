@@ -4,6 +4,12 @@ class World {
     static level_end_x = 2200;
     static camera_x = 0;
 
+    // === Needed for pause or resume game ===
+    static gameInterval;
+    static pauseStartTime = null;
+    static totalPausedDuration = 0;
+    // ==================================
+
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
@@ -12,12 +18,21 @@ class World {
         this.chickenBig = new ChickenBig();
         this.level = level1;
         this.init();
+        this.startGame();
     }
 
     init() {
         this.setWorld();
         this.runGameLoop();
         this.draw();
+    }
+
+    startGame() {
+        document.getElementById('start-screen-container').classList.add('d-none');
+        document.getElementById('win-screen-container').classList.add('d-none');
+        document.getElementById('lose-screen-container').classList.add('d-none');
+        document.getElementById('pause-game').classList.remove('d-none');
+        //toggleMobileControls();
     }
 
     static pauseOrResumeGame() {
@@ -29,9 +44,9 @@ class World {
             resumeIcon.classList.add('d-none');
             World.isGamePaused=false;
 
-            if (pauseStartTime !== null) {
-                totalPausedDuration += Date.now() - pauseStartTime;
-                pauseStartTime = null;
+            if (World.pauseStartTime !== null) {
+                World.totalPausedDuration += Date.now() - World.pauseStartTime;
+                World.pauseStartTime = null;
             }
 
             world.runGameLoop();
@@ -40,8 +55,8 @@ class World {
             resumeIcon.classList.remove('d-none');
             pauseIcon.classList.add('d-none');
             World.isGamePaused=true;
-            clearInterval(gameInterval);
-            pauseStartTime = Date.now();
+            clearInterval(World.gameInterval);
+            World.pauseStartTime = Date.now();
         }
     }
 
@@ -50,7 +65,7 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy)) {
                     bottle.splash();
-                    enemy.energy=0;
+                    enemy.reduceEnergy();
                 }
             });
         });
@@ -111,11 +126,11 @@ class World {
     }
 
     runGameLoop() {
-        if (gameInterval) {
-            clearInterval(gameInterval);
+        if (World.gameInterval) {
+            clearInterval(World.gameInterval);
         }
 
-        gameInterval = setInterval(() => {
+        World.gameInterval = setInterval(() => {
             this.handleEnemyWithThrowableBottleCollision();
             this.handleChickenBigWithThrowableBottleCollision();
             this.handleCharacterWithBottleCollision();

@@ -7,7 +7,8 @@ class ChickenRegular extends Enemy {
 
     constructor(x, y, width, height) {
         super(x, y, width, height);
-        this.speedX = 0.25 + Math.random() * (0.75 - 0.25)
+        this.speedX = 0.25 + Math.random() * (0.75 - 0.25);
+        this.energy = 0.01;
     }
 
     animate() {
