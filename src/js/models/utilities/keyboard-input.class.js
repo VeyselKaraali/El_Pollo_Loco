@@ -4,6 +4,13 @@ class KeyboardInput {
     static UP = false;
     static SPACE = false;
 
+    static KEYS = {
+        LEFT: 'ArrowLeft',
+        RIGHT: 'ArrowRight',
+        UP: 'ArrowUp',
+        SPACE: ' ',
+    };
+
     static setupEventListeners() {
         //window.addEventListener('resize', toggleMobileControls);
         window.addEventListener("keydown", (e) => KeyboardInput.handleKeyDown(e));
@@ -11,55 +18,37 @@ class KeyboardInput {
 
         const options = { passive: true };
 
-        // Left
-        document.getElementById('mobile-left-btn').addEventListener('mousedown', () => KeyboardInput.LEFT = true);
-        document.getElementById('mobile-left-btn').addEventListener('mouseup', () => KeyboardInput.LEFT = false);
-        document.getElementById('mobile-left-btn').addEventListener('mouseleave', () => KeyboardInput.LEFT = false);
+        KeyboardInput.addMobileButtonListeners('mobile-left-btn', 'LEFT', options);
+        KeyboardInput.addMobileButtonListeners('mobile-right-btn', 'RIGHT', options);
+        KeyboardInput.addMobileButtonListeners('mobile-up-btn', 'UP', options);
+        KeyboardInput.addMobileButtonListeners('mobile-throw-btn', 'SPACE', options);
+    }
 
-        document.getElementById('mobile-left-btn').addEventListener('touchstart', () => KeyboardInput.LEFT = true, options);
-        document.getElementById('mobile-left-btn').addEventListener('touchend', () => KeyboardInput.LEFT = false, options);
-        document.getElementById('mobile-left-btn').addEventListener('touchcancel', () => KeyboardInput.LEFT = false, options);
+    static addMobileButtonListeners(buttonId, key, options) {
+        const button = document.getElementById(buttonId);
+        if (!button) return;
 
-        // Right
-        document.getElementById('mobile-right-btn').addEventListener('mousedown', () => KeyboardInput.RIGHT = true);
-        document.getElementById('mobile-right-btn').addEventListener('mouseup', () => KeyboardInput.RIGHT = false);
-        document.getElementById('mobile-right-btn').addEventListener('mouseleave', () => KeyboardInput.RIGHT = false);
+        button.addEventListener('mousedown', () => KeyboardInput[key] = true);
+        button.addEventListener('mouseup', () => KeyboardInput[key] = false);
+        button.addEventListener('mouseleave', () => KeyboardInput[key] = false);
 
-        document.getElementById('mobile-right-btn').addEventListener('touchstart', () => KeyboardInput.RIGHT = true, options);
-        document.getElementById('mobile-right-btn').addEventListener('touchend', () => KeyboardInput.RIGHT = false, options);
-        document.getElementById('mobile-right-btn').addEventListener('touchcancel', () => KeyboardInput.RIGHT = false, options);
-
-        // Up
-        document.getElementById('mobile-up-btn').addEventListener('mousedown', () => KeyboardInput.UP = true);
-        document.getElementById('mobile-up-btn').addEventListener('mouseup', () => KeyboardInput.UP = false);
-        document.getElementById('mobile-up-btn').addEventListener('mouseleave', () => KeyboardInput.UP = false);
-
-        document.getElementById('mobile-up-btn').addEventListener('touchstart', () => KeyboardInput.UP = true, options);
-        document.getElementById('mobile-up-btn').addEventListener('touchend', () => KeyboardInput.UP = false, options);
-        document.getElementById('mobile-up-btn').addEventListener('touchcancel', () => KeyboardInput.UP = false, options);
-
-        // Throw
-        document.getElementById('mobile-throw-btn').addEventListener('mousedown', () => KeyboardInput.SPACE = true);
-        document.getElementById('mobile-throw-btn').addEventListener('mouseup', () => KeyboardInput.SPACE = false);
-        document.getElementById('mobile-throw-btn').addEventListener('mouseleave', () => KeyboardInput.SPACE = false);
-
-        document.getElementById('mobile-throw-btn').addEventListener('touchstart', () => KeyboardInput.SPACE = true, options);
-        document.getElementById('mobile-throw-btn').addEventListener('touchend', () => KeyboardInput.SPACE = false, options);
-        document.getElementById('mobile-throw-btn').addEventListener('touchcancel', () => KeyboardInput.SPACE = false, options);
+        button.addEventListener('touchstart', () => KeyboardInput[key] = true, options);
+        button.addEventListener('touchend', () => KeyboardInput[key] = false, options);
+        button.addEventListener('touchcancel', () => KeyboardInput[key] = false, options);
     }
 
     static handleKeyDown(e) {
         switch (e.key) {
-            case 'ArrowLeft':
+            case KeyboardInput.KEYS.LEFT:
                 KeyboardInput.LEFT = true;
                 break;
-            case 'ArrowRight':
+            case KeyboardInput.KEYS.RIGHT:
                 KeyboardInput.RIGHT = true;
                 break;
-            case 'ArrowUp':
+            case KeyboardInput.KEYS.UP:
                 KeyboardInput.UP = true;
                 break;
-            case ' ':
+            case KeyboardInput.KEYS.SPACE:
                 KeyboardInput.SPACE = true;
                 break;
         }
@@ -67,16 +56,16 @@ class KeyboardInput {
 
     static handleKeyUp(e) {
         switch (e.key) {
-            case ' ':
+            case KeyboardInput.KEYS.SPACE:
                 KeyboardInput.SPACE = false;
                 break;
-            case 'ArrowLeft':
+            case KeyboardInput.KEYS.LEFT:
                 KeyboardInput.LEFT = false;
                 break;
-            case 'ArrowRight':
+            case KeyboardInput.KEYS.RIGHT:
                 KeyboardInput.RIGHT = false;
                 break;
-            case 'ArrowUp':
+            case KeyboardInput.KEYS.UP:
                 KeyboardInput.UP = false;
                 break;
         }
