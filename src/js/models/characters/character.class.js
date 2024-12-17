@@ -1,14 +1,6 @@
 class Character extends MovableObject {
     world;
 
-    audioWalk = AudioManager.load("assets/audio/characters/character/walk.mp3");
-    audioJump = AudioManager.load("assets/audio/characters/character/jump.mp3");
-    audioSnore = AudioManager.load("assets/audio/characters/character/snore.mp3");
-    audioHurt = AudioManager.load("assets/audio/characters/character/hurt.mp3");
-    audioDead = AudioManager.load("assets/audio/characters/character/dead.mp3");
-    audioCollectBottle = AudioManager.load("assets/audio/collectables/bottle/collect.mp3")
-    audioCollectCoin = AudioManager.load("assets/audio/collectables/coin/collect.mp3")
-
     IMAGES_WALK = [
         "assets/img/4_character/1_walk/1.png",
         "assets/img/4_character/1_walk/2.png",
@@ -72,6 +64,14 @@ class Character extends MovableObject {
         "assets/img/4_character/6_dead/7.png",
     ];
 
+    audioWalk = AudioManager.load("assets/audio/characters/character/walk.mp3");
+    audioJump = AudioManager.load("assets/audio/characters/character/jump.mp3");
+    audioSnore = AudioManager.load("assets/audio/characters/character/snore.mp3");
+    audioHurt = AudioManager.load("assets/audio/characters/character/hurt.mp3");
+    audioDead = AudioManager.load("assets/audio/characters/character/dead.mp3");
+    audioCollectBottle = AudioManager.load("assets/audio/collectables/bottle/collect.mp3")
+    audioCollectCoin = AudioManager.load("assets/audio/collectables/coin/collect.mp3")
+
     constructor() {
         super(
             120,
@@ -79,8 +79,8 @@ class Character extends MovableObject {
             100,
             250
         );
-        super.speedX = 10;
-        super.acceleration = 2.5;
+        this.speedX = 10;
+        this.acceleration = 2.5;
         this.offset = {
             x: 13,
             y: 97,
@@ -95,7 +95,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMP);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        super.applyGravity();
+        this.applyGravity();
         this.animate();
     }
 
@@ -110,16 +110,16 @@ class Character extends MovableObject {
     }
 
     jump() {
-        if(!super.isDead()) {
+        if(!this.isDead()) {
             super.jump();
-            super.speedY = 30;
+            this.speedY = 30;
             this.playAudioJump();
         }
     }
 
     bounce() {
-        if(!super.isDead()) {
-            super.speedY = 15;
+        if(!this.isDead()) {
+            this.speedY = 15;
         }
     }
 
@@ -184,7 +184,7 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALK);
             }
 
-            else if(super.isInactive()) {
+            else if(this.isInactive()) {
                 this.handleInactiveState();
             }
 
@@ -195,7 +195,7 @@ class Character extends MovableObject {
     }
 
     playAudioWalk() {
-        if (!super.isAboveGround() && !super.isDead()) {
+        if (!this.isAboveGround() && !this.isDead()) {
             this.audioManager.play(this.audioWalk);
         }
     }

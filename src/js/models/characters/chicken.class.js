@@ -22,8 +22,8 @@ class Chicken extends ChickenRegular {
             width: 0,
             height: 8
         };
-        super.loadImages(this.IMAGES_WALK);
-        super.loadImages(this.IMAGES_DEAD);
-        super.animate();
+        this.loadImages(this.IMAGES_WALK);
+        this.loadImages(this.IMAGES_DEAD);
+        this.animate();
     }
 }

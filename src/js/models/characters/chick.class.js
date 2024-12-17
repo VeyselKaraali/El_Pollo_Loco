@@ -1,5 +1,4 @@
 class Chick extends ChickenRegular {
-
     IMAGES_WALK = [
         "assets/img/5_enemies/1_chicken_small/1_walk/1.png",
         "assets/img/5_enemies/1_chicken_small/1_walk/2.png",
@@ -23,8 +22,8 @@ class Chick extends ChickenRegular {
             width: 15,
             height: 108
         };
-        super.loadImages(this.IMAGES_WALK);
-        super.loadImages(this.IMAGES_DEAD);
-        super.animate();
+        this.loadImages(this.IMAGES_WALK);
+        this.loadImages(this.IMAGES_DEAD);
+        this.animate();
     }
 }

@@ -1,8 +1,4 @@
 class ChickenBig extends Enemy {
-    audioCluck = new Audio("assets/audio/characters/chickenBig/cluck.mp3");
-    audioScream = new Audio("assets/audio/characters/chickenBig/scream.mp3");
-    audioDead = new Audio("assets/audio/characters/chickenBig/dead.mp3");
-
     IMAGES_WALK = [
         "assets/img/5_enemies/3_chicken_big/1_walk/1.png",
         "assets/img/5_enemies/3_chicken_big/1_walk/2.png",
@@ -44,6 +40,10 @@ class ChickenBig extends Enemy {
         "assets/img/5_enemies/3_chicken_big/5_dead/3.png",
     ]
 
+    audioCluck = new Audio("assets/audio/characters/chickenBig/cluck.mp3");
+    audioScream = new Audio("assets/audio/characters/chickenBig/scream.mp3");
+    audioDead = new Audio("assets/audio/characters/chickenBig/dead.mp3");
+
     constructor() {
         super(
             2500,
@@ -58,28 +58,28 @@ class ChickenBig extends Enemy {
             height: 75
         };
         this.speedX = 0.1;
-        super.loadImages(this.IMAGES_WALK);
-        super.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_WALK);
+        this.loadImages(this.IMAGES_DEAD);
         this.animate();
     }
 
     animate() {
         //this.audioScream.play().then(() => {});
         setStoppableInterval(() => {
-            if(!super.isDead()) {
+            if(!this.isDead()) {
                 this.moveLeft();
             }
         }, 1000 / 60);
 
         setStoppableInterval(() => {
-            if(!super.isDead()) {
+            if(!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALK);
                 //this.audioCluck.play().then(() => {});
             }
         }, 200)
 
         setStoppableInterval(() => {
-            if(super.isDead()) {
+            if(this.isDead()) {
                 //this.audioDead.play().then(() => {});
             }
         }, 200)
