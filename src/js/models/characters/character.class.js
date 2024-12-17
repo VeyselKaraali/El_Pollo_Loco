@@ -1,6 +1,4 @@
 class Character extends MovableObject {
-    world;
-
     IMAGES_WALK = [
         "assets/img/4_character/1_walk/1.png",
         "assets/img/4_character/1_walk/2.png",
@@ -158,7 +156,7 @@ class Character extends MovableObject {
     animate() {
         setStoppableInterval(() => {
 
-            if(KeyboardInput.RIGHT && this.x < this.world.level.level_end_x) {
+            if(KeyboardInput.RIGHT && this.x < World.level_end_x) {
                 this.moveRight();
             }
 
@@ -175,7 +173,7 @@ class Character extends MovableObject {
                 this.throwBottle();
             }
 
-            this.world.camera_x = -this.x + 100;
+            World.camera_x = -this.x + 100;
         }, 1000 / 60);
 
         setStoppableInterval(() => {

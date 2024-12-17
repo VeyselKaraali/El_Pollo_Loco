@@ -1,9 +1,12 @@
 class World {
+    static hasGameStarted = true;
+    static level_end_x = 2200;
+    static camera_x = 0;
+
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         KeyboardInput.setupEventListeners();
-        this.camera_x = 0;
         this.character = new Character();
         this.chickenBig = new ChickenBig();
         this.level = level1;
@@ -96,7 +99,6 @@ class World {
         }, 20);
     }
 
-
     draw() {
         if (!isGamePaused && !this.character.isDead() && this.chickenBig.statusBarHealth.value > 0) {
             this.clearCanvas();
@@ -127,7 +129,7 @@ class World {
     }
 
     drawGameElements() {
-        this.ctx.translate(this.camera_x, 0);
+        this.ctx.translate(World.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
 
         // Moving elements
@@ -136,18 +138,18 @@ class World {
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
         // START: SPACE FOR FIXED OBJECTS
-        this.ctx.translate(-this.camera_x, 0);
+        this.ctx.translate(-World.camera_x, 0);
         this.addToMap(this.character.statusBarHealth);
         this.addToMap(this.character.statusBarCoin);
         this.addToMap(this.character.statusBarBottle);
         this.addToMap(this.chickenBig.statusBarHealth);
-        this.ctx.translate(this.camera_x, 0);
+        this.ctx.translate(World.camera_x, 0);
         // END: SPACE FOR FIXED OBJECTS
 
         this.addToMap(this.character);
         this.addToMap(this.chickenBig);
         this.addObjectsToMap(this.character.throwableBottles);
-        this.ctx.translate(-this.camera_x, 0);
+        this.ctx.translate(-World.camera_x, 0);
     }
 
     addObjectsToMap(objects) {

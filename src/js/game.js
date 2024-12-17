@@ -1,7 +1,6 @@
 let canvas;
 let world;
 let gameInterval;
-let hasGameStarted = false;
 let isVolumeOn = false;
 
 let pauseStartTime = null;
@@ -17,7 +16,6 @@ function startGame() {
     document.getElementById('start-screen-container').classList.add('d-none');
     document.getElementById('win-screen-container').classList.add('d-none');
     document.getElementById('lose-screen-container').classList.add('d-none');
-    hasGameStarted = true;
     document.getElementById('pause-game').classList.remove('d-none');
     //toggleMobileControls();
 }
@@ -35,7 +33,7 @@ function goToStartScreen() {
 
 /*
 function toggleMobileControls() {
-    if (window.innerWidth <= 720 && hasGameStarted) {
+    if (window.innerWidth <= 720 && World.hasGameStarted) {
         document.querySelectorAll('.mobile-control').forEach((button) => {
             button.classList.remove('d-none');
         });
