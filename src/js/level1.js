@@ -5,16 +5,8 @@ const level1 = new Level(
         ...Array(6).fill().map((_, i) => new Chicken(i))
     ],
     [
-        new Cloud1(),
-        new Cloud2(),
-        new Cloud1(),
-        new Cloud2(),
-        new Cloud1(),
-        new Cloud2(),
-        new Cloud1(),
-        new Cloud2(),
-        new Cloud1(),
-        new Cloud2()
+        ...Array.from({ length: 5 }, () => new Cloud1()),
+        ...Array.from({ length: 5 }, () => new Cloud2())
 
     ],
     [
