@@ -5,7 +5,7 @@ let isVolumeOn = false;
 
 let pauseStartTime = null;
 let totalPausedDuration = 0;
-let isGamePaused = false;
+
 
 audioMusic = AudioManager.load("assets/audio/music/2.mp3", { loop: true, volume: 0.05 });
 
@@ -46,30 +46,7 @@ function toggleMobileControls() {
 
  */
 
-function pauseOrResumeGame() {
-    const pauseIcon = document.getElementById('pause-game');
-    const resumeIcon = document.getElementById('resume-game');
 
-    if(isGamePaused) {
-        pauseIcon.classList.remove('d-none');
-        resumeIcon.classList.add('d-none');
-        isGamePaused=false;
-
-        if (pauseStartTime !== null) {
-            totalPausedDuration += Date.now() - pauseStartTime;
-            pauseStartTime = null;
-        }
-
-        world.runGameLoop();
-        requestAnimationFrame(() => world.draw());
-    } else {
-        resumeIcon.classList.remove('d-none');
-        pauseIcon.classList.add('d-none');
-        isGamePaused=true;
-        clearInterval(gameInterval);
-        pauseStartTime = Date.now();
-    }
-}
 
 function toggleVolume() {
     isVolumeOn = !isVolumeOn;

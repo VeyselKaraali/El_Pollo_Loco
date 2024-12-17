@@ -2,7 +2,7 @@ let intervalIds = [];
 
 function setStoppableInterval(fn, time) {
     let id = setInterval(() => {
-        if (!isGamePaused) {
+        if (!World.isGamePaused) {
             fn();
         }
     }, time);

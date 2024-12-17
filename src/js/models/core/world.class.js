@@ -1,5 +1,6 @@
 class World {
     static hasGameStarted = true;
+    static isGamePaused = false;
     static level_end_x = 2200;
     static camera_x = 0;
 
@@ -17,6 +18,31 @@ class World {
         this.setWorld();
         this.runGameLoop();
         this.draw();
+    }
+
+    static pauseOrResumeGame() {
+        const pauseIcon = document.getElementById('pause-game');
+        const resumeIcon = document.getElementById('resume-game');
+
+        if(World.isGamePaused) {
+            pauseIcon.classList.remove('d-none');
+            resumeIcon.classList.add('d-none');
+            World.isGamePaused=false;
+
+            if (pauseStartTime !== null) {
+                totalPausedDuration += Date.now() - pauseStartTime;
+                pauseStartTime = null;
+            }
+
+            world.runGameLoop();
+            requestAnimationFrame(() => world.draw());
+        } else {
+            resumeIcon.classList.remove('d-none');
+            pauseIcon.classList.add('d-none');
+            World.isGamePaused=true;
+            clearInterval(gameInterval);
+            pauseStartTime = Date.now();
+        }
     }
 
     handleEnemyWithThrowableBottleCollision() {
@@ -100,7 +126,7 @@ class World {
     }
 
     draw() {
-        if (!isGamePaused && !this.character.isDead() && this.chickenBig.statusBarHealth.value > 0) {
+        if (!World.isGamePaused && !this.character.isDead() && this.chickenBig.statusBarHealth.value > 0) {
             this.clearCanvas();
             this.drawGameElements();
             requestAnimationFrame(this.draw.bind(this));
