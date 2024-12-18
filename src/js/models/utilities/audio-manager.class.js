@@ -12,9 +12,7 @@ class AudioManager {
     }
 
     play(audio) {
-        if(isVolumeOn) {
-            audio.play().then(() => {});
-        }
+        audio.play().then(() => {});
     }
 
 
