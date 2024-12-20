@@ -156,20 +156,20 @@ class Character extends MovableObject {
     animate() {
         setStoppableInterval(() => {
 
-            if(KeyboardInput.RIGHT && this.x < World.level_end_x) {
+            if(KeyboardInputManager.RIGHT && this.x < World.level_end_x) {
                 this.moveRight();
             }
 
 
-            if(KeyboardInput.LEFT && this.x > 0) {
+            if(KeyboardInputManager.LEFT && this.x > 0) {
                 this.moveLeft();
             }
 
-            if(KeyboardInput.UP && !this.isAboveGround()) {
+            if(KeyboardInputManager.UP && !this.isAboveGround()) {
                 this.jump();
             }
 
-            if(KeyboardInput.SPACE) {
+            if(KeyboardInputManager.SPACE) {
                 this.throwBottle();
             }
 
@@ -189,7 +189,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_JUMP);
             }
 
-            else if(KeyboardInput.RIGHT || KeyboardInput.LEFT) {
+            else if(KeyboardInputManager.RIGHT || KeyboardInputManager.LEFT) {
                     this.playAnimation(this.IMAGES_WALK);
             }
 

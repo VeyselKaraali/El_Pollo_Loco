@@ -1,10 +1,6 @@
 class World {
-    static hasGameStarted = true;
-    static isGamePaused = false;
-    static isGameOver = false;
     static level_end_x = 2200;
     static camera_x = 0;
-
     // === Needed for pause or resume game ===
     static gameInterval;
     static pauseStartTime = null;
@@ -14,7 +10,6 @@ class World {
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        KeyboardInput.setupEventListeners();
         this.character = new Character();
         this.chickenBig = new ChickenBig();
         this.level = level1;
@@ -30,46 +25,24 @@ class World {
 
     startGame() {
         document.getElementById('start-screen-container').classList.add('d-none');
-        document.getElementById('win-screen-container').classList.add('d-none');
-        document.getElementById('lose-screen-container').classList.add('d-none');
-        document.getElementById('pause-game').classList.remove('d-none');
-        //toggleMobileControls();
+        document.getElementById('end-screen-container').classList.add('d-none');
     }
 
     restartGame() {
         this.clearCanvas();
         this.init();
+        startGame();
     }
 
-    goToStartScreen() {
+    goToMenu() {
         this.clearCanvas();
         document.getElementById('canvas').classList.add('d-none');
-        document.getElementById('win-screen-container').classList.add('d-none');
-        document.getElementById('lose-screen-container').classList.add('d-none');
+        document.getElementById('end-screen-container').classList.add('d-none');
         document.getElementById('start-screen-container').classList.remove('d-none');
     }
 
-    /*
-    toggleMobileControls() {
-        if (window.innerWidth <= 720 && World.hasGameStarted) {
-            document.querySelectorAll('.mobile-control').forEach((button) => {
-                button.classList.remove('d-none');
-            });
-        } else {
-            document.querySelectorAll('.mobile-control').forEach((button) => {
-                button.classList.add('d-none');
-            });
-        }
-    }
-     */
-
     static pauseOrResumeGame() {
-        const pauseIcon = document.getElementById('pause-game');
-        const resumeIcon = document.getElementById('resume-game');
-
         if(World.isGamePaused) {
-            pauseIcon.classList.remove('d-none');
-            resumeIcon.classList.add('d-none');
             World.isGamePaused=false;
 
             if (World.pauseStartTime !== null) {
@@ -80,8 +53,6 @@ class World {
             world.runGameLoop();
             requestAnimationFrame(() => world.draw());
         } else {
-            resumeIcon.classList.remove('d-none');
-            pauseIcon.classList.add('d-none');
             World.isGamePaused=true;
             clearInterval(World.gameInterval);
             World.pauseStartTime = Date.now();
@@ -176,21 +147,17 @@ class World {
         }
 
         if(this.character.isDead()) {
-            this.showLoseScreen();
+            this.showEndScreen();
         }
 
         if(this.chickenBig.statusBarHealth.value <= 0 && !this.character.isDead()) {
-            this.showWinScreen();
+            this.showEndScreen();
         }
 
     }
 
-    showWinScreen() {
-        document.getElementById('win-screen-container').classList.remove('d-none');
-    }
-
-    showLoseScreen() {
-        document.getElementById('lose-screen-container').classList.remove('d-none');
+    showEndScreen() {
+        document.getElementById('end-screen-container').classList.remove('d-none');
     }
 
     clearCanvas() {
@@ -201,11 +168,12 @@ class World {
         this.ctx.translate(World.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
 
-        // Moving elements
+        // START: MOVING ELEMENTS
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
+
         // START: SPACE FOR FIXED OBJECTS
         this.ctx.translate(-World.camera_x, 0);
         this.addToMap(this.character.statusBarHealth);
@@ -218,6 +186,7 @@ class World {
         this.addToMap(this.character);
         this.addToMap(this.chickenBig);
         this.addObjectsToMap(this.character.throwableBottles);
+        // END: MOVING ELEMENTS
         this.ctx.translate(-World.camera_x, 0);
     }
 
