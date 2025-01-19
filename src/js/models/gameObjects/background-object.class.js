@@ -3,8 +3,8 @@ class BackgroundObject extends DrawableObject {
         super(
             x,
             0,
-            CANVAS.WIDTH,
-            CANVAS.HEIGHT
+            World.WIDTH,
+            World.HEIGHT
         );
         this.loadImage(imgPath);
     }

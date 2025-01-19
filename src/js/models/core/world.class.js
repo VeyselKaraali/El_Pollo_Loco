@@ -1,18 +1,40 @@
 class World {
-    static level_end_x = 2200;
+    static WIDTH = 720;
+    static HEIGHT = 480;
+    static WIDTH_MAX_X = 2200;
     static camera_x = 0;
     // === Needed for pause or resume game ===
     static gameInterval;
     static pauseStartTime = null;
     static totalPausedDuration = 0;
     // ==================================
+    static BACKGROUND_WIDTH = World.WIDTH - 1;
+    static INITIAL_OFFSET = World.BACKGROUND_WIDTH * -1;
+    static segmentCount = 5;
+    static BACKGROUND_LAYERS = [
+        ["4_fourth/1.png", "3_third/2.png", "2_second/2.png", "1_first/2.png"],
+        ["4_fourth/1.png", "3_third/1.png", "2_second/1.png", "1_first/1.png"],
+    ];
+
 
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
+        this.enemies = [
+            ...createChicks(6),
+            ...createChickens(6)
+        ];
+        this.backgroundObjects = createBackgroundObjects(
+            World.INITIAL_OFFSET,
+            World.BACKGROUND_WIDTH,
+            World.BACKGROUND_LAYERS,
+            World.segmentCount
+        );
         this.character = new Character();
         this.chickenBig = new ChickenBig();
-        this.level = level1;
+        this.clouds = createClouds(Cloud1, Cloud2, 5);
+        this.bottles = createBottles(6);
+        this.coins = createCoins(5);
         this.init();
         this.startGame();
     }
@@ -61,7 +83,7 @@ class World {
 
     handleEnemyWithThrowableBottleCollision() {
         this.character.throwableBottles.forEach((bottle) => {
-            this.level.enemies.forEach((enemy) => {
+            this.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy)) {
                     bottle.splash();
                     enemy.reduceEnergy();
@@ -81,7 +103,7 @@ class World {
     }
 
     handleCharacterWithEnemyCollision() {
-        this.level.enemies.forEach((enemy, index) => {
+        this.enemies.forEach((enemy, index) => {
             if(this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
                 enemy.energy = 0;
                 this.character.bounce();
@@ -95,27 +117,27 @@ class World {
     }
 
     handleCharacterWithCoinCollision() {
-        this.level.coins.forEach((coin, index) => {
+        this.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin) && !this.character.statusBarCoin.isFull()) {
                 this.character.collectCoin();
                 this.character.statusBarCoin.setValue(this.character.collectedCoins);
-                this.level.coins.splice(index, 1);
+                this.coins.splice(index, 1);
             }
         });
     }
 
     handleCharacterWithBottleCollision() {
-        this.level.bottles.forEach((bottle, index) => {
+        this.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle) && !this.character.statusBarBottle.isFull()) {
                 this.character.collectBottle();
                 this.character.statusBarBottle.setValue(this.character.collectedBottles);
-                this.level.bottles.splice(index, 1);
+                this.bottles.splice(index, 1);
             }
         });
     }
 
     handleCharacterNearEndBoss() {
-        if (this.chickenBig.x - this.character.x < (CANVAS.WIDTH / 3 * 2) ) {
+        if (this.chickenBig.x - this.character.x < (World.WIDTH / 3 * 2) ) {
             this.chickenBig.statusBarHealth.y = 30;
         }
     }
@@ -166,13 +188,13 @@ class World {
 
     drawGameElements() {
         this.ctx.translate(World.camera_x, 0);
-        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.backgroundObjects);
 
         // START: MOVING ELEMENTS
-        this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.bottles);
-        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.clouds);
+        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.bottles);
+        this.addObjectsToMap(this.coins);
 
         // START: SPACE FOR FIXED OBJECTS
         this.ctx.translate(-World.camera_x, 0);
@@ -216,4 +238,39 @@ class World {
         mo.x *= -1;
         this.ctx.restore();
     }
+}
+
+function createChicks(count) {
+    return Array.from({ length: count }, (_, i) => new Chick(i));
+}
+
+function createChickens(count) {
+    return Array.from({ length: count }, (_, i) => new Chicken(i));
+}
+
+function createClouds(CloudType1, CloudType2, count) {
+    return [
+        ...Array.from({ length: count }, () => new CloudType1()),
+        ...Array.from({ length: count }, () => new CloudType2()),
+    ];
+}
+
+function createBackgroundObjects(initialOffset, width, layersPerSegment, segmentCount) {
+    const backgroundObjects = [];
+    for (let segment = 0; segment < segmentCount; segment++) {
+        const offset = initialOffset + segment * width;
+        const layers = layersPerSegment[segment % layersPerSegment.length];
+        layers.forEach(layerPath => {
+            backgroundObjects.push(new BackgroundObject(offset, `assets/img/3_background/layers/${layerPath}`));
+        });
+    }
+    return backgroundObjects;
+}
+
+function createBottles(count) {
+    return Array.from({ length: count }, (_, i) => new Bottle(i));
+}
+
+function createCoins(count) {
+    return Array.from({ length: count }, (_, i) => new Coin(i));
 }
