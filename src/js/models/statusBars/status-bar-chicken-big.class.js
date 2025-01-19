@@ -1,4 +1,4 @@
-class StatusBarEndBoss extends StatusBar {
+class StatusBarChickenBig extends StatusBar {
     IMAGES = [
         "assets/img/8_statusbars/2_chicken_big/1_health/0.png",
         "assets/img/8_statusbars/2_chicken_big/1_health/1.png",

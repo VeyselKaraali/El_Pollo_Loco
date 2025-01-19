@@ -136,7 +136,7 @@ class World {
         });
     }
 
-    handleCharacterNearEndBoss() {
+    handleCharacterNearChickenBig() {
         if (this.chickenBig.x - this.character.x < (World.WIDTH / 3 * 2) ) {
             this.chickenBig.statusBarHealth.y = 30;
         }
@@ -157,7 +157,7 @@ class World {
             this.handleCharacterWithBottleCollision();
             this.handleCharacterWithCoinCollision();
             this.handleCharacterWithEnemyCollision();
-            this.handleCharacterNearEndBoss();
+            this.handleCharacterNearChickenBig();
         }, 20);
     }
 
