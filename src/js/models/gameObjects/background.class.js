@@ -1,4 +1,4 @@
-class BackgroundObject extends DrawableObject {
+class Background extends DrawableObject {
     constructor(x, imgPath) {
         super(
             x,

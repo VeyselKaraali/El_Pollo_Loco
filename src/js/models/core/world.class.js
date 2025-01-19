@@ -261,7 +261,7 @@ function createBackgroundObjects(initialOffset, width, layersPerSegment, segment
         const offset = initialOffset + segment * width;
         const layers = layersPerSegment[segment % layersPerSegment.length];
         layers.forEach(layerPath => {
-            backgroundObjects.push(new BackgroundObject(offset, `assets/img/3_background/layers/${layerPath}`));
+            backgroundObjects.push(new Background(offset, `assets/img/3_background/layers/${layerPath}`));
         });
     }
     return backgroundObjects;
