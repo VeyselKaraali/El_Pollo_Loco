@@ -66,20 +66,20 @@ class ChickenBig extends Enemy {
 
     animate() {
         //this.audioScream.play().then(() => {});
-        setStoppableInterval(() => {
+        IntervalManager.setStoppableInterval(() => {
             if(!this.isDead()) {
                 this.moveLeft();
             }
         }, 1000 / 60);
 
-        setStoppableInterval(() => {
+        IntervalManager.setStoppableInterval(() => {
             if(!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALK);
                 //this.audioCluck.play().then(() => {});
             }
         }, 200)
 
-        setStoppableInterval(() => {
+        IntervalManager.setStoppableInterval(() => {
             if(this.isDead()) {
                 //this.audioDead.play().then(() => {});
             }

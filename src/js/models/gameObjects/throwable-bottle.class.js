@@ -40,19 +40,19 @@ class ThrowableBottle extends ThrowableObject {
         super.throw();
         this.speedY = 30;
         this.rotate();
-        setStoppableInterval(() => {
+        IntervalManager.setStoppableInterval(() => {
             this.isFacingOtherDirection ? this.x -=10 : this.x +=10;
         }, 25)
     }
 
     rotate() {
-        setStoppableInterval(() => {
+        IntervalManager.setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
         }, 1000 / 60)
     }
 
     splash() {
-        setStoppableInterval(() => {
+        IntervalManager.setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
             //audioBottleSplash = new Audio("assets/audio/collectables/bottle/splash.mp3");
         }, 0)

@@ -154,7 +154,7 @@ class Character extends MovableObject {
     }
 
     animate() {
-        setStoppableInterval(() => {
+        IntervalManager.setStoppableInterval(() => {
 
             if(KeyboardInputManager.RIGHT && this.x < World.WIDTH_MAX_X) {
                 this.moveRight();
@@ -176,7 +176,7 @@ class Character extends MovableObject {
             World.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-        setStoppableInterval(() => {
+        IntervalManager.setStoppableInterval(() => {
             if(this.isDead()) {
                 this.handleDeath();
             }

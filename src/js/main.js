@@ -2,7 +2,7 @@ function init() {
     const audioBackgroundMusic = AudioManager.load("assets/audio/music/1.mp3", {loop: true, volume: 0.05});
     setupStateListener();
     KeyboardInputManager.setupEventListeners();
-    setStoppableInterval(() => {
+    IntervalManager.setStoppableInterval(() => {
         if(GameStateManager.getState("isMusicOn")) {
             audioBackgroundMusic.play().then(r => {});
         }
