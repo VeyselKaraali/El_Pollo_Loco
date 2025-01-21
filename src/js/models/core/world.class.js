@@ -39,35 +39,24 @@ class World {
         this.draw();
     }
 
-    toggleElementVisibility(id, isVisible) {
-        const element = document.getElementById(id);
-        if (element) element.classList.toggle("d-none", !isVisible);
+    runGameLoop() {
+        IntervalManager.setStoppableInterval(() => {
+            this.handleCollisions();
+            this.handleCharacterNearChickenBig();
+        }, 20)
     }
 
+    draw() {
+        const isGamePaused = StateManager.getState("isPaused");
+        const isCharacterDead = this.character.isDead();
+        const isChickenBigDead = this.chickenBig.statusBarHealth.value <= 0;
 
-    startGame() {
-        this.toggleElementVisibility("start-screen-container", false);
-        this.toggleElementVisibility("end-screen-container", false);
-    }
-
-    restartGame() {
-        this.clearCanvas();
-        this.init();
-        startGame();
-    }
-
-    goToMenu() {
-        this.clearCanvas();
-        this.toggleElementVisibility("canvas", false);
-        this.toggleElementVisibility("end-screen-container", false);
-        this.toggleElementVisibility("start-screen-container", true);
-    }
-
-
-
-    handleCharacterNearChickenBig() {
-        if (this.chickenBig.x - this.character.x < (World.WIDTH / 3 * 2) ) {
-            this.chickenBig.statusBarHealth.y = 30;
+        if (!isGamePaused && !isCharacterDead && !isChickenBigDead) {
+            this.clearCanvas();
+            this.drawGameElements();
+            requestAnimationFrame(this.draw.bind(this));
+        } else if (isCharacterDead || isChickenBigDead) {
+            this.showEndScreen();
         }
     }
 
@@ -79,44 +68,14 @@ class World {
         CollisionManager.characterWithEnemy(this.character, this.enemies);
     }
 
-    runGameLoop() {
-        IntervalManager.setStoppableInterval(() => {
-            this.handleCollisions();
-            this.handleCharacterNearChickenBig();
-        }, 20)
-    }
-
-    draw() {
-        if (!StateManager.getState("isPaused") && !this.character.isDead() && this.chickenBig.statusBarHealth.value > 0) {
-            this.clearCanvas();
-            this.drawGameElements();
-            requestAnimationFrame(this.draw.bind(this));
+    handleCharacterNearChickenBig() {
+        if (this.chickenBig.x - this.character.x < (World.WIDTH / 3 * 2) ) {
+            this.chickenBig.statusBarHealth.y = 30;
         }
-
-        if(this.character.isDead()) {
-            this.showEndScreen();
-        }
-
-        if(this.chickenBig.statusBarHealth.value <= 0 && !this.character.isDead()) {
-            this.showEndScreen();
-        }
-
-    }
-
-
-    showEndScreen() {
-        this.toggleElementVisibility("end-screen-container", true);
     }
 
     clearCanvas() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-
-    #drawFixedUIElements() {
-        this.addToMap(this.character.statusBarHealth);
-        this.addToMap(this.character.statusBarCoin);
-        this.addToMap(this.character.statusBarBottle);
-        this.addToMap(this.chickenBig.statusBarHealth);
     }
 
     drawGameElements() {
@@ -139,6 +98,42 @@ class World {
         // END: MOVING ELEMENTS
         this.ctx.translate(-World.CAMERA_X, 0);
     }
+
+    #drawFixedUIElements() {
+        this.addToMap(this.character.statusBarHealth);
+        this.addToMap(this.character.statusBarCoin);
+        this.addToMap(this.character.statusBarBottle);
+        this.addToMap(this.chickenBig.statusBarHealth);
+    }
+
+    startGame() {
+        this.toggleElementVisibility("start-screen-container", false);
+        this.toggleElementVisibility("end-screen-container", false);
+    }
+
+    restartGame() {
+        this.clearCanvas();
+        this.init();
+        startGame();
+    }
+
+    showEndScreen() {
+        this.toggleElementVisibility("end-screen-container", true);
+    }
+
+    goToMenu() {
+        this.clearCanvas();
+        this.toggleElementVisibility("canvas", false);
+        this.toggleElementVisibility("end-screen-container", false);
+        this.toggleElementVisibility("start-screen-container", true);
+    }
+
+
+    toggleElementVisibility(id, isVisible) {
+        const element = document.getElementById(id);
+        if (element) element.classList.toggle("d-none", !isVisible);
+    }
+
 
     addObjectsToMap(objects) {
         objects.forEach(obj => this.addToMap(obj));
