@@ -156,7 +156,7 @@ class Character extends MovableObject {
     animate() {
         IntervalManager.setStoppableInterval(() => {
 
-            if(KeyboardInputManager.RIGHT && this.x < World.WIDTH_MAX_X) {
+            if(KeyboardInputManager.RIGHT && this.x < WorldConfig.WIDTH_MAX_X) {
                 this.moveRight();
             }
 

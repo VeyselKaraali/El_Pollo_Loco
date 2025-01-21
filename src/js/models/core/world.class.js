@@ -1,17 +1,6 @@
 class World {
     static CAMERA_X = 0;
 
-    static WIDTH = 720;
-    static HEIGHT = 480;
-    static WIDTH_MAX_X = 2200;
-    static BACKGROUND_WIDTH = World.WIDTH - 1;
-    static INITIAL_OFFSET = World.BACKGROUND_WIDTH * -1;
-    static segmentCount = 5;
-    static BACKGROUND_LAYERS = [
-        ["4_fourth/1.png", "3_third/2.png", "2_second/2.png", "1_first/2.png"],
-        ["4_fourth/1.png", "3_third/1.png", "2_second/1.png", "1_first/1.png"],
-    ];
-
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
@@ -20,10 +9,10 @@ class World {
             ...createChickens(6)
         ];
         this.backgroundObjects = createBackgroundObjects(
-            World.INITIAL_OFFSET,
-            World.BACKGROUND_WIDTH,
-            World.BACKGROUND_LAYERS,
-            World.segmentCount
+            WorldConfig.INITIAL_OFFSET,
+            WorldConfig.BACKGROUND_WIDTH,
+            WorldConfig.BACKGROUND_LAYERS,
+            WorldConfig.SEGMENT_COUNT
         );
         this.character = new Character();
         this.chickenBig = new ChickenBig();
@@ -69,7 +58,7 @@ class World {
     }
 
     handleCharacterNearChickenBig() {
-        if (this.chickenBig.x - this.character.x < (World.WIDTH / 3 * 2) ) {
+        if (this.chickenBig.x - this.character.x < (WorldConfig.WIDTH / 3 * 2) ) {
             this.chickenBig.statusBarHealth.y = 30;
         }
     }
