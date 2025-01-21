@@ -107,8 +107,8 @@ class World {
     }
 
     startGame() {
-        this.toggleElementVisibility("start-screen-container", false);
-        this.toggleElementVisibility("end-screen-container", false);
+        DomUtils.toggleElementVisibility("start-screen-container", false);
+        DomUtils.toggleElementVisibility("end-screen-container", false);
     }
 
     restartGame() {
@@ -118,24 +118,15 @@ class World {
     }
 
     showEndScreen() {
-        this.toggleElementVisibility("end-screen-container", true);
+        DomUtils.toggleElementVisibility("end-screen-container", true);
     }
 
     goToMenu() {
         this.clearCanvas();
-        this.toggleElementVisibility("canvas", false);
-        this.toggleElementVisibility("end-screen-container", false);
-        this.toggleElementVisibility("start-screen-container", true);
+        DomUtils.toggleElementVisibility("canvas", false);
+        DomUtils.toggleElementVisibility("end-screen-container", false);
+        DomUtils.toggleElementVisibility("start-screen-container", true);
     }
-
-
-    toggleElementVisibility(id, isVisible) {
-        const element = document.getElementById(id);
-        if (element) element.classList.toggle("d-none", !isVisible);
-    }
-
-
-
 }
 
 function createChicks(count) {
