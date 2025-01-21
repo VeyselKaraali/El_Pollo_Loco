@@ -1,8 +1,9 @@
 class World {
+    static CAMERA_X = 0;
+
     static WIDTH = 720;
     static HEIGHT = 480;
     static WIDTH_MAX_X = 2200;
-    static camera_x = 0;
     static BACKGROUND_WIDTH = World.WIDTH - 1;
     static INITIAL_OFFSET = World.BACKGROUND_WIDTH * -1;
     static segmentCount = 5;
@@ -119,7 +120,7 @@ class World {
     }
 
     drawGameElements() {
-        this.ctx.translate(World.camera_x, 0);
+        this.ctx.translate(World.CAMERA_X, 0);
         this.addObjectsToMap(this.backgroundObjects);
 
         // START: MOVING ELEMENTS
@@ -128,15 +129,15 @@ class World {
         this.addObjectsToMap(this.bottles);
         this.addObjectsToMap(this.coins);
 
-        this.ctx.translate(-World.camera_x, 0);
+        this.ctx.translate(-World.CAMERA_X, 0);
         this.#drawFixedUIElements();
-        this.ctx.translate(World.camera_x, 0);
+        this.ctx.translate(World.CAMERA_X, 0);
 
         this.addToMap(this.character);
         this.addToMap(this.chickenBig);
         this.addObjectsToMap(this.character.throwableBottles);
         // END: MOVING ELEMENTS
-        this.ctx.translate(-World.camera_x, 0);
+        this.ctx.translate(-World.CAMERA_X, 0);
     }
 
     addObjectsToMap(objects) {

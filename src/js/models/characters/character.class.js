@@ -173,7 +173,7 @@ class Character extends MovableObject {
                 this.throwBottle();
             }
 
-            World.camera_x = -this.x + 100;
+            World.CAMERA_X = -this.x + 100;
         }, 1000 / 60);
 
         IntervalManager.setStoppableInterval(() => {
