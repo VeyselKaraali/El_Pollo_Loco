@@ -72,11 +72,11 @@ class World {
     }
 
     handleCollisions() {
-        CollisionHandler.enemyWithThrowableBottle(this.character, this.enemies);
-        CollisionHandler.chickenBigWithThrowableBottle(this.chickenBig, this.character.throwableBottles);
-        CollisionHandler.characterWithBottle(this.character, this.bottles);
-        CollisionHandler.characterWithCoin(this.character, this.coins);
-        CollisionHandler.characterWithEnemy(this.character, this.enemies);
+        CollisionManager.enemyWithThrowableBottle(this.character, this.enemies);
+        CollisionManager.chickenBigWithThrowableBottle(this.chickenBig, this.character.throwableBottles);
+        CollisionManager.characterWithBottle(this.character, this.bottles);
+        CollisionManager.characterWithCoin(this.character, this.coins);
+        CollisionManager.characterWithEnemy(this.character, this.enemies);
     }
 
     runGameLoop() {

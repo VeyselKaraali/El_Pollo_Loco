@@ -1,4 +1,4 @@
-class CollisionHandler {
+class CollisionManager {
     static enemyWithThrowableBottle(character, enemies) {
         character.throwableBottles.forEach((bottle) => {
             enemies.forEach((enemy) => {
