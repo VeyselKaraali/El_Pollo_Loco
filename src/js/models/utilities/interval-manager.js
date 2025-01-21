@@ -3,7 +3,7 @@ class IntervalManager {
 
     static setStoppableInterval(fn, time) {
         let id = setInterval(() => {
-            if (!World.isGamePaused) {
+            if (!StateManager.getState("isPaused")) {
                 fn();
             }
         }, time);

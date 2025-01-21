@@ -1,4 +1,4 @@
-class GameStateManager {
+class StateManager {
     static #listeners = [];
     static #state = {
         hasGameStarted: false,

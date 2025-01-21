@@ -14,7 +14,7 @@ class KeyboardInputManager {
     static setupEventListeners() {
         window.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
-                GameStateManager.updateState('isFullscreen', false);
+                StateManager.updateState('isFullscreen', false);
             } else {
                 KeyboardInputManager.handleKeyDown(e);
             }

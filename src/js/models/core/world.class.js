@@ -3,11 +3,6 @@ class World {
     static HEIGHT = 480;
     static WIDTH_MAX_X = 2200;
     static camera_x = 0;
-    // === Needed for pause or resume game ===
-    static gameInterval;
-    static pauseStartTime = null;
-    static totalPausedDuration = 0;
-    // ==================================
     static BACKGROUND_WIDTH = World.WIDTH - 1;
     static INITIAL_OFFSET = World.BACKGROUND_WIDTH * -1;
     static segmentCount = 5;
@@ -15,7 +10,6 @@ class World {
         ["4_fourth/1.png", "3_third/2.png", "2_second/2.png", "1_first/2.png"],
         ["4_fourth/1.png", "3_third/1.png", "2_second/1.png", "1_first/1.png"],
     ];
-
 
     constructor(canvas) {
         this.canvas = canvas;
@@ -40,7 +34,6 @@ class World {
     }
 
     init() {
-        this.setWorld();
         this.runGameLoop();
         this.draw();
     }
@@ -63,24 +56,6 @@ class World {
         document.getElementById('start-screen-container').classList.remove('d-none');
     }
 
-    static pauseOrResumeGame() {
-        if(World.isGamePaused) {
-            World.isGamePaused=false;
-
-            if (World.pauseStartTime !== null) {
-                World.totalPausedDuration += Date.now() - World.pauseStartTime;
-                World.pauseStartTime = null;
-            }
-
-            world.runGameLoop();
-            requestAnimationFrame(() => world.draw());
-        } else {
-            World.isGamePaused=true;
-            clearInterval(World.gameInterval);
-            World.pauseStartTime = Date.now();
-        }
-    }
-
 
 
     handleCharacterNearChickenBig() {
@@ -89,27 +64,19 @@ class World {
         }
     }
 
-    setWorld() {
-        this.character.world = this;
-    }
-
     runGameLoop() {
-        if (World.gameInterval) {
-            clearInterval(World.gameInterval);
-        }
-
-        World.gameInterval = setInterval(() => {
+        IntervalManager.setStoppableInterval(() => {
             CollisionHandler.enemyWithThrowableBottle(this.character, this.enemies);
             CollisionHandler.chickenBigWithThrowableBottle(this.chickenBig, this.character.throwableBottles);
             CollisionHandler.characterWithBottle(this.character, this.bottles);
             CollisionHandler.characterWithCoin(this.character, this.coins);
             CollisionHandler.characterWithEnemy(this.character, this.enemies);
             this.handleCharacterNearChickenBig();
-        }, 20);
+        }, 20)
     }
 
     draw() {
-        if (!World.isGamePaused && !this.character.isDead() && this.chickenBig.statusBarHealth.value > 0) {
+        if (!StateManager.getState("isPaused") && !this.character.isDead() && this.chickenBig.statusBarHealth.value > 0) {
             this.clearCanvas();
             this.drawGameElements();
             requestAnimationFrame(this.draw.bind(this));

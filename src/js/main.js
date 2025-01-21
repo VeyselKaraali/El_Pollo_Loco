@@ -3,7 +3,7 @@ function init() {
     setupStateListener();
     KeyboardInputManager.setupEventListeners();
     IntervalManager.setStoppableInterval(() => {
-        if(GameStateManager.getState("isMusicOn")) {
+        if(StateManager.getState("isMusicOn")) {
             audioBackgroundMusic.play().then(r => {});
         }
         else {
@@ -13,24 +13,24 @@ function init() {
 }
 
 function setupStateListener() {
-    GameStateManager.addListener((key, value) => {
-        const btnId = Object.keys(UIStateManager.buttonMappings).find(
-            id => UIStateManager.buttonMappings[id] === key
+    StateManager.addListener((key, value) => {
+        const btnId = Object.keys(StateManagerUI.buttonMappings).find(
+            id => StateManagerUI.buttonMappings[id] === key
         );
 
         if (btnId) {
             const imgElement = document.querySelector(`#${btnId} img`);
-            if (imgElement && UIStateManager.IMAGE_PATHS[key]) {
-                imgElement.src = UIStateManager.IMAGE_PATHS[key][value];
+            if (imgElement && StateManagerUI.IMAGE_PATHS[key]) {
+                imgElement.src = StateManagerUI.IMAGE_PATHS[key][value];
             }
         }
     });
-    UIStateManager.init();
+    StateManagerUI.init();
 }
 
 function startGame() {
     const canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     new World(canvas);
-    GameStateManager.updateState('hasGameStarted', true);
+    StateManager.updateState('hasGameStarted', true);
 }

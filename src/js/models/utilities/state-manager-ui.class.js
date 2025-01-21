@@ -1,4 +1,4 @@
-class UIStateManager {
+class StateManagerUI {
     static buttonMappings = {
         'btn-music': 'isMusicOn',
         'btn-sound': 'isSoundOn',
@@ -43,8 +43,8 @@ class UIStateManager {
     static handleButtonClick(buttonId) {
         const stateKey = this.buttonMappings[buttonId];
         if (stateKey) {
-            const newValue = !GameStateManager.getState(stateKey);
-            GameStateManager.updateState(stateKey, newValue);
+            const newValue = !StateManager.getState(stateKey);
+            StateManager.updateState(stateKey, newValue);
         }
     }
 }
