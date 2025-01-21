@@ -81,60 +81,7 @@ class World {
         }
     }
 
-    handleEnemyWithThrowableBottleCollision() {
-        this.character.throwableBottles.forEach((bottle) => {
-            this.enemies.forEach((enemy) => {
-                if (bottle.isColliding(enemy)) {
-                    bottle.splash();
-                    enemy.reduceEnergy();
-                }
-            });
-        });
-    }
 
-    handleChickenBigWithThrowableBottleCollision() {
-        this.character.throwableBottles.forEach((bottle) => {
-            if(this.chickenBig.isColliding(bottle)) {
-                this.chickenBig.reduceEnergy();
-                this.chickenBig.statusBarHealth.setValue(this.chickenBig.energy);
-                bottle.splash();
-            }
-        });
-    }
-
-    handleCharacterWithEnemyCollision() {
-        this.enemies.forEach((enemy, index) => {
-            if(this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
-                enemy.energy = 0;
-                this.character.bounce();
-            }
-
-            else if (!this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead()) {
-                    this.character.reduceEnergy();
-                    this.character.statusBarHealth.setValue(this.character.energy);
-            }
-        })
-    }
-
-    handleCharacterWithCoinCollision() {
-        this.coins.forEach((coin, index) => {
-            if (this.character.isColliding(coin) && !this.character.statusBarCoin.isFull()) {
-                this.character.collectCoin();
-                this.character.statusBarCoin.setValue(this.character.collectedCoins);
-                this.coins.splice(index, 1);
-            }
-        });
-    }
-
-    handleCharacterWithBottleCollision() {
-        this.bottles.forEach((bottle, index) => {
-            if (this.character.isColliding(bottle) && !this.character.statusBarBottle.isFull()) {
-                this.character.collectBottle();
-                this.character.statusBarBottle.setValue(this.character.collectedBottles);
-                this.bottles.splice(index, 1);
-            }
-        });
-    }
 
     handleCharacterNearChickenBig() {
         if (this.chickenBig.x - this.character.x < (World.WIDTH / 3 * 2) ) {
@@ -152,11 +99,11 @@ class World {
         }
 
         World.gameInterval = setInterval(() => {
-            this.handleEnemyWithThrowableBottleCollision();
-            this.handleChickenBigWithThrowableBottleCollision();
-            this.handleCharacterWithBottleCollision();
-            this.handleCharacterWithCoinCollision();
-            this.handleCharacterWithEnemyCollision();
+            CollisionHandler.enemyWithThrowableBottle(this.character, this.enemies);
+            CollisionHandler.chickenBigWithThrowableBottle(this.chickenBig, this.character.throwableBottles);
+            CollisionHandler.characterWithBottle(this.character, this.bottles);
+            CollisionHandler.characterWithCoin(this.character, this.coins);
+            CollisionHandler.characterWithEnemy(this.character, this.enemies);
             this.handleCharacterNearChickenBig();
         }, 20);
     }
