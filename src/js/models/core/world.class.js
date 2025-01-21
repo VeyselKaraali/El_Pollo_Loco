@@ -38,9 +38,15 @@ class World {
         this.draw();
     }
 
+    toggleElementVisibility(id, isVisible) {
+        const element = document.getElementById(id);
+        if (element) element.classList.toggle("d-none", !isVisible);
+    }
+
+
     startGame() {
-        document.getElementById('start-screen-container').classList.add('d-none');
-        document.getElementById('end-screen-container').classList.add('d-none');
+        this.toggleElementVisibility("start-screen-container", false);
+        this.toggleElementVisibility("end-screen-container", false);
     }
 
     restartGame() {
@@ -51,9 +57,9 @@ class World {
 
     goToMenu() {
         this.clearCanvas();
-        document.getElementById('canvas').classList.add('d-none');
-        document.getElementById('end-screen-container').classList.add('d-none');
-        document.getElementById('start-screen-container').classList.remove('d-none');
+        this.toggleElementVisibility("canvas", false);
+        this.toggleElementVisibility("end-screen-container", false);
+        this.toggleElementVisibility("start-screen-container", true);
     }
 
 
@@ -64,13 +70,17 @@ class World {
         }
     }
 
+    handleCollisions() {
+        CollisionHandler.enemyWithThrowableBottle(this.character, this.enemies);
+        CollisionHandler.chickenBigWithThrowableBottle(this.chickenBig, this.character.throwableBottles);
+        CollisionHandler.characterWithBottle(this.character, this.bottles);
+        CollisionHandler.characterWithCoin(this.character, this.coins);
+        CollisionHandler.characterWithEnemy(this.character, this.enemies);
+    }
+
     runGameLoop() {
         IntervalManager.setStoppableInterval(() => {
-            CollisionHandler.enemyWithThrowableBottle(this.character, this.enemies);
-            CollisionHandler.chickenBigWithThrowableBottle(this.chickenBig, this.character.throwableBottles);
-            CollisionHandler.characterWithBottle(this.character, this.bottles);
-            CollisionHandler.characterWithCoin(this.character, this.coins);
-            CollisionHandler.characterWithEnemy(this.character, this.enemies);
+            this.handleCollisions();
             this.handleCharacterNearChickenBig();
         }, 20)
     }
@@ -92,12 +102,20 @@ class World {
 
     }
 
+
     showEndScreen() {
-        document.getElementById('end-screen-container').classList.remove('d-none');
+        this.toggleElementVisibility("end-screen-container", true);
     }
 
     clearCanvas() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    #drawFixedUIElements() {
+        this.addToMap(this.character.statusBarHealth);
+        this.addToMap(this.character.statusBarCoin);
+        this.addToMap(this.character.statusBarBottle);
+        this.addToMap(this.chickenBig.statusBarHealth);
     }
 
     drawGameElements() {
@@ -110,14 +128,9 @@ class World {
         this.addObjectsToMap(this.bottles);
         this.addObjectsToMap(this.coins);
 
-        // START: SPACE FOR FIXED OBJECTS
         this.ctx.translate(-World.camera_x, 0);
-        this.addToMap(this.character.statusBarHealth);
-        this.addToMap(this.character.statusBarCoin);
-        this.addToMap(this.character.statusBarBottle);
-        this.addToMap(this.chickenBig.statusBarHealth);
+        this.#drawFixedUIElements();
         this.ctx.translate(World.camera_x, 0);
-        // END: SPACE FOR FIXED OBJECTS
 
         this.addToMap(this.character);
         this.addToMap(this.chickenBig);
