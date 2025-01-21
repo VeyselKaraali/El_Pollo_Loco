@@ -80,30 +80,30 @@ class World {
 
     drawGameElements() {
         this.ctx.translate(World.CAMERA_X, 0);
-        this.addObjectsToMap(this.backgroundObjects);
+        MapUtils.addObjectsToMap(this.ctx, this.backgroundObjects);
 
         // START: MOVING ELEMENTS
-        this.addObjectsToMap(this.clouds);
-        this.addObjectsToMap(this.enemies);
-        this.addObjectsToMap(this.bottles);
-        this.addObjectsToMap(this.coins);
+        MapUtils.addObjectsToMap(this.ctx, this.clouds);
+        MapUtils.addObjectsToMap(this.ctx, this.enemies);
+        MapUtils.addObjectsToMap(this.ctx, this.bottles);
+        MapUtils.addObjectsToMap(this.ctx, this.coins);
 
         this.ctx.translate(-World.CAMERA_X, 0);
         this.#drawFixedUIElements();
         this.ctx.translate(World.CAMERA_X, 0);
 
-        this.addToMap(this.character);
-        this.addToMap(this.chickenBig);
-        this.addObjectsToMap(this.character.throwableBottles);
+        MapUtils.addToMap(this.ctx, this.character);
+        MapUtils.addToMap(this.ctx, this.chickenBig);
+        MapUtils.addObjectsToMap(this.ctx, this.character.throwableBottles);
         // END: MOVING ELEMENTS
         this.ctx.translate(-World.CAMERA_X, 0);
     }
 
     #drawFixedUIElements() {
-        this.addToMap(this.character.statusBarHealth);
-        this.addToMap(this.character.statusBarCoin);
-        this.addToMap(this.character.statusBarBottle);
-        this.addToMap(this.chickenBig.statusBarHealth);
+        MapUtils.addToMap(this.ctx, this.character.statusBarHealth);
+        MapUtils.addToMap(this.ctx, this.character.statusBarCoin);
+        MapUtils.addToMap(this.ctx, this.character.statusBarBottle);
+        MapUtils.addToMap(this.ctx, this.chickenBig.statusBarHealth);
     }
 
     startGame() {
@@ -135,32 +135,7 @@ class World {
     }
 
 
-    addObjectsToMap(objects) {
-        objects.forEach(obj => this.addToMap(obj));
-    }
 
-    addToMap(mo) {
-        if (mo.isFacingOtherDirection) {
-            this.flipImage(mo);
-        }
-        mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
-        if (mo.isFacingOtherDirection) {
-            this.flipImageBack(mo);
-        }
-    }
-
-    flipImage(mo) {
-        this.ctx.save();
-        this.ctx.translate(mo.width, 0);
-        this.ctx.scale(-1, 1);
-        mo.x *= -1;
-    }
-
-    flipImageBack(mo) {
-        mo.x *= -1;
-        this.ctx.restore();
-    }
 }
 
 function createChicks(count) {
