@@ -5,13 +5,13 @@ class World {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.enemies = [
-            ...createChicks(6),
-            ...createChickens(6)
+            ...ObjectUtilsCreation.createChicks(6),
+            ...ObjectUtilsCreation.createChickens(6)
         ];
         this.backgroundObjects = ObjectUtilsCreation.backgroundObjects;
         this.character = new Character();
         this.chickenBig = new ChickenBig();
-        this.clouds = createClouds(Cloud1, Cloud2, 5);
+        this.clouds = ObjectUtilsCreation.createClouds(Cloud1, Cloud2, 5);
         this.bottles = ObjectUtilsCreation.bottles;
         this.coins = ObjectUtilsCreation.coins;
         this.init();
@@ -106,21 +106,6 @@ class World {
         DomUtils.toggleElementVisibility("end-screen-container", false);
         DomUtils.toggleElementVisibility("start-screen-container", true);
     }
-}
-
-function createChicks(count) {
-    return Array.from({ length: count }, (_, i) => new Chick(i));
-}
-
-function createChickens(count) {
-    return Array.from({ length: count }, (_, i) => new Chicken(i));
-}
-
-function createClouds(CloudType1, CloudType2, count) {
-    return [
-        ...Array.from({ length: count }, () => new CloudType1()),
-        ...Array.from({ length: count }, () => new CloudType2()),
-    ];
 }
 
 
