@@ -26,7 +26,6 @@ class World {
     runGameLoop() {
         IntervalManager.setStoppableInterval(() => {
             this.handleCollisions();
-            this.handleCharacterNearChickenBig();
         }, 20);
     }
 
@@ -50,12 +49,7 @@ class World {
         CollisionManager.characterWithBottle(this.character, this.bottles);
         CollisionManager.characterWithCoin(this.character, this.coins);
         CollisionManager.characterWithEnemy(this.character, this.enemies);
-    }
-
-    handleCharacterNearChickenBig() {
-        if (this.chickenBig.x - this.character.x < (WorldConfig.WIDTH / 3 * 2) ) {
-            this.chickenBig.statusBarHealth.y = 30;
-        }
+        CollisionManager.characterNearChickenBig(this.character, this.chickenBig);
     }
 
     clearCanvas() {
