@@ -93,7 +93,7 @@ class World {
     restartGame() {
         this.clearCanvas();
         this.init();
-        startGame();
+        Main.startGame();
     }
 
     showEndScreen() {

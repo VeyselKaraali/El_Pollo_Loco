@@ -14,6 +14,7 @@
     <script src="js/models/utils/dom-utils.class.js"></script>
     <script src="js/models/utils/image-utils.class.js"></script>
     <script src="js/models/utils/map-utils.class.js"></script>
+    <script src="js/models/utils/initialization-utils.class.js"></script>
     <script src="js/models/core/drawable-object.class.js"></script>
     <script src="js/models/core/movable-object.class.js"></script>
     <script src="js/models/core/throwable-object.class.js"></script>
@@ -40,7 +41,7 @@
     <script src="js/models/core/world.class.js"></script>
     <script src="js/main.js"></script>
 </head>
-<body onload="init()">
+<body onload="Main.init()">
     <div id="game-container">
         <div class="btn-container">
             <div id="btn-help" class="btn btn-round">
@@ -66,7 +67,7 @@
 
         <div id="start-screen-container">
             <img id="start-screen" src="assets/img/2_intro_outro_screens/1_start/1.png" alt="">
-            <div onclick="startGame()" id="btn-start" class="btn btn-rect">
+            <div onclick="Main.startGame()" id="btn-start" class="btn btn-rect">
                 <div>START</div>
             </div>
         </div>
