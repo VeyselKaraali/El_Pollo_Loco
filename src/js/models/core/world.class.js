@@ -8,17 +8,12 @@ class World {
             ...createChicks(6),
             ...createChickens(6)
         ];
-        this.backgroundObjects = createBackgroundObjects(
-            WorldConfig.INITIAL_OFFSET,
-            WorldConfig.BACKGROUND_WIDTH,
-            WorldConfig.BACKGROUND_LAYERS,
-            WorldConfig.SEGMENT_COUNT
-        );
+        this.backgroundObjects = ObjectUtilsCreation.backgroundObjects;
         this.character = new Character();
         this.chickenBig = new ChickenBig();
         this.clouds = createClouds(Cloud1, Cloud2, 5);
-        this.bottles = createBottles(6);
-        this.coins = createCoins(5);
+        this.bottles = ObjectUtilsCreation.bottles;
+        this.coins = ObjectUtilsCreation.coins;
         this.init();
         this.startGame();
     }
@@ -32,7 +27,7 @@ class World {
         IntervalManager.setStoppableInterval(() => {
             this.handleCollisions();
             this.handleCharacterNearChickenBig();
-        }, 20)
+        }, 20);
     }
 
     draw() {
@@ -70,29 +65,24 @@ class World {
     drawGameElements() {
         this.ctx.translate(World.CAMERA_X, 0);
         MapUtils.addObjectsToMap(this.ctx, this.backgroundObjects);
-
-        // START: MOVING ELEMENTS
         MapUtils.addObjectsToMap(this.ctx, this.clouds);
         MapUtils.addObjectsToMap(this.ctx, this.enemies);
         MapUtils.addObjectsToMap(this.ctx, this.bottles);
         MapUtils.addObjectsToMap(this.ctx, this.coins);
-
-        this.ctx.translate(-World.CAMERA_X, 0);
         this.#drawFixedUIElements();
-        this.ctx.translate(World.CAMERA_X, 0);
-
         MapUtils.addToMap(this.ctx, this.character);
         MapUtils.addToMap(this.ctx, this.chickenBig);
         MapUtils.addObjectsToMap(this.ctx, this.character.throwableBottles);
-        // END: MOVING ELEMENTS
         this.ctx.translate(-World.CAMERA_X, 0);
     }
 
     #drawFixedUIElements() {
+        this.ctx.translate(-World.CAMERA_X, 0);
         MapUtils.addToMap(this.ctx, this.character.statusBarHealth);
         MapUtils.addToMap(this.ctx, this.character.statusBarCoin);
         MapUtils.addToMap(this.ctx, this.character.statusBarBottle);
         MapUtils.addToMap(this.ctx, this.chickenBig.statusBarHealth);
+        this.ctx.translate(World.CAMERA_X, 0);
     }
 
     startGame() {
@@ -133,22 +123,4 @@ function createClouds(CloudType1, CloudType2, count) {
     ];
 }
 
-function createBackgroundObjects(initialOffset, width, layersPerSegment, segmentCount) {
-    const backgroundObjects = [];
-    for (let segment = 0; segment < segmentCount; segment++) {
-        const offset = initialOffset + segment * width;
-        const layers = layersPerSegment[segment % layersPerSegment.length];
-        layers.forEach(layerPath => {
-            backgroundObjects.push(new Background(offset, `assets/img/3_background/layers/${layerPath}`));
-        });
-    }
-    return backgroundObjects;
-}
 
-function createBottles(count) {
-    return Array.from({ length: count }, (_, i) => new Bottle(i));
-}
-
-function createCoins(count) {
-    return Array.from({ length: count }, (_, i) => new Coin(i));
-}

@@ -29,8 +29,7 @@ function setupStateListener() {
 }
 
 function startGame() {
-    const canvas = document.getElementById('canvas');
-    canvas.classList.remove('d-none');
+    const canvas = DomUtils.toggleElementVisibility("canvas", true);
     new World(canvas);
     StateManager.updateState('hasGameStarted', true);
 }
