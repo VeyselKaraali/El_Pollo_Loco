@@ -15,7 +15,7 @@ class World {
         this.bottles = ObjectUtilsCreation.bottles;
         this.coins = ObjectUtilsCreation.coins;
         this.init();
-        //this.restartGame();
+        this.startGame();
     }
 
     init() {
@@ -79,11 +79,11 @@ class World {
         this.ctx.translate(World.CAMERA_X, 0);
     }
 
-    /*restartGame() {
+    startGame() {
         DomUtils.toggleElementVisibility("start-screen-container", false);
         DomUtils.toggleElementVisibility("end-screen-container", false);
-        this.clearCanvas();
-    }*/
+        //this.clearCanvas();
+    }
 
     showEndScreen() {
         DomUtils.toggleElementVisibility("end-screen-container", true);
