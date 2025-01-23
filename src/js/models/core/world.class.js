@@ -92,6 +92,14 @@ class World {
 
     showEndScreen() {
         DomUtils.toggleElementVisibility("end-screen-container", true);
+        if(this.character.isDead()) {
+            DomUtils.toggleElementVisibility("win-screen", false);
+            DomUtils.toggleElementVisibility("lose-screen", true);
+        } else {
+            DomUtils.toggleElementVisibility("lose-screen", false);
+            DomUtils.toggleElementVisibility("win-screen", true);
+        }
+        StateManager.updateState("isGameOver", true);
     }
 
     goToMenu() {
