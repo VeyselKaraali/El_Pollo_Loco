@@ -1,3 +1,5 @@
+let world;
+
 class Main {
     static init() {
         InitializationUtils.initializeApp();
@@ -5,7 +7,7 @@ class Main {
 
     static startGame() {
         const canvas = DomUtils.toggleElementVisibility("canvas", true);
-        new World(canvas);
+        world = new World(canvas);
         StateManager.updateState('hasGameStarted', true);
     }
 

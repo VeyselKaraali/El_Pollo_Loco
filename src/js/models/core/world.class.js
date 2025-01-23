@@ -15,7 +15,7 @@ class World {
         this.bottles = ObjectUtilsCreation.bottles;
         this.coins = ObjectUtilsCreation.coins;
         this.init();
-        this.startGame();
+        //this.restartGame();
     }
 
     init() {
@@ -79,16 +79,11 @@ class World {
         this.ctx.translate(World.CAMERA_X, 0);
     }
 
-    startGame() {
+    /*restartGame() {
         DomUtils.toggleElementVisibility("start-screen-container", false);
         DomUtils.toggleElementVisibility("end-screen-container", false);
-    }
-
-    restartGame() {
         this.clearCanvas();
-        this.init();
-        Main.startGame();
-    }
+    }*/
 
     showEndScreen() {
         DomUtils.toggleElementVisibility("end-screen-container", true);
@@ -107,6 +102,7 @@ class World {
         DomUtils.toggleElementVisibility("canvas", false);
         DomUtils.toggleElementVisibility("end-screen-container", false);
         DomUtils.toggleElementVisibility("start-screen-container", true);
+        StateManager.updateState("hasGameStarted", false);
     }
 }
 
