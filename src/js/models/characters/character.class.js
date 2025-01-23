@@ -86,8 +86,7 @@ class Character extends MovableObject {
             height: 110
         };
         this.throwableBottles = [];
-        this.bottleThrowDelay = 1000;
-        this.lastBottleThrowTime = 0;
+        this.canThrowBottle = true;
         this.collectedBottles = 0;
         this.collectedCoins = 0;
         this.statusBarHealth = new StatusBarHealth();
@@ -143,20 +142,18 @@ class Character extends MovableObject {
 
     throwBottle() {
         // ToDo Audio
-        const now = Date.now();
-
-        if(now - this.lastBottleThrowTime < this.bottleThrowDelay) {
-            return;
-        }
-
-        if(this.collectedBottles) {
+        if(this.canThrowBottle && this.collectedBottles) {
             const throwableBottle = new ThrowableBottle(this.x, this.y + 100);
             throwableBottle.isFacingOtherDirection = this.isFacingOtherDirection;
             this.throwableBottles.push(throwableBottle);
             throwableBottle.throw();
             this.collectedBottles--;
             this.statusBarBottle.setValue(this.collectedBottles);
-            this.lastBottleThrowTime = now;
+
+            this.canThrowBottle = false;
+            setTimeout(() => {
+                this.canThrowBottle = true;
+            }, 1000);
         }
     }
 
