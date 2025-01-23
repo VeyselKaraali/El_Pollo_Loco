@@ -59,7 +59,10 @@ class ChickenBig extends Enemy {
         };
         this.speedX = 0.1;
         this.statusBarHealth = new StatusBarChickenBig();
+        this.isNearCharacter = false;
+        this.alertCount = 0;
         this.loadImages(this.IMAGES_WALK);
+        this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_DEAD);
         this.animate();
     }
@@ -77,9 +80,12 @@ class ChickenBig extends Enemy {
                 this.playAnimation(this.IMAGES_WALK);
                 //this.audioCluck.play().then(() => {});
             }
-        }, 200)
 
-        IntervalManager.setStoppableInterval(() => {
+            if(this.isNearCharacter && this.alertCount < 10) {
+                this.playAnimation(this.IMAGES_ALERT);
+                this.alertCount++;
+            }
+
             if(this.isDead()) {
                 //this.audioDead.play().then(() => {});
             }

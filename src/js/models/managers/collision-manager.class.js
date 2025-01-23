@@ -57,6 +57,7 @@ class CollisionManager {
     static characterNearChickenBig(character, chickenBig) {
         if (chickenBig.x - character.x < (WorldConfig.WIDTH / 3 * 2) ) {
             chickenBig.statusBarHealth.y = 30;
+            chickenBig.isNearCharacter = true;
         }
     }
 }
