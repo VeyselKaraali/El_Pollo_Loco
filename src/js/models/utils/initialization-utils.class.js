@@ -33,4 +33,23 @@ class InitializationUtils {
             }
         }, 100);
     }
+
+    static enterFullscreen(element) {
+        if(element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if(element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+        } else if(element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        }
+    }
+
+    static exitFullscreen() {
+        if(document.fullscreenElement) {
+            document.exitFullscreen().then(r => {});
+        } else if(document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+        StateManager.updateState("isFullscreen", false);
+    }
 }

@@ -8,5 +8,14 @@ class Main {
         new World(canvas);
         StateManager.updateState('hasGameStarted', true);
     }
+
+    static toggleFullscreen() {
+        let fullscreen = document.getElementById("game-container");
+        if(StateManager.getState("isFullscreen")) {
+            InitializationUtils.exitFullscreen();
+        } else {
+            InitializationUtils.enterFullscreen(fullscreen);
+        }
+    }
 }
 

@@ -9,15 +9,12 @@ class KeyboardInputManager {
         RIGHT: 'ArrowRight',
         UP: 'ArrowUp',
         SPACE: ' ',
+        ESCAPE: 'Escape'
     };
 
     static setupEventListeners() {
         window.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                StateManager.updateState('isFullscreen', false);
-            } else {
-                KeyboardInputManager.handleKeyDown(e);
-            }
+            KeyboardInputManager.handleKeyDown(e);
         });
         window.addEventListener("keyup", (e) => KeyboardInputManager.handleKeyUp(e));
 
@@ -56,14 +53,14 @@ class KeyboardInputManager {
             case KeyboardInputManager.KEYS.SPACE:
                 KeyboardInputManager.SPACE = true;
                 break;
+            case KeyboardInputManager.KEYS.ESCAPE:
+                KeyboardInputManager.ESCAPE = true;
+                break;
         }
     }
 
     static handleKeyUp(e) {
         switch (e.key) {
-            case KeyboardInputManager.KEYS.SPACE:
-                KeyboardInputManager.SPACE = false;
-                break;
             case KeyboardInputManager.KEYS.LEFT:
                 KeyboardInputManager.LEFT = false;
                 break;
@@ -73,6 +70,18 @@ class KeyboardInputManager {
             case KeyboardInputManager.KEYS.UP:
                 KeyboardInputManager.UP = false;
                 break;
+            case KeyboardInputManager.KEYS.SPACE:
+                KeyboardInputManager.SPACE = false;
+                break;
+            case KeyboardInputManager.KEYS.ESCAPE:
+                KeyboardInputManager.ESCAPE = false;
+                break;
         }
     }
 }
+
+window.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        InitializationUtils.exitFullscreen();
+    }
+});
