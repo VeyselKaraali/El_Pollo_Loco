@@ -24,7 +24,7 @@ class InitializationUtils {
     }
 
     static setupBackgroundMusic() {
-        IntervalManager.setStoppableInterval(() => {
+        setInterval(() => {
             if(StateManager.getState("isMusicOn")) {
                 InitializationUtils.audioBackgroundMusic.play().then(r => {});
             }

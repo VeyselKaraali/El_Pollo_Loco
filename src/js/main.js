@@ -6,6 +6,7 @@ class Main {
     }
 
     static startGame() {
+        IntervalManager.stopAllIntervals();
         const canvas = DomUtils.toggleElementVisibility("canvas", true);
         world = new World(canvas);
         StateManager.updateState('hasGameStarted', true);
