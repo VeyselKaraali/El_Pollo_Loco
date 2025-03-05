@@ -240,9 +240,6 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_DEAD);
             this.audioManager.play(this.audioDead);
             this.audioDeadPlayed = true;
-            /*setTimeout(() => {
-                StateManager.updateState("isGameOver", true);
-            }, 1000);*/
             StateManager.updateState("isGameOver", true);
         }
 
