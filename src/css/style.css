@@ -32,6 +32,13 @@ canvas {
     height: 100%;
 }
 
+.controls-container {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    z-index: 100;
+}
+
 .btn-container {
     position: absolute;
     top: 5px;
