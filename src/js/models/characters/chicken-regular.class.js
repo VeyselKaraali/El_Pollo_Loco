@@ -2,8 +2,8 @@ class ChickenRegular extends Enemy {
     static basePosition = 600;
     static step = 1500 / 5;
 
-    audioCluck = new Audio("assets/audio/characters/chicken/cluck.mp3");
     audioDead = new Audio("assets/audio/characters/chicken/dead.mp3");
+    audioDeadPlayed = false;
 
     constructor(x, y, width, height) {
         super(x, y, width, height);
@@ -21,14 +21,14 @@ class ChickenRegular extends Enemy {
         IntervalManager.setStoppableInterval(() => {
             if(!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALK);
-                //this.audioCluck.play().then(() => {});
             }
         }, 200)
 
         IntervalManager.setStoppableInterval(() => {
-            if(this.isDead()) {
+            if(this.isDead() && !this.audioDeadPlayed) {
                 this.playAnimation(this.IMAGES_DEAD);
-                //this.audioDead.play().then(() => {});
+                this.audioManager.play(this.audioDead);
+                this.audioDeadPlayed = true;
                 setTimeout(() => {
                     this.y = 1000;
                 }, 1000);

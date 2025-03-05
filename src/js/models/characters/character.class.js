@@ -69,6 +69,7 @@ class Character extends MovableObject {
     audioDead = AudioManager.load("assets/audio/characters/character/dead.mp3");
     audioCollectBottle = AudioManager.load("assets/audio/collectables/bottle/collect.mp3")
     audioCollectCoin = AudioManager.load("assets/audio/collectables/coin/collect.mp3")
+    audioDeadPlayed = false;
 
     constructor() {
         super(
@@ -141,7 +142,6 @@ class Character extends MovableObject {
     }
 
     throwBottle() {
-        // ToDo Audio
         if(this.canThrowBottle && this.collectedBottles) {
             const throwableBottle = new ThrowableBottle(this.x, this.y + 100);
             throwableBottle.isFacingOtherDirection = this.isFacingOtherDirection;
@@ -214,29 +214,37 @@ class Character extends MovableObject {
     }
 
     playAudioJump() {
-        //this.audioManager.play(this.audioJump);
+        this.audioManager.play(this.audioJump);
     }
 
     playAudioCollectCoin() {
-        //this.audioManager.play(this.audioCollectCoin);
+        this.audioManager.play(this.audioCollectCoin);
     }
 
     playAudioCollectBottle() {
-        //this.audioManager.play(this.audioCollectBottle);
+        this.audioManager.play(this.audioCollectBottle);
     }
 
     handleInactiveState() {
         this.playAnimation(this.IMAGES_IDLE_LONG);
-        //this.audioManager.play(this.audioSnore);
+        this.audioManager.play(this.audioSnore);
     }
 
     handleHurt() {
         this.playAnimation(this.IMAGES_HURT);
-        //this.audioManager.play(this.audioHurt);
+        this.audioManager.play(this.audioHurt);
     }
 
     handleDeath() {
-        this.playAnimation(this.IMAGES_DEAD);
-        //this.audioManager.play(this.audioDead);
+        if(!this.audioDeadPlayed) {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.audioManager.play(this.audioDead);
+            this.audioDeadPlayed = true;
+            /*setTimeout(() => {
+                StateManager.updateState("isGameOver", true);
+            }, 1000);*/
+            StateManager.updateState("isGameOver", true);
+        }
+
     }
 }

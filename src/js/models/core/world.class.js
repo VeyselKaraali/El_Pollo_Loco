@@ -89,7 +89,6 @@ class World {
             DomUtils.toggleElementVisibility("lose-screen", false);
             DomUtils.toggleElementVisibility("win-screen", true);
         }
-        StateManager.updateState("isGameOver", true);
     }
 
     goToMenu() {

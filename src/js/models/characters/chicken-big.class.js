@@ -41,8 +41,8 @@ class ChickenBig extends Enemy {
     ]
 
     audioCluck = new Audio("assets/audio/characters/chickenBig/cluck.mp3");
-    audioScream = new Audio("assets/audio/characters/chickenBig/scream.mp3");
     audioDead = new Audio("assets/audio/characters/chickenBig/dead.mp3");
+    audioDeadPlayed = false;
 
     constructor() {
         super(
@@ -69,7 +69,6 @@ class ChickenBig extends Enemy {
     }
 
     animate() {
-        //this.audioScream.play().then(() => {});
         IntervalManager.setStoppableInterval(() => {
             if(!this.isDead()) {
                 this.moveLeft();
@@ -79,7 +78,6 @@ class ChickenBig extends Enemy {
         IntervalManager.setStoppableInterval(() => {
             if(!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALK);
-                //this.audioCluck.play().then(() => {});
             }
             if(this.isNearCharacter && this.alertCount < 10) {
                 this.playAnimation(this.IMAGES_ALERT);
@@ -87,11 +85,18 @@ class ChickenBig extends Enemy {
             }
             if(this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                this.audioManager.play(this.audioCluck);
             }
 
-            if(this.isDead() && !StateManager.getState("isGameOver")) {
+            if(this.isDead() && !this.audioDeadPlayed) {
                 this.playAnimation(this.IMAGES_DEAD);
-                //this.audioDead.play().then(() => {});
+                this.audioManager.play(this.audioDead);
+                this.audioDeadPlayed = true;
+                StateManager.updateState("isGameOver", true);
+            }
+
+            if(this.energy < 1) {
+                this.energy = 0;
             }
         }, 200)
     }

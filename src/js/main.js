@@ -10,6 +10,7 @@ class Main {
         const canvas = DomUtils.toggleElementVisibility("canvas", true);
         world = new World(canvas);
         StateManager.updateState('hasGameStarted', true);
+        StateManager.updateState('isGameOver', false);
     }
 
     static toggleFullscreen() {

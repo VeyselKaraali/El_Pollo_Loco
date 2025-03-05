@@ -12,7 +12,7 @@ class AudioManager {
     }
 
     play(audio) {
-        if(StateManager.getState("isSoundOn")) {
+        if(StateManager.getState("isSoundOn") && !StateManager.getState("isGameOver")) {
             audio.play().then(() => {});
         }
     }
