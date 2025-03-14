@@ -10,8 +10,9 @@ html, body {
 body {
     margin: 0;
     font-family: "bangers", sans-serif;
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-image: url("../assets/img/1_environments/1.png");
     background-position: center;
 }
