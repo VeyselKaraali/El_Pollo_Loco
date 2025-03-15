@@ -147,6 +147,7 @@ canvas {
     position: absolute;
     cursor: pointer;
     bottom: 10px;
+    display: none;
 }
 
 #btn-mobile-left {
@@ -184,6 +185,12 @@ canvas {
 
     #game-container {
         display: none;
+    }
+}
+
+@media (pointer: coarse) {
+    .btn-mobile {
+        display: flex !important;
     }
 }
 
