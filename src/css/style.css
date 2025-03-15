@@ -24,6 +24,8 @@ body {
 #game-container {
     width: 100%;
     max-width: 720px;
+    max-height: 100vh;
+    overflow: hidden;
     aspect-ratio: 3 / 2;
     position: relative;
 }
@@ -190,5 +192,6 @@ canvas {
         max-width: unset;
         width: auto;
         height: 100svh;
+        overflow: hidden;
     }
 }
