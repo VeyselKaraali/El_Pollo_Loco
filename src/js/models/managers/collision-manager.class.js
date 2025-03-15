@@ -20,8 +20,8 @@ class CollisionManager {
         });
     }
 
-    static characterWithEnemy(character, enemies) {
-        enemies.forEach((enemy, index) => {
+    static characterWithChickenRegular(character, chickenRegular) {
+        chickenRegular.forEach((enemy, index) => {
             if(character.isAboveGround() && character.isColliding(enemy) && !enemy.isDead()) {
                 enemy.energy = 0;
                 character.bounce();
@@ -32,6 +32,13 @@ class CollisionManager {
                 character.statusBarHealth.setValue(character.energy);
             }
         })
+    }
+
+    static characterWithChickenBig(character, chickenBig) {
+        if (character.isColliding(chickenBig) && !chickenBig.isDead()) {
+            character.reduceEnergy();
+            character.statusBarHealth.setValue(character.energy);
+        }
     }
 
     static characterWithCoin(character, coins) {

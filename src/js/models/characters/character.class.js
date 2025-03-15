@@ -185,7 +185,7 @@ class Character extends MovableObject {
                 this.handleDeath();
             }
 
-            else if(this.isHurt()) {
+            else if(this.isHurt() && !this.isDead()) {
                 this.handleHurt();
             }
 
@@ -236,12 +236,26 @@ class Character extends MovableObject {
     }
 
     handleDeath() {
+        this.playAnimation(this.IMAGES_DEAD);
         if(!this.audioDeadPlayed) {
-            this.playAnimation(this.IMAGES_DEAD);
             this.audioManager.play(this.audioDead);
             this.audioDeadPlayed = true;
-            StateManager.updateState("isGameOver", true);
         }
 
+        IntervalManager.setStoppableInterval(() => {
+            IntervalManager.stopAllIntervals();
+
+            const lastImageIndex = this.IMAGES_DEAD.length - 1;
+            const lastImagePath = this.IMAGES_DEAD[lastImageIndex];
+            this.img = this.imgCache[lastImagePath];
+
+            StateManager.updateState("isGameOver", true);
+            StateManager.updateState("isGamePaused", true);
+
+            DomUtils.toggleElementVisibility("end-screen-container", true);
+            DomUtils.toggleElementVisibility("win-screen", false);
+            DomUtils.toggleElementVisibility("lose-screen", true);
+
+        }, 2000);
     }
 }

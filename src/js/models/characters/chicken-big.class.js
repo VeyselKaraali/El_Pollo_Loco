@@ -68,6 +68,30 @@ class ChickenBig extends Enemy {
         this.animate();
     }
 
+    handleDeath() {
+        this.playAnimation(this.IMAGES_DEAD);
+        if(!this.audioDeadPlayed) {
+            this.audioManager.play(this.audioDead);
+            this.audioDeadPlayed = true;
+        }
+
+        setTimeout(() => {
+            IntervalManager.stopAllIntervals();
+
+            const lastImageIndex = this.IMAGES_DEAD.length - 1;
+            const lastImagePath = this.IMAGES_DEAD[lastImageIndex];
+            this.img = this.imgCache[lastImagePath];
+
+            StateManager.updateState("isGameOver", true);
+            StateManager.updateState("isGamePaused", true);
+
+            DomUtils.toggleElementVisibility("end-screen-container", true);
+            DomUtils.toggleElementVisibility("win-screen", true);
+            DomUtils.toggleElementVisibility("lose-screen", false);
+
+        }, 2000);
+    }
+
     animate() {
         IntervalManager.setStoppableInterval(() => {
             if(!this.isDead()) {
@@ -79,20 +103,17 @@ class ChickenBig extends Enemy {
             if(!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALK);
             }
-            if(this.isNearCharacter && this.alertCount < 10) {
+            if(this.isNearCharacter && this.alertCount < 10 && !this.isDead()) {
                 this.playAnimation(this.IMAGES_ALERT);
                 this.alertCount++;
             }
-            if(this.isHurt()) {
+            if(this.isHurt() && !this.isDead()) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.audioManager.play(this.audioCluck);
             }
 
-            if(this.isDead() && !this.audioDeadPlayed) {
-                this.playAnimation(this.IMAGES_DEAD);
-                this.audioManager.play(this.audioDead);
-                this.audioDeadPlayed = true;
-                StateManager.updateState("isGameOver", true);
+            if(this.isDead()) {
+               this.handleDeath();
             }
 
             if(this.energy < 1) {
