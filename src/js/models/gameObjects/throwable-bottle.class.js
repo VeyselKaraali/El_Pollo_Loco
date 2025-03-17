@@ -46,7 +46,7 @@ class ThrowableBottle extends ThrowableObject {
     rotate() {
         IntervalManager.setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
-        }, 1000 / 60)
+        }, 100)
     }
 
     splash() {
