@@ -20,6 +20,7 @@ class World {
     }
 
     init() {
+        InitializationUtils.setupBackgroundMusic();
         this.runGameLoop();
         this.draw();
     }
@@ -80,6 +81,7 @@ class World {
         DomUtils.toggleElementVisibility("start-screen-container", true);
         StateManager.updateState("hasGameStarted", false);
         IntervalManager.stopAllIntervals();
+        InitializationUtils.audioBtnClick.play().then(r => {});
     }
 }
 

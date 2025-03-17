@@ -31,8 +31,6 @@ class ThrowableBottle extends ThrowableObject {
     }
 
     isAboveGround() {
-        // ToDo
-        //return this.y < 330;
         return true;
     }
 
@@ -54,7 +52,7 @@ class ThrowableBottle extends ThrowableObject {
     splash() {
         IntervalManager.setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-            //audioBottleSplash = new Audio("assets/audio/collectables/bottle/splash.mp3");
+            //audioBottleSplash = AudioManager.load("assets/audio/collectables/bottle/splash.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
         }, 0)
     }
 }

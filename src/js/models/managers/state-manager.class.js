@@ -4,7 +4,7 @@ class StateManager {
         hasGameStarted: false,
         isGameOver: false,
         isHelpOpen: false,
-        isSoundOn: false,
+        isSoundOn: true,
         isMusicOn: false,
         isPaused: false,
         isFullscreen: false,

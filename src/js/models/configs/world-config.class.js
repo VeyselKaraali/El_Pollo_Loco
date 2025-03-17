@@ -9,4 +9,6 @@ class WorldConfig {
         ["4_fourth/1.png", "3_third/2.png", "2_second/2.png", "1_first/2.png"],
         ["4_fourth/1.png", "3_third/1.png", "2_second/1.png", "1_first/1.png"],
     ];
+    static VOLUME_BACKGROUND_MUSIC = 0.025;
+    static VOLUME_SOUNDS = 0.05;
 }

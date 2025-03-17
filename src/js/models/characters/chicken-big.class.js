@@ -40,8 +40,8 @@ class ChickenBig extends Enemy {
         "assets/img/5_enemies/3_chicken_big/5_dead/3.png",
     ]
 
-    audioCluck = new Audio("assets/audio/characters/chickenBig/cluck.mp3");
-    audioDead = new Audio("assets/audio/characters/chickenBig/dead.mp3");
+    audioCluck = AudioManager.load("assets/audio/characters/chickenBig/cluck.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
+    audioDead = AudioManager.load("assets/audio/characters/chickenBig/dead.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
     audioDeadPlayed = false;
 
     constructor() {

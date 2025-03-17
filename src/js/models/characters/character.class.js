@@ -62,13 +62,13 @@ class Character extends MovableObject {
         "assets/img/4_character/6_dead/7.png",
     ];
 
-    audioWalk = AudioManager.load("assets/audio/characters/character/walk.mp3");
-    audioJump = AudioManager.load("assets/audio/characters/character/jump.mp3");
-    audioSnore = AudioManager.load("assets/audio/characters/character/snore.mp3");
-    audioHurt = AudioManager.load("assets/audio/characters/character/hurt.mp3");
-    audioDead = AudioManager.load("assets/audio/characters/character/dead.mp3");
-    audioCollectBottle = AudioManager.load("assets/audio/collectables/bottle/collect.mp3")
-    audioCollectCoin = AudioManager.load("assets/audio/collectables/coin/collect.mp3")
+    audioWalk = AudioManager.load("assets/audio/characters/character/walk.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
+    audioJump = AudioManager.load("assets/audio/characters/character/jump.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
+    audioSnore = AudioManager.load("assets/audio/characters/character/snore.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
+    audioHurt = AudioManager.load("assets/audio/characters/character/hurt.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
+    audioDead = AudioManager.load("assets/audio/characters/character/dead.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
+    audioCollectBottle = AudioManager.load("assets/audio/collectables/bottle/collect.mp3", { volume: WorldConfig.VOLUME_SOUNDS })
+    audioCollectCoin = AudioManager.load("assets/audio/collectables/coin/collect.mp3", { volume: WorldConfig.VOLUME_SOUNDS })
     audioDeadPlayed = false;
 
     constructor() {
@@ -142,7 +142,7 @@ class Character extends MovableObject {
     }
 
     throwBottle() {
-        if(this.canThrowBottle && this.collectedBottles) {
+        if(this.canThrowBottle && this.collectedBottles && !this.isHurt() && !this.isDead()) {
             const throwableBottle = new ThrowableBottle(this.x, this.y + 100);
             throwableBottle.isFacingOtherDirection = this.isFacingOtherDirection;
             this.throwableBottles.push(throwableBottle);

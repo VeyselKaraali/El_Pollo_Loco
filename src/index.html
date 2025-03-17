@@ -48,20 +48,8 @@
         </div>
 
         <div class="btn-container">
-            <div id="btn-help">
-                <img src="assets/img/9_ui/help.png" alt="">
-            </div>
-
             <div id="btn-sound" title="Sounds">
-                <img src="assets/img/9_ui/sound-off.png" alt="">
-            </div>
-
-            <div id="btn-music" title="Music">
-                <img src="assets/img/9_ui/music-off.png" alt="">
-            </div>
-
-            <div id="btn-paused">
-                <img src="assets/img/9_ui/pause-off.png" alt="">
+                <img src="assets/img/9_ui/sound-on.png" alt="">
             </div>
 
             <div onclick="Main.toggleFullscreen()" id="btn-fullscreen">
@@ -82,8 +70,8 @@
             <img id="win-screen" class="" src="assets/img/2_intro_outro_screens/2_win/4.png" alt="">
             <img id="lose-screen" class="" src="assets/img/2_intro_outro_screens/3_game_over/4.png" alt="">
             <div class="btn-container-end-screen">
-                <div id="btn-menu" class="btn btn-rect">
-                    <div onclick="world.goToMenu()">MENU</div>
+                <div onclick="world.goToMenu()" id="btn-menu" class="btn btn-rect">
+                    <div>MENU</div>
                 </div>
                 <div onclick="Main.startGame()" id="btn-restart" class="btn btn-rect">
                     <div>RESTART</div>

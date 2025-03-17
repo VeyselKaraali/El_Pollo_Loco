@@ -1,9 +1,9 @@
 class InitializationUtils {
-    static audioBackgroundMusic = AudioManager.load("assets/audio/music/1.mp3", {loop: true, volume: 0.05});
+    static audioBackgroundMusic = AudioManager.load("assets/audio/music/1.mp3", {loop: true, volume: WorldConfig.VOLUME_BACKGROUND_MUSIC});
+    static audioBtnClick = AudioManager.load("assets/audio/menu/click.mp3", {loop: false, volume: WorldConfig.VOLUME_SOUNDS});
 
     static initializeApp() {
         InitializationUtils.setupStateListener();
-        InitializationUtils.setupBackgroundMusic();
         KeyboardInputManager.setupEventListeners();
     }
 
@@ -25,7 +25,7 @@ class InitializationUtils {
 
     static setupBackgroundMusic() {
         setInterval(() => {
-            if(StateManager.getState("isMusicOn")) {
+            if(StateManager.getState("isSoundOn")) {
                 InitializationUtils.audioBackgroundMusic.play().then(r => {});
             }
             else {
