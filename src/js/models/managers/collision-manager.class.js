@@ -1,10 +1,11 @@
 class CollisionManager {
-    static enemyWithThrowableBottle(character, enemies) {
-        character.throwableBottles.forEach((bottle) => {
-            enemies.forEach((enemy) => {
-                if (bottle.isColliding(enemy)) {
+    static ChickenRegularWithThrowableBottle(chickenRegular, throwableBottles) {
+        throwableBottles.forEach((bottle) => {
+            chickenRegular.forEach((chickenRegular) => {
+                if (bottle.isColliding(chickenRegular)) {
+                    console.log("ChickenRegularWithThrowableBottle")
                     bottle.splash();
-                    enemy.reduceEnergy();
+                    chickenRegular.reduceEnergy();
                 }
             });
         });

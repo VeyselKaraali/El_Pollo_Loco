@@ -38,7 +38,7 @@ class World {
     }
 
     handleCollisions() {
-        CollisionManager.enemyWithThrowableBottle(this.character, this.chickenRegular);
+        CollisionManager.ChickenRegularWithThrowableBottle(this.chickenRegular, this.character.throwableBottles);
         CollisionManager.chickenBigWithThrowableBottle(this.chickenBig, this.character.throwableBottles);
         CollisionManager.characterWithBottle(this.character, this.bottles);
         CollisionManager.characterWithCoin(this.character, this.coins);

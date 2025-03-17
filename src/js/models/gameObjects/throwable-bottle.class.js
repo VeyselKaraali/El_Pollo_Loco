@@ -52,7 +52,8 @@ class ThrowableBottle extends ThrowableObject {
     splash() {
         IntervalManager.setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+            console.log("splash")
             //audioBottleSplash = AudioManager.load("assets/audio/collectables/bottle/splash.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
-        }, 0)
+        }, 200)
     }
 }
