@@ -3,7 +3,6 @@ class CollisionManager {
         throwableBottles.forEach((bottle) => {
             chickenRegular.forEach((chickenRegular) => {
                 if (bottle.isColliding(chickenRegular)) {
-                    console.log("ChickenRegularWithThrowableBottle")
                     bottle.splash();
                     chickenRegular.reduceEnergy();
                 }
