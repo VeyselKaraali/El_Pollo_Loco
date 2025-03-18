@@ -245,7 +245,7 @@ class Character extends MovableObject {
         IntervalManager.setStoppableInterval(() => {
             IntervalManager.stopAllIntervals();
 
-            const lastImageIndex = this.IMAGES_DEAD.length - 1;
+            const lastImageIndex = this.IMAGES_DEAD.length - 2;
             const lastImagePath = this.IMAGES_DEAD[lastImageIndex];
             this.img = this.imgCache[lastImagePath];
 
