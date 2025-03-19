@@ -11,7 +11,7 @@ class World {
             ...ObjectUtilsCreation.createChickens(6)
         ];
         this.chickenBig = new ChickenBig();
-        this.clouds = ObjectUtilsCreation.createClouds(Cloud1, Cloud2, 5);
+        this.clouds = ObjectUtilsCreation.createClouds(Cloud1, Cloud2, 12);
         this.bottles = ObjectUtilsCreation.createBottles(6);
         this.coins = ObjectUtilsCreation.createCoins(5);
         this.init();

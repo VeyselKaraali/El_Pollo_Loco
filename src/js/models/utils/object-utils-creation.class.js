@@ -5,9 +5,6 @@ class ObjectUtilsCreation {
         WorldConfig.BACKGROUND_LAYERS,
         WorldConfig.SEGMENT_COUNT);
 
-    static bottles = ObjectUtilsCreation.createBottles(6);
-    static coins = ObjectUtilsCreation.createCoins(5);
-
     static createBackgroundObjects(initialOffset, width, layersPerSegment, segmentCount) {
         const backgroundObjects = [];
         for (let segment = 0; segment < segmentCount; segment++) {
@@ -37,9 +34,21 @@ class ObjectUtilsCreation {
     }
 
     static createClouds(CloudType1, CloudType2, count) {
-        return [
-            ...Array.from({ length: count }, () => new CloudType1()),
-            ...Array.from({ length: count }, () => new CloudType2()),
-        ];
+        const clouds = [];
+        const worldMinX = -WorldConfig.WIDTH;
+        const worldMaxX = WorldConfig.SEGMENT_COUNT * WorldConfig.WIDTH;
+        const worldWidth = worldMaxX - worldMinX;
+        const spacing = worldWidth / count;
+
+        for (let i = 0; i < count; i++) {
+            let cloud1 = new CloudType1();
+            let cloud2 = new CloudType2();
+
+            cloud1.x = worldMinX + i * spacing + Math.random() * 100;
+            cloud2.x = worldMinX + i * spacing + Math.random() * 100;
+
+            clouds.push(cloud1, cloud2);
+        }
+        return clouds;
     }
 }
