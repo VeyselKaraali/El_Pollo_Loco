@@ -33,6 +33,8 @@ class StatusBar extends DrawableObject {
             return 2;
         } else if(this.value >= 1) {
             return 1;
+        } else if(this.value > 0 && this.value < 1) {
+            return 1;
         } else {
             return 0;
         }
