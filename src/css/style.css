@@ -36,10 +36,31 @@ canvas {
 }
 
 .controls-container {
+    display: flex;
+    column-gap: 5px;
     position: absolute;
     top: 5px;
     left: 15px;
     z-index: 100;
+}
+
+.controls-container img {
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.controls-container .section {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.divider {
+    width: 3px;
+    background-color: black;
+    height: 20px;
 }
 
 .btn-container {
@@ -67,6 +88,11 @@ canvas {
 .btn:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.settings {
+    width: 20px;
+    height: 20px;
 }
 
 .btn-rect {
@@ -190,7 +216,11 @@ canvas {
 
 @media (pointer: coarse) {
     .btn-mobile {
-        display: flex !important;
+        display: flex;
+    }
+
+    #game-container {
+        width: 100%;
     }
 }
 

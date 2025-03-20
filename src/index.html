@@ -44,16 +44,37 @@
 <body onload="Main.init()">
     <div id="game-container">
         <div class="controls-container">
-            <img src="assets/img/9_ui/controls.png" alt="">
+            <div class="section">
+                <img src="assets/img/9_ui/left.png" class="left" alt="">
+                <div>LEFT</div>
+                <div class="divider"></div>
+            </div>
+
+            <div class="section">
+                <img src="assets/img/9_ui/right.png" alt="">
+                <div>RIGHT</div>
+                <div class="divider"></div>
+            </div>
+
+            <div class="section">
+                <img src="assets/img/9_ui/up.png" alt="">
+                <div>JUMP</div>
+                <div class="divider"></div>
+            </div>
+
+            <div class="section">
+                <img src="assets/img/9_ui/space-bar.png" alt="">
+                <div>THROW BOTTLE</div>
+            </div>
         </div>
 
         <div class="btn-container">
             <div id="btn-sound" title="Sounds">
-                <img src="assets/img/9_ui/sound-on.png" alt="">
+                <img class="settings" src="assets/img/9_ui/sound-on.png" alt="">
             </div>
 
             <div onclick="Main.toggleFullscreen()" id="btn-fullscreen">
-                <img src="assets/img/9_ui/fullscreen-off.png" alt="">
+                <img class="settings" src="assets/img/9_ui/fullscreen-off.png" alt="">
             </div>
         </div>
 
