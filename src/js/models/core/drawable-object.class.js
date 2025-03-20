@@ -33,6 +33,12 @@ class DrawableObject {
         });
     }
 
+    getLastImage(images) {
+        const lastImageIndex = images.length - 1;
+        const lastImagePath = images[lastImageIndex];
+        return this.imgCache[lastImagePath];
+    }
+
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }

@@ -68,30 +68,6 @@ class ChickenBig extends Enemy {
         this.animate();
     }
 
-    handleDeath() {
-        this.playAnimation(this.IMAGES_DEAD);
-        if(!this.audioDeadPlayed) {
-            this.audioManager.play(this.audioDead);
-            this.audioDeadPlayed = true;
-        }
-
-        setTimeout(() => {
-            IntervalManager.stopAllIntervals();
-
-            const lastImageIndex = this.IMAGES_DEAD.length - 1;
-            const lastImagePath = this.IMAGES_DEAD[lastImageIndex];
-            this.img = this.imgCache[lastImagePath];
-
-            StateManager.updateState("isGameOver", true);
-            StateManager.updateState("isGamePaused", true);
-
-            DomUtils.toggleElementVisibility("end-screen-container", true);
-            DomUtils.toggleElementVisibility("win-screen", true);
-            DomUtils.toggleElementVisibility("lose-screen", false);
-
-        }, 2000);
-    }
-
     animate() {
         IntervalManager.setStoppableInterval(() => {
             if(!this.isDead()) {
@@ -120,5 +96,27 @@ class ChickenBig extends Enemy {
                 this.energy = 0;
             }
         }, 200)
+    }
+
+    handleDeath() {
+        this.playAnimation(this.IMAGES_DEAD);
+        this.playDeathAudio();
+        this.showEndScreenAfterDelay();
+    }
+
+    playDeathAudio() {
+        if (!this.audioDeadPlayed) {
+            this.audioManager.play(this.audioDead);
+            this.audioDeadPlayed = true;
+        }
+    }
+
+    showEndScreenAfterDelay() {
+        IntervalManager.setStoppableInterval(() => {
+            IntervalManager.stopAllIntervals();
+            this.img = this.getLastImage(this.IMAGES_DEAD);
+            StateManager.updateState("isGameOver", true);
+            DomUtils.showEndScreen(true, true, false);
+        }, 2000);
     }
 }

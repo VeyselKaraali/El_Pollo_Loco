@@ -59,7 +59,6 @@ class Character extends MovableObject {
         "assets/img/4_character/6_dead/4.png",
         "assets/img/4_character/6_dead/5.png",
         "assets/img/4_character/6_dead/6.png",
-        "assets/img/4_character/6_dead/7.png",
     ];
 
     audioWalk = AudioManager.load("assets/audio/characters/character/walk.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
@@ -233,25 +232,23 @@ class Character extends MovableObject {
 
     handleDeath() {
         this.playAnimation(this.IMAGES_DEAD);
-        if(!this.audioDeadPlayed) {
+        this.playDeathAudio();
+        this.showEndScreenAfterDelay();
+    }
+
+    playDeathAudio() {
+        if (!this.audioDeadPlayed) {
             this.audioManager.play(this.audioDead);
             this.audioDeadPlayed = true;
         }
+    }
 
+    showEndScreenAfterDelay() {
         IntervalManager.setStoppableInterval(() => {
             IntervalManager.stopAllIntervals();
-
-            const lastImageIndex = this.IMAGES_DEAD.length - 2;
-            const lastImagePath = this.IMAGES_DEAD[lastImageIndex];
-            this.img = this.imgCache[lastImagePath];
-
+            this.img = this.getLastImage(this.IMAGES_DEAD);
             StateManager.updateState("isGameOver", true);
-            StateManager.updateState("isGamePaused", true);
-
-            DomUtils.toggleElementVisibility("end-screen-container", true);
-            DomUtils.toggleElementVisibility("win-screen", false);
-            DomUtils.toggleElementVisibility("lose-screen", true);
-
+            DomUtils.showEndScreen(true, false, true);
         }, 2000);
     }
 }
