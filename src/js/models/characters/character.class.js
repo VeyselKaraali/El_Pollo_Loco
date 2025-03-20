@@ -159,6 +159,7 @@ class Character extends MovableObject {
         this.canThrowBottle = true;
         this.collectedBottles = 0;
         this.collectedCoins = 0;
+        this.jumpCounter = 0;
         this.statusBarHealth = new StatusBarHealth();
         this.statusBarCoin = new StatusBarCoin();
         this.statusBarBottle = new StatusBarBottle();
@@ -269,6 +270,10 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         IntervalManager.setStoppableInterval(() => {
+            if (!this.isAboveGround()) {
+                this.jumpCounter = 0;
+            }
+
             if (this.isDead()) {
                 this.handleDeath();
             }
@@ -277,8 +282,12 @@ class Character extends MovableObject {
                 this.handleHurt();
             }
 
-            else if (this.isAboveGround()) {
+            else if (this.isAboveGround() && this.jumpCounter < this.IMAGES_JUMP.length) {
+                if(this.jumpCounter === 0) {
+                    this.currentImage = 0;
+                }
                 this.playAnimation(this.IMAGES_JUMP);
+                this.jumpCounter++;
             }
 
             else if (KeyboardInputManager.RIGHT || KeyboardInputManager.LEFT) {
