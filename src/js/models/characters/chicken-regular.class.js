@@ -1,6 +1,6 @@
 class ChickenRegular extends Enemy {
     static basePosition = 600;
-    static step = 1500 / 5;
+    static step = 500;
 
     audioDead = AudioManager.load("assets/audio/characters/chicken/dead.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
     audioDeadPlayed = false;

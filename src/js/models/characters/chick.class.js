@@ -10,8 +10,9 @@ class Chick extends ChickenRegular {
     ]
 
     constructor(index) {
+        const xPosition = ChickenRegular.basePosition + index * ChickenRegular.step + (Math.random() * 300 - 150);
         super(
-            ChickenRegular.basePosition + index * ChickenRegular.step + (Math.random() * 100 - 50),
+            Math.min(xPosition, 2400),
             355,
             60,
             60
