@@ -26,6 +26,7 @@ class ThrowableBottle extends ThrowableObject {
         this.speedX = 20;
         this.speedY = 30;
         this.acceleration = 2.5;
+        this.groundLevel = WorldConfig.HEIGHT;
         this.loadImages(this.IMAGES_BOTTLE_SPLASH);
         this.loadImages(this.IMAGES_BOTTLE_ROTATION);
     }
@@ -52,7 +53,6 @@ class ThrowableBottle extends ThrowableObject {
     splash() {
         IntervalManager.setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-            //audioBottleSplash = AudioManager.load("assets/audio/collectables/bottle/splash.mp3", { volume: WorldConfig.VOLUME_SOUNDS });
         }, 200)
     }
 }
