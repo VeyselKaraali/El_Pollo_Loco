@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
         this.isFacingOtherDirection = false;
         this.energy = 5;
         this.lastHit = 0;
+        this.groundLevel = 172;
         this.audioManager = new AudioManager();
         this.lastActivityTime = Date.now();
     }
@@ -38,7 +39,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.y < 0;
+        return this.y < this.groundLevel;
     }
 
     applyGravity() {
@@ -46,6 +47,11 @@ class MovableObject extends DrawableObject {
             if(this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
+
+                if (this.y > this.groundLevel) {
+                    this.y = this.groundLevel;
+                    this.speedY = 0;
+                }
             }
         }, 1000 / 25)
     }
