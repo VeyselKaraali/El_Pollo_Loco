@@ -8,7 +8,6 @@ class MapUtils {
             ImageUtils.flipImage(ctx, mo);
         }
         mo.draw(ctx);
-        mo.drawFrame(ctx);
         if (mo.isFacingOtherDirection) {
             ImageUtils.flipImageBack(ctx, mo);
         }

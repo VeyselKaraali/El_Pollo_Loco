@@ -37,6 +37,15 @@ class DrawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
+    /**
+     * Draws a red frame (debug border) around the current object
+     * if it is an instance of one of the specified classes.
+     *
+     * The frame is drawn based on the object's position (`x`, `y`),
+     * its size (`width`, `height`), and its `offset` values.
+     *
+     * @param {CanvasRenderingContext2D} ctx - The canvas 2D rendering context to draw the frame on.
+     */
     drawFrame(ctx) {
         if(
             this instanceof Character ||

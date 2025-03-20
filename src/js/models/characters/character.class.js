@@ -82,9 +82,9 @@ class Character extends MovableObject {
         this.acceleration = 2.5;
         this.offset = {
             x: 13,
-            y: 97,
-            width: 25,
-            height: 110
+            y: 100,
+            width: 45,
+            height: 112
         };
         this.throwableBottles = [];
         this.canThrowBottle = true;
