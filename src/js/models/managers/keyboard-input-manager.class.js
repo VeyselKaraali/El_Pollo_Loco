@@ -1,3 +1,8 @@
+/**
+ * Manages keyboard and mobile button inputs for controlling game actions.
+ * It listens for keydown and keyup events and updates the state of input keys.
+ * It also handles mobile button presses for touch devices.
+ */
 class KeyboardInputManager {
     static LEFT = false;
     static RIGHT = false;
@@ -12,6 +17,10 @@ class KeyboardInputManager {
         ESCAPE: 'Escape'
     };
 
+    /**
+     * Sets up event listeners for keyboard and mobile button inputs.
+     * Listens for keydown, keyup events for keyboard and touch events for mobile buttons.
+     */
     static setupEventListeners() {
         window.addEventListener("keydown", (e) => {
             KeyboardInputManager.handleKeyDown(e);
@@ -26,6 +35,12 @@ class KeyboardInputManager {
         KeyboardInputManager.addMobileButtonListeners('btn-mobile-throw', 'SPACE', options);
     }
 
+    /**
+     * Adds event listeners for mobile button interactions (touch and mouse).
+     * @param {string} buttonId - The ID of the mobile button element.
+     * @param {string} key - The key to associate with the mobile button.
+     * @param {Object} options - The options to configure touch events.
+     */
     static addMobileButtonListeners(buttonId, key, options) {
         const button = document.getElementById(buttonId);
         if (!button) return;
@@ -39,6 +54,10 @@ class KeyboardInputManager {
         button.addEventListener('touchcancel', () => KeyboardInputManager[key] = false, options);
     }
 
+    /**
+     * Handles keydown events and updates the corresponding key state.
+     * @param {KeyboardEvent} e - The event object representing the keydown event.
+     */
     static handleKeyDown(e) {
         switch (e.key) {
             case KeyboardInputManager.KEYS.LEFT:
@@ -59,6 +78,10 @@ class KeyboardInputManager {
         }
     }
 
+    /**
+     * Handles keyup events and updates the corresponding key state.
+     * @param {KeyboardEvent} e - The event object representing the keyup event.
+     */
     static handleKeyUp(e) {
         switch (e.key) {
             case KeyboardInputManager.KEYS.LEFT:
@@ -80,6 +103,9 @@ class KeyboardInputManager {
     }
 }
 
+/**
+ * Listens for fullscreen changes and exits fullscreen mode if the document is not fullscreen.
+ */
 window.addEventListener("fullscreenchange", () => {
     if (!document.fullscreenElement) {
         InitializationUtils.exitFullscreen();

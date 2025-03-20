@@ -12,6 +12,9 @@ class MovableObject extends DrawableObject {
         this.lastActivityTime = Date.now();
     }
 
+    /**
+     * Moves the object to the left by its speedX value.
+     */
     moveLeft() {
         if(!this.isDead()) {
             this.x -= this.speedX;
@@ -20,6 +23,9 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Moves the object to the right by its speedX value.
+     */
     moveRight() {
         if(!this.isDead()) {
             this.x += this.speedX;
@@ -28,20 +34,34 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Makes the object jump by setting the vertical speed (speedY) to 0.
+     */
     jump() {
         this.speedY = 0;
         this.lastActivityTime = Date.now();
     }
 
+    /**
+     * Makes the object bounce by setting the vertical speed (speedY) to 0.
+     */
     bounce() {
         this.speedY = 0;
         this.lastActivityTime = Date.now();
     }
 
+    /**
+     * Checks if the object is above the ground (y-position is less than the ground level).
+     * @returns {boolean} - Returns true if the object is above the ground.
+     */
     isAboveGround() {
         return this.y < this.groundLevel;
     }
 
+    /**
+     * Applies gravity to the object by reducing its vertical speed and adjusting its y-position.
+     * If the object falls below the ground, it is reset to the ground level.
+     */
     applyGravity() {
         IntervalManager.setStoppableInterval(() => {
             if(this.isAboveGround() || this.speedY > 0) {
@@ -53,13 +73,23 @@ class MovableObject extends DrawableObject {
                     this.speedY = 0;
                 }
             }
-        }, 1000 / 25)
+        }, 1000 / 25);
     }
 
+    /**
+     * Checks if the object is inactive by comparing the current time with the last activity time.
+     * Inactivity is considered if the object has been idle for more than 5 seconds.
+     * @returns {boolean} - Returns true if the object is inactive.
+     */
     isInactive() {
         return Date.now() >= this.lastActivityTime + 5000;
     }
 
+    /**
+     * Checks if the object is colliding with another movable object.
+     * @param {MovableObject} mo - The other movable object to check collision with.
+     * @returns {boolean} - Returns true if the objects are colliding.
+     */
     isColliding(mo) {
         return this.x + this.offset.x + this.width - this.offset.width >= mo.x &&
             this.y + this.offset.y + this.height - this.offset.height >= mo.y &&
@@ -67,10 +97,18 @@ class MovableObject extends DrawableObject {
             this.y + this.offset.y <= mo.y + mo.offset.y + mo.height - mo.offset.height;
     }
 
+    /**
+     * Checks if the object is hurt by checking if the time since the last hit is less than 1 second.
+     * @returns {boolean} - Returns true if the object was recently hit (within 1 second).
+     */
     isHurt() {
         return (Date.now() - this.lastHit) / 1000 < 1;
     }
 
+    /**
+     * Reduces the energy of the object by 0.05, ensuring it doesn't go below 0.
+     * If energy is reduced, updates the last hit time.
+     */
     reduceEnergy() {
         this.energy = Math.max(this.energy - 0.05, 0);
         if (this.energy > 0) {
@@ -78,10 +116,18 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Checks if the object is dead by verifying if its energy is less than or equal to 0.
+     * @returns {boolean} - Returns true if the object is dead (energy <= 0).
+     */
     isDead() {
         return this.energy <= 0;
     }
 
+    /**
+     * Plays an animation by cycling through the provided images.
+     * @param {Array} images - Array of image paths for the animation sequence.
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
