@@ -217,6 +217,10 @@ canvas {
 }
 
 @media (pointer: coarse) {
+    .controls-container {
+        display: none;
+    }
+
     .btn-mobile {
         display: flex;
     }
