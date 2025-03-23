@@ -2,6 +2,9 @@
  * Configuration class for game world settings.
  */
 class WorldConfig {
+    // Set this to true to enable debug mode
+    static DEBUG_MODE = false;
+
     // The number of segments that divide the world
     static SEGMENT_COUNT = 6;
 

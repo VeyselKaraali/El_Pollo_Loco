@@ -27,6 +27,15 @@ class Bottle extends MovableObject {
     ];
 
     /**
+     * Different offsets corresponding to each image.
+     * @type {Object[]}
+     */
+    OFFSETS_BOTTLE = [
+        { x: 40, y: 14, width: 60, height: 23 },
+        { x: 30, y: 14, width: 60, height: 23 }
+    ];
+
+    /**
      * Creates a new bottle object at a random horizontal position.
      * @param {number} index - The index of the bottle used to calculate its position.
      */
@@ -37,14 +46,20 @@ class Bottle extends MovableObject {
             90,
             75
         );
-        this.offset = {
-            x: 27,
-            y: 13,
-            width: 45,
-            height: 20
-        };
         this.loadImages(this.IMAGES_BOTTLE);
         this.animate();
+    }
+
+    /**
+     * Plays an animation by cycling through the provided images.
+     * @param {Array} images - Array of image paths for the animation sequence.
+     */
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imgCache[path];
+        this.offset = this.OFFSETS_BOTTLE[i];
+        this.currentImage++;
     }
 
     /**

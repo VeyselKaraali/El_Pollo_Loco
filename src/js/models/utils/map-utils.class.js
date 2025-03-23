@@ -19,6 +19,9 @@ class MapUtils {
             ImageUtils.flipImage(ctx, mo);
         }
         mo.draw(ctx);
+        if (WorldConfig.DEBUG_MODE) {
+            mo.drawFrame(ctx);
+        }
         if (mo.isFacingOtherDirection) {
             ImageUtils.flipImageBack(ctx, mo);
         }
