@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject {
         this.acceleration = 0;
         this.isFacingOtherDirection = false;
         this.energy = 5;
+        this.energyLoss = 0.05
         this.lastHit = 0;
         this.groundLevel = 172;
         this.audioManager = new AudioManager();
@@ -110,7 +111,7 @@ class MovableObject extends DrawableObject {
      * If energy is reduced, updates the last hit time.
      */
     reduceEnergy() {
-        this.energy = Math.max(this.energy - 0.05, 0);
+        this.energy = Math.max(this.energy - this.energyLoss, 0);
         if (this.energy > 0) {
             this.lastHit = Date.now();
         }

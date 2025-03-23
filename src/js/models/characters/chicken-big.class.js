@@ -101,6 +101,7 @@ class ChickenBig extends Enemy {
         this.statusBarHealth = new StatusBarChickenBig();
         this.isNearCharacter = false;
         this.alertCount = 0;
+        this.energyLoss = 0.0325;
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
@@ -132,6 +133,7 @@ class ChickenBig extends Enemy {
             if (this.isHurt() && !this.isDead()) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.audioManager.play(this.audioCluck);
+                console.log("Energy: ", this.energy)
             }
 
             if (this.isDead()) {
