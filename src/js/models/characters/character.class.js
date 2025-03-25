@@ -249,58 +249,21 @@ class Character extends MovableObject {
      */
     animate() {
         IntervalManager.setStoppableInterval(() => {
-
-            if (KeyboardInputManager.RIGHT && this.x < WorldConfig.WIDTH_MAX_X) {
-                this.moveRight();
-            }
-
-            if (KeyboardInputManager.LEFT && this.x > 0) {
-                this.moveLeft();
-            }
-
-            if (KeyboardInputManager.UP && !this.isAboveGround()) {
-                this.jump();
-            }
-
-            if (KeyboardInputManager.SPACE) {
-                this.throwBottle();
-            }
-
+            if (KeyboardInputManager.RIGHT && this.x < WorldConfig.WIDTH_MAX_X) this.moveRight();
+            if (KeyboardInputManager.LEFT && this.x > 0) this.moveLeft();
+            if (KeyboardInputManager.UP && !this.isAboveGround()) this.jump();
+            if (KeyboardInputManager.SPACE) this.throwBottle();
             World.CAMERA_X = -this.x + 100;
         }, 1000 / 60);
 
         IntervalManager.setStoppableInterval(() => {
-            if (!this.isAboveGround()) {
-                this.jumpCounter = 0;
-            }
-
-            if (this.isDead()) {
-                this.handleDeath();
-            }
-
-            else if (this.isHurt() && !this.isDead()) {
-                this.handleHurt();
-            }
-
-            else if (this.isAboveGround() && this.jumpCounter < this.IMAGES_JUMP.length) {
-                if(this.jumpCounter === 0) {
-                    this.currentImage = 0;
-                }
-                this.playAnimation(this.IMAGES_JUMP);
-                this.jumpCounter++;
-            }
-
-            else if (KeyboardInputManager.RIGHT || KeyboardInputManager.LEFT) {
-                this.playAnimation(this.IMAGES_WALK);
-            }
-
-            else if (this.isInactive()) {
-                this.handleInactiveState();
-            }
-
-            else {
-                this.playAnimation(this.IMAGES_IDLE);
-            }
+            if (!this.isAboveGround()) this.jumpCounter = 0;
+            if (this.isDead()) this.handleDeath();
+            else if (this.isHurt() && !this.isDead()) this.handleHurt();
+            else if (this.isAboveGround() && this.jumpCounter < this.IMAGES_JUMP.length) this.handleJumpAnimation();
+            else if (KeyboardInputManager.RIGHT || KeyboardInputManager.LEFT) this.playAnimation(this.IMAGES_WALK);
+            else if (this.isInactive()) this.handleInactiveState();
+            else this.playAnimation(this.IMAGES_IDLE);
         }, 100);
     }
 
@@ -340,6 +303,18 @@ class Character extends MovableObject {
     handleInactiveState() {
         this.playAnimation(this.IMAGES_IDLE_LONG);
         this.audioManager.play(this.audioSnore);
+    }
+
+    /**
+     * Handles the jump animation by updating the current image and incrementing the jump counter.
+     * Ensures that the animation starts from the first frame when the jump begins.
+     */
+    handleJumpAnimation() {
+        if(this.jumpCounter === 0) {
+            this.currentImage = 0;
+        }
+        this.playAnimation(this.IMAGES_JUMP);
+        this.jumpCounter++;
     }
 
     /**

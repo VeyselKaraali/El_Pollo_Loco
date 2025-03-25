@@ -114,36 +114,32 @@ class ChickenBig extends Enemy {
      * Handles the animation updates for the ChickenBig's states.
      */
     animate() {
+        IntervalManager.setStoppableInterval(() => !this.isDead() && this.moveLeft(), 1000 / 60);
         IntervalManager.setStoppableInterval(() => {
-            if (!this.isDead()) {
-                this.moveLeft();
-            }
-        }, 1000 / 60);
-
-        IntervalManager.setStoppableInterval(() => {
-            if (!this.isDead()) {
-                this.playAnimation(this.IMAGES_WALK);
-            }
-
-            if (this.isNearCharacter && this.alertCount < 10 && !this.isDead()) {
-                this.playAnimation(this.IMAGES_ALERT);
-                this.alertCount++;
-            }
-
-            if (this.isHurt() && !this.isDead()) {
-                this.playAnimation(this.IMAGES_HURT);
-                this.audioManager.play(this.audioCluck);
-                console.log("Energy: ", this.energy)
-            }
-
-            if (this.isDead()) {
-                this.handleDeath();
-            }
-
-            if (this.energy < 1) {
-                this.energy = 0;
-            }
+            if (!this.isDead()) this.playAnimation(this.IMAGES_WALK);
+            if (this.isNearCharacter && this.alertCount < 10 && !this.isDead()) this.handleAlertAnimation();
+            if (this.isHurt() && !this.isDead()) this.handleHurt();
+            if (this.isDead()) this.handleDeath();
+            if (this.energy < 1) this.energy = 0;
         }, 200);
+    }
+
+    /**
+     * Handles the alert animation when the ChickenBig is near the character.
+     * Increments the alert count to limit repeated alerts.
+     */
+    handleAlertAnimation() {
+        this.playAnimation(this.IMAGES_ALERT);
+        this.alertCount++;
+    }
+
+    /**
+     * Handles the hurt animation and plays the cluck sound.
+     * This method is triggered when the ChickenBig takes damage.
+     */
+    handleHurt() {
+        this.playAnimation(this.IMAGES_HURT);
+        this.audioManager.play(this.audioCluck);
     }
 
     /**

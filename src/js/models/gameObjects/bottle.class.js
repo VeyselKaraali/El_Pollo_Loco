@@ -66,8 +66,6 @@ class Bottle extends MovableObject {
      * Starts the bottle animation by cycling through its images.
      */
     animate() {
-        IntervalManager.setStoppableInterval(() => {
-            this.playAnimation(this.IMAGES_BOTTLE);
-        }, 350);
+        IntervalManager.setStoppableInterval(() => this.playAnimation(this.IMAGES_BOTTLE), 350);
     }
 }

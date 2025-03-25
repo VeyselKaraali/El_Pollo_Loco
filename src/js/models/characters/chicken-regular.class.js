@@ -44,28 +44,24 @@ class ChickenRegular extends Enemy {
      * Handles the animation updates for the ChickenRegular's states.
      */
     animate() {
-        IntervalManager.setStoppableInterval(() => {
-            if (!this.isDead()) {
-                this.moveLeft();
-            }
-        }, 1000 / 60);
+        IntervalManager.setStoppableInterval(() => !this.isDead() && this.moveLeft(), 1000 / 60);
+        IntervalManager.setStoppableInterval(() => !this.isDead() && this.playAnimation(this.IMAGES_WALK), 200);
+        IntervalManager.setStoppableInterval(() => this.handleDeath(), 200);
+    }
 
-        IntervalManager.setStoppableInterval(() => {
-            if (!this.isDead()) {
-                this.playAnimation(this.IMAGES_WALK);
-            }
-        }, 200);
-
-        IntervalManager.setStoppableInterval(() => {
-            if (this.isDead() && !this.audioDeadPlayed) {
-                this.playAnimation(this.IMAGES_DEAD);
-                this.audioManager.play(this.audioDead);
-                this.audioDeadPlayed = true;
-                // After 1 second, move the chicken off the screen
-                setTimeout(() => {
-                    this.y = 1000; // Move it off-screen
-                }, 1000);
-            }
-        }, 200);
+    /**
+     * Handles the death state of the character by playing the death animation,
+     * the death audio, and moving the character off the screen after a short delay.
+     *
+     * The method ensures that the death animation and audio are played only once.
+     * After a 1-second delay, the character is moved off the screen.
+     */
+    handleDeath() {
+        if (this.isDead() && !this.audioDeadPlayed) {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.audioManager.play(this.audioDead);
+            this.audioDeadPlayed = true;
+            setTimeout(() => this.y = 1000, 1000);
+        }
     }
 }
