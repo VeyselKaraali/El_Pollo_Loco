@@ -45,7 +45,7 @@ class CollisionManager {
      */
     static characterWithChickenRegular(character, chickenRegular) {
         chickenRegular.forEach((enemy, index) => {
-            if(character.isAboveGround() && character.isColliding(enemy) && !enemy.isDead()) {
+            if(character.isAboveGround() && character.isColliding(enemy) && !enemy.isDead() && character.speedY < 0) {
                 enemy.energy = 0;
                 character.bounce();
             }
