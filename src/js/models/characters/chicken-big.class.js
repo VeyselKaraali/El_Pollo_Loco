@@ -102,6 +102,7 @@ class ChickenBig extends Enemy {
         this.isNearCharacter = false;
         this.alertCount = 0;
         this.energyLoss = 0.0325;
+        this.direction = -1;
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
@@ -114,7 +115,11 @@ class ChickenBig extends Enemy {
      * Handles the animation updates for the ChickenBig's states.
      */
     animate() {
-        IntervalManager.setStoppableInterval(() => !this.isDead() && this.moveLeft(), 1000 / 60);
+        IntervalManager.setStoppableInterval(() => {
+            if(!this.isDead() && this.x > 0 && this.direction === -1) this.moveLeft();
+            if(!this.isDead() && this.x < WorldConfig.WIDTH_MAX_X && this.direction === 1) this.moveRight();
+        }, 1000 / 60);
+
         IntervalManager.setStoppableInterval(() => {
             if (!this.isDead()) this.playAnimation(this.IMAGES_WALK);
             if (this.isNearCharacter && this.alertCount < 10 && !this.isDead()) this.handleAlertAnimation();

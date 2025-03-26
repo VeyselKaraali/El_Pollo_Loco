@@ -45,6 +45,7 @@ class World {
     runGameLoop() {
         IntervalManager.setStoppableInterval(() => {
             this.handleCollisions();
+            this.updateChickenBigDirection();
         }, 20);
     }
 
@@ -68,6 +69,21 @@ class World {
         CollisionManager.characterWithChickenRegular(this.character, this.chickenRegular);
         CollisionManager.characterWithChickenBig(this.character, this.chickenBig);
         CollisionManager.characterNearChickenBig(this.character, this.chickenBig);
+    }
+
+    /**
+     * Updates the movement direction of ChickenBig based on the character's position.
+     */
+    updateChickenBigDirection() {
+        const buffer = 150;
+        const chickenBigCenter = this.chickenBig.x + this.chickenBig.width / 2;
+        const characterCenter = this.character.x + this.character.width / 2;
+
+        if (chickenBigCenter < characterCenter - buffer) {
+            this.chickenBig.direction = 1; // right
+        } else if (chickenBigCenter > characterCenter + buffer) {
+            this.chickenBig.direction = -1; // left
+        }
     }
 
     /**
