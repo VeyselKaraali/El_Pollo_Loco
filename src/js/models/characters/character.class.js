@@ -236,6 +236,7 @@ class Character extends MovableObject {
             throwableBottle.throw();
             this.collectedBottles--;
             this.statusBarBottle.setValue(this.collectedBottles);
+            this.lastActivityTime = Date.now();
 
             this.canThrowBottle = false;
             setTimeout(() => {
