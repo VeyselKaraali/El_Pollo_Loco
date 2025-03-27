@@ -4,20 +4,6 @@
  */
 class Bottle extends MovableObject {
     /**
-     * The base starting position of the bottle in the game world.
-     * @static
-     * @type {number}
-     */
-    static basePosition = 600;
-
-    /**
-     * The step size used to calculate the position of multiple bottles.
-     * @static
-     * @type {number}
-     */
-    static step = 1500 / 5;
-
-    /**
      * The image paths for the bottle animations.
      * @type {string[]}
      */
@@ -36,16 +22,12 @@ class Bottle extends MovableObject {
     ];
 
     /**
-     * Creates a new bottle object at a random horizontal position.
-     * @param {number} index - The index of the bottle used to calculate its position.
+     * Creates a new instance of the class.
+     *
+     * @param {number} xPosition - The x-coordinate of the object.
      */
-    constructor(index) {
-        super(
-            Bottle.basePosition + index * Bottle.step + (Math.random() * 100 - 50),
-            340,
-            90,
-            75
-        );
+    constructor(xPosition) {
+        super(xPosition, 340, 90, 75);
         this.loadImages(this.IMAGES_BOTTLE);
         this.animate();
     }

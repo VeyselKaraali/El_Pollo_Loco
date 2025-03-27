@@ -37,23 +37,67 @@ class ObjectUtilsCreation {
     }
 
     /**
-     * Creates an array of bottle objects.
+     * Creates multiple bottles at randomly generated positions.
      *
      * @param {number} count - The number of bottles to create.
-     * @returns {Array} An array of bottle objects.
+     * @returns {Bottle[]} An array of Bottle instances.
      */
     static createBottles(count) {
-        return Array.from({ length: count }, (_, i) => new Bottle(i));
+        let positions = ObjectUtilsCreation.generateBottlePositions(count, 300, 2000, 150);
+        return positions.map(pos => new Bottle(pos));
     }
 
     /**
-     * Creates an array of coin objects.
+     * Generates an array of unique x-positions for bottles, ensuring a minimum distance between them.
+     *
+     * @param {number} count - The number of positions to generate.
+     * @param {number} min - The minimum x-coordinate value.
+     * @param {number} max - The maximum x-coordinate value.
+     * @param {number} minDistance - The minimum required distance between positions.
+     * @returns {number[]} A sorted array of unique x-positions.
+     */
+    static generateBottlePositions(count, min, max, minDistance) {
+        let positions = [];
+        while (positions.length < count) {
+            let pos = Math.floor(Math.random() * (max - min + 1)) + min;
+            if (positions.every(p => Math.abs(p - pos) >= minDistance)) {
+                positions.push(pos);
+            }
+        }
+        return positions.sort((a, b) => a - b);
+    }
+
+    /**
+     * Creates an array of coin objects at randomly generated positions.
      *
      * @param {number} count - The number of coins to create.
-     * @returns {Array} An array of coin objects.
+     * @returns {Coin[]} An array of Coin instances.
      */
     static createCoins(count) {
-        return Array.from({ length: count }, (_, i) => new Coin(i));
+        let positions = ObjectUtilsCreation.generateCoinPositions(count, 300, 2000, 200);
+        return positions.map(pos => new Coin(pos.x, pos.y));
+    }
+
+    /**
+     * Generates an array of unique positions for coins, ensuring a minimum distance between them.
+     *
+     * @param {number} count - The number of positions to generate.
+     * @param {number} minX - The minimum x-coordinate value.
+     * @param {number} maxX - The maximum x-coordinate value.
+     * @param {number} minDistance - The minimum required distance between coin positions.
+     * @returns {{x: number, y: number}[]} An array of objects containing x and y coordinates.
+     */
+    static generateCoinPositions(count, minX, maxX, minDistance) {
+        let positions = [];
+        while (positions.length < count) {
+            let x = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+            let y = Math.floor(Math.random() * (180 - 20 + 1)) + 20; // Zufällige y-Position
+
+            if (positions.every(p => Math.abs(p.x - x) >= minDistance)) {
+                positions.push({ x, y });
+            }
+        }
+        return positions.sort((a, b) => a.x - b.x); // Optional: Sortiert nach x für bessere Übersicht
     }
 
     /**

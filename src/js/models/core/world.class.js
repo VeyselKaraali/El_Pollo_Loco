@@ -23,7 +23,7 @@ class World {
         ];
         this.chickenBig = new ChickenBig();
         this.clouds = ObjectUtilsCreation.createClouds(Cloud1, Cloud2, 12);
-        this.bottles = ObjectUtilsCreation.createBottles(6);
+        this.bottles = ObjectUtilsCreation.createBottles(8);
         this.coins = ObjectUtilsCreation.createCoins(5);
         this.init();
         DomUtils.toggleElementVisibility("start-screen-container", false);
