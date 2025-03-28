@@ -133,6 +133,8 @@ class World {
         DomUtils.toggleElementVisibility("start-screen-container", true);
         StateManager.updateState("hasGameStarted", false);
         IntervalManager.stopAllIntervals();
-        InitializationUtils.audioBtnClick.play().then(r => {});
+        if(StateManager.getState("isSoundOn")) {
+            InitializationUtils.audioBtnClick.play().then(r => {});
+        }
     }
 }

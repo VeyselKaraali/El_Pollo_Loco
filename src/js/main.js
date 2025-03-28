@@ -26,7 +26,9 @@ class Main {
     static startGame() {
         IntervalManager.stopAllIntervals();
         const canvas = DomUtils.toggleElementVisibility("canvas", true);
-        InitializationUtils.audioBtnClick.play().then(r => {});
+        if(StateManager.getState("isSoundOn")) {
+            InitializationUtils.audioBtnClick.play().then(r => {});
+        }
         world = new World(canvas);
         StateManager.updateState('hasGameStarted', true);
         StateManager.updateState('isGameOver', false);
