@@ -13,6 +13,7 @@ class Main {
      */
     static init() {
         InitializationUtils.initializeApp();
+        document.addEventListener('contextmenu', event => event.preventDefault());
     }
 
     /**
