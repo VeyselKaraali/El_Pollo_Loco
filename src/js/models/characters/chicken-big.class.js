@@ -124,8 +124,8 @@ class ChickenBig extends Enemy {
      */
     animate() {
         IntervalManager.setStoppableInterval(() => {
-            if(!this.isDead() && this.x > 0 && this.direction === -1) this.moveLeft();
-            if(!this.isDead() && this.x < WorldConfig.WIDTH_MAX_X && this.direction === 1) this.moveRight();
+            if(!this.isDead() && this.x > 0 && this.direction === -1 && this.alertCount >= 10) this.moveLeft();
+            if(!this.isDead() && this.x < WorldConfig.WIDTH_MAX_X && this.direction === 1 && this.alertCount >= 10) this.moveRight();
         }, 1000 / 60);
 
         IntervalManager.setStoppableInterval(() => {
