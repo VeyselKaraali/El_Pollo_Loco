@@ -176,6 +176,7 @@ class ChickenBig extends Enemy {
             this.img = this.getLastImage(this.IMAGES_DEAD);
             StateManager.updateState("isGameOver", true);
             DomUtils.showEndScreen(true, true, false);
+            DomUtils.updateMobileButtonsVisibility();
         }, 2000);
     }
 }

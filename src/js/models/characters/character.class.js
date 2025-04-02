@@ -354,6 +354,7 @@ class Character extends MovableObject {
             this.img = this.getLastImage(this.IMAGES_DEAD);
             StateManager.updateState("isGameOver", true);
             DomUtils.showEndScreen(true, false, true);
+            DomUtils.updateMobileButtonsVisibility();
         }, 2000);
     }
 }

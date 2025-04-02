@@ -32,6 +32,7 @@ class Main {
         world = new World(canvas);
         StateManager.updateState('hasGameStarted', true);
         StateManager.updateState('isGameOver', false);
+        DomUtils.updateMobileButtonsVisibility();
     }
 
     /**

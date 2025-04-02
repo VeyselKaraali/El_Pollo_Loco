@@ -9,7 +9,6 @@ html, body {
 
 body {
     margin: 0;
-    font-family: "bangers", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,6 +23,7 @@ body {
 }
 
 #game-container {
+    font-family: "bangers", sans-serif;
     width: 100%;
     max-width: 720px;
     max-height: 100vh;
@@ -51,6 +51,10 @@ canvas {
     height: 20px;
     border: 2px solid black;
     border-radius: 50%;
+}
+
+.bottle {
+    display: none;
 }
 
 .controls-container .section {
@@ -116,7 +120,7 @@ canvas {
 
 #btn-start {
     position: absolute;
-    top: 70px;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
@@ -194,6 +198,26 @@ canvas {
     right: 10px;
 }
 
+.imprint-container {
+    font-family: Calibri, sans-serif;
+}
+
+.imprint-link {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 720px) and (orientation: portrait) {
     #rotate-message-container {
         display: flex;
@@ -217,12 +241,12 @@ canvas {
 }
 
 @media (pointer: coarse) {
-    .controls-container {
+    .space-bar {
         display: none;
     }
 
-    .btn-mobile {
-        display: flex;
+    .bottle {
+        display: unset;
     }
 
     #game-container {

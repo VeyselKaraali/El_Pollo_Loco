@@ -21,6 +21,22 @@ class DomUtils {
     }
 
     /**
+     * Toggles mobile buttons visibility based on game state
+     */
+    static updateMobileButtonsVisibility() {
+        const isGameOver = StateManager.getState("isGameOver");
+        const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+        const gameStarted = StateManager.getState("hasGameStarted");
+
+        const buttons = document.querySelectorAll('.btn-mobile');
+        buttons.forEach(btn => {
+            btn.style.display = (isTouchDevice && gameStarted && !isGameOver)
+                ? 'flex'
+                : 'none';
+        });
+    }
+
+    /**
      * Shows or hides the end screen and the win/lose screens based on the provided visibility values.
      * This function toggles the visibility of the following elements:
      * - The "end-screen-container"
