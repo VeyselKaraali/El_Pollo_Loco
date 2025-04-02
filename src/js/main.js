@@ -51,5 +51,19 @@ class Main {
             InitializationUtils.enterFullscreen(fullscreen);
         }
     }
+
+    /**
+     * Displays the popup element by removing the 'd-none' class.
+     */
+    static showPopup() {
+        document.getElementById('popup').classList.remove('d-none');
+    }
+
+    /**
+     * Hides the popup element by adding the 'd-none' class.
+     */
+    static closePopup() {
+        document.getElementById('popup').classList.add('d-none');
+    }
 }
 

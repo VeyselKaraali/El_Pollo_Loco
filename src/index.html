@@ -84,7 +84,34 @@
             <div onclick="Main.startGame()" id="btn-start">
                 <div class="btn btn-rect">START</div>
             </div>
-            <a href="imprint.html" target="_blank" class="imprint-link">Imprint</a>
+            <button onclick="Main.showPopup()" class="imprint-btn">Imprint</button>
+
+            <div id="popup" class="popup d-none">
+                <div class="popup-content">
+                    <div id="imprint-container">
+                        <div class="headline-container">
+                            <h1>Imprint</h1>
+                            <img class="close-btn" onclick="Main.closePopup()" src="assets/img/9_ui/close.png" alt="">
+                        </div>
+
+                        <h2>Information pursuant to § 5 TMG</h2>
+                        <p>
+                            ***REMOVED***<br>
+                            ***REMOVED***<br>
+                            ***REMOVED***
+                        </p>
+
+                        <h2>Contact</h2>
+                        <p>
+                            Phone: <a href="tel:***REMOVED***">***REMOVED***</a><br>
+                            Email: <a href="mailto:***REMOVED***">***REMOVED***</a>
+                        </p>
+                        <p>
+                            Source: <a href="https://www.e-recht24.de" target="_blank">e-recht24.de</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <canvas id="canvas" class="d-none" width="720" height="480"></canvas>
