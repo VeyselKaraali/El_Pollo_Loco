@@ -54,17 +54,39 @@ class Main {
     }
 
     /**
-     * Displays the popup element by removing the 'd-none' class.
+     * Displays the popup by removing the 'd-none' class and hides certain UI elements.
+     *
+     * This function makes the popup visible and hides various controls, including
+     * the imprint button, sound button, fullscreen button, start button, and
+     * elements with the classes 'controls-img', 'controls-text', and 'divider'.
      */
     static showPopup() {
         document.getElementById('popup').classList.remove('d-none');
+        document.getElementById('imprint-btn').classList.add('d-none');
+        document.getElementById('btn-sound').classList.add('d-none');
+        document.getElementById('btn-fullscreen').classList.add('d-none');
+        document.getElementById('btn-start').classList.add('d-none');
+        document.querySelectorAll('.controls-img').forEach(el => el.classList.add('d-none'));
+        document.querySelectorAll('.controls-text').forEach(el => el.classList.add('d-none'));
+        document.querySelectorAll('.divider').forEach(el => el.classList.add('d-none'));
     }
 
     /**
-     * Hides the popup element by adding the 'd-none' class.
+     * Hides the popup by adding the 'd-none' class and restores the visibility of UI elements.
+     *
+     * This function makes the popup invisible and shows various controls again, including
+     * the imprint button, sound button, fullscreen button, start button, and elements
+     * with the classes 'controls-img', 'controls-text', and 'divider'.
      */
     static closePopup() {
         document.getElementById('popup').classList.add('d-none');
+        document.getElementById('imprint-btn').classList.remove('d-none');
+        document.getElementById('btn-sound').classList.remove('d-none');
+        document.getElementById('btn-fullscreen').classList.remove('d-none');
+        document.getElementById('btn-start').classList.remove('d-none');
+        document.querySelectorAll('.controls-img').forEach(el => el.classList.remove('d-none'));
+        document.querySelectorAll('.controls-text').forEach(el => el.classList.remove('d-none'));
+        document.querySelectorAll('.divider').forEach(el => el.classList.remove('d-none'));
     }
 }
 
