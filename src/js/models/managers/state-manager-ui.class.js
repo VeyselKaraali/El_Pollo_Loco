@@ -9,10 +9,10 @@ class StateManagerUI {
      * @type {Object}
      */
     static buttonMappings = {
-        'btn-music': 'isMusicOn',        // Button for toggling music on/off
-        'btn-sound': 'isSoundOn',        // Button for toggling sound on/off
-        'btn-fullscreen': 'isFullscreen',// Button for toggling fullscreen mode
-        'btn-paused': 'isPaused',        // Button for toggling pause state
+        'btn-music': 'isMusicOn',
+        'btn-sound': 'isSoundOn',
+        'btn-fullscreen': 'isFullscreen',
+        'btn-paused': 'isPaused',
     };
 
     /**
@@ -22,20 +22,20 @@ class StateManagerUI {
      */
     static #IMAGE_PATHS = {
         isMusicOn: {
-            true: "assets/img/9_ui/music-on.png",    // Image when music is on
-            false: "assets/img/9_ui/music-off.png",  // Image when music is off
+            true: "assets/img/9_ui/music-on.png",
+            false: "assets/img/9_ui/music-off.png",
         },
         isSoundOn: {
-            true: "assets/img/9_ui/sound-on.png",    // Image when sound is on
-            false: "assets/img/9_ui/sound-off.png",  // Image when sound is off
+            true: "assets/img/9_ui/sound-on.png",
+            false: "assets/img/9_ui/sound-off.png",
         },
         isFullscreen: {
-            true: "assets/img/9_ui/fullscreen-on.png",  // Image when fullscreen is on
-            false: "assets/img/9_ui/fullscreen-off.png", // Image when fullscreen is off
+            true: "assets/img/9_ui/fullscreen-on.png",
+            false: "assets/img/9_ui/fullscreen-off.png",
         },
         isPaused: {
-            true: "assets/img/9_ui/pause-on.png",    // Image when game is paused
-            false: "assets/img/9_ui/pause-off.png",   // Image when game is unpaused
+            true: "assets/img/9_ui/pause-on.png",
+            false: "assets/img/9_ui/pause-off.png",
         },
     };
 
@@ -70,8 +70,8 @@ class StateManagerUI {
     static handleButtonClick(buttonId) {
         const stateKey = this.buttonMappings[buttonId];
         if (stateKey) {
-            const newValue = !StateManager.getState(stateKey); // Toggle the state
-            StateManager.updateState(stateKey, newValue);      // Update the state
+            const newValue = !StateManager.getState(stateKey);
+            StateManager.updateState(stateKey, newValue);
         }
     }
 }

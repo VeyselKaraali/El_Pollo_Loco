@@ -10,10 +10,10 @@ class ImageUtils {
      * @param {Object} mo - The object representing the image or drawable, which must have `x` (position) and `width` properties.
      */
     static flipImage(ctx, mo) {
-        ctx.save();  // Save the current canvas state to restore later
-        ctx.translate(mo.width, 0);  // Translate the context to the image width
-        ctx.scale(-1, 1);  // Flip the context horizontally
-        mo.x *= -1;  // Update the position of the image object to reflect the flip
+        ctx.save();
+        ctx.translate(mo.width, 0);
+        ctx.scale(-1, 1);
+        mo.x *= -1;
     }
 
     /**
@@ -24,7 +24,7 @@ class ImageUtils {
      * @param {Object} mo - The object representing the image or drawable, which must have `x` (position) properties.
      */
     static flipImageBack(ctx, mo) {
-        mo.x *= -1;  // Revert the position of the image object to its original state
-        ctx.restore();  // Restore the previous canvas state
+        mo.x *= -1;
+        ctx.restore();
     }
 }

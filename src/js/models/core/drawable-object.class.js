@@ -36,7 +36,10 @@ class DrawableObject {
             img.src = path;
             this.imgCache[path] = img;
 
-            // Set the first image as the current image
+            /**
+             * Sets the first image in the array as the current image.
+             * @property {HTMLImageElement} img - The currently selected image.
+             */
             if (index === 0) {
                 this.img = img;
             }

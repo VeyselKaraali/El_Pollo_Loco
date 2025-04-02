@@ -91,13 +91,13 @@ class ObjectUtilsCreation {
         let positions = [];
         while (positions.length < count) {
             let x = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
-            let y = Math.floor(Math.random() * (180 - 20 + 1)) + 20; // Zufällige y-Position
+            let y = Math.floor(Math.random() * (180 - 20 + 1)) + 20;
 
             if (positions.every(p => Math.abs(p.x - x) >= minDistance)) {
                 positions.push({ x, y });
             }
         }
-        return positions.sort((a, b) => a.x - b.x); // Optional: Sortiert nach x für bessere Übersicht
+        return positions.sort((a, b) => a.x - b.x);
     }
 
     /**

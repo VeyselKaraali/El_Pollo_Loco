@@ -73,6 +73,10 @@ class World {
 
     /**
      * Updates the movement direction of ChickenBig based on the character's position.
+     *
+     * The function checks the horizontal position of ChickenBig relative to the character.
+     * - If ChickenBig is more than 150 pixels to the left of the character, it moves right (`1`).
+     * - If ChickenBig is more than 150 pixels to the right of the character, it moves left (`-1`).
      */
     updateChickenBigDirection() {
         const buffer = 150;
@@ -80,9 +84,9 @@ class World {
         const characterCenter = this.character.x + this.character.width / 2;
 
         if (chickenBigCenter < characterCenter - buffer) {
-            this.chickenBig.direction = 1; // right
+            this.chickenBig.direction = 1;
         } else if (chickenBigCenter > characterCenter + buffer) {
-            this.chickenBig.direction = -1; // left
+            this.chickenBig.direction = -1;
         }
     }
 

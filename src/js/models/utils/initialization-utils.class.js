@@ -66,11 +66,11 @@ class InitializationUtils {
      */
     static enterFullscreen(element) {
         if(element.requestFullscreen) {
-            element.requestFullscreen(); // Standard Fullscreen API
+            element.requestFullscreen();
         } else if(element.msRequestFullscreen) {
-            element.msRequestFullscreen(); // IE and Edge
+            element.msRequestFullscreen();
         } else if(element.webkitRequestFullscreen) {
-            element.webkitRequestFullscreen(); // Safari
+            element.webkitRequestFullscreen();
         }
     }
 
@@ -80,9 +80,9 @@ class InitializationUtils {
      */
     static exitFullscreen() {
         if(document.fullscreenElement) {
-            document.exitFullscreen().then(r => {}); // Standard Fullscreen API
+            document.exitFullscreen().then(r => {});
         } else if(document.webkitExitFullscreen) {
-            document.webkitExitFullscreen(); // Safari
+            document.webkitExitFullscreen();
         }
         StateManager.updateState("isFullscreen", false);
     }

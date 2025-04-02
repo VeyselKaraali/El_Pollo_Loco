@@ -84,13 +84,21 @@ class ChickenBig extends Enemy {
 
     /**
      * Creates an instance of a ChickenBig.
+     *
+     * The ChickenBig is initialized with a fixed position and size.
+     *
+     * @constructor
+     * @property {number} xPosition - The initial x-coordinate of ChickenBig.
+     * @property {number} yPosition - The initial y-coordinate of ChickenBig.
+     * @property {number} width - The width of ChickenBig.
+     * @property {number} height - The height of ChickenBig.
      */
     constructor() {
         super(
-            2500,  // xPosition
-            45,    // yPosition
-            250,   // width
-            400    // height
+            2500,
+            45,
+            250,
+            400
         );
         this.offset = {
             x: 20,

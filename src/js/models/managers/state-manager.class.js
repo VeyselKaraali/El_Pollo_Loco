@@ -6,13 +6,13 @@
 class StateManager {
     static #listeners = [];
     static #state = {
-        hasGameStarted: false,  // Indicates if the game has started
-        isGameOver: false,      // Indicates if the game is over
-        isHelpOpen: false,      // Indicates if the help menu is open
-        isSoundOn: true,        // Indicates if the sound is on
-        isMusicOn: false,       // Indicates if the music is on
-        isPaused: false,        // Indicates if the game is paused
-        isFullscreen: false,    // Indicates if the game is in fullscreen mode
+        hasGameStarted: false,
+        isGameOver: false,
+        isHelpOpen: false,
+        isSoundOn: true,
+        isMusicOn: false,
+        isPaused: false,
+        isFullscreen: false,
     };
 
     /**

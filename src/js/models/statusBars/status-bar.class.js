@@ -24,11 +24,11 @@ class StatusBar extends DrawableObject {
     constructor() {
         super();
         this.loadImages(this.IMAGES);
-        this.x = 10;             // X position of the status bar
-        this.y = 0;              // Y position of the status bar
-        this.width = 200;        // Width of the status bar
-        this.height = 60;        // Height of the status bar
-        this.setValue(0);        // Set the initial value to 0
+        this.x = 10;
+        this.y = 0;
+        this.width = 200;
+        this.height = 60;
+        this.setValue(0);
     }
 
     /**
@@ -38,8 +38,8 @@ class StatusBar extends DrawableObject {
      */
     setValue(value) {
         this.value = value;
-        let path = this.IMAGES[this.resolveImageIndex()]; // Resolve the image index based on the value
-        this.img = this.imgCache[path];                    // Update the image
+        let path = this.IMAGES[this.resolveImageIndex()];
+        this.img = this.imgCache[path];
     }
 
     /**

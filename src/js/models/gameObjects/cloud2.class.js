@@ -17,7 +17,7 @@ class Cloud2 extends Cloud {
     constructor() {
         super();
         this.loadImages(this.IMAGES_CLOUD_2);
-        this.speedX = 0.08 + Math.random() * 0.05; // Random speed for cloud movement
-        this.y = 40 + Math.random() * 20; // Random vertical position
+        this.speedX = 0.08 + Math.random() * 0.05;
+        this.y = 40 + Math.random() * 20;
     }
 }
