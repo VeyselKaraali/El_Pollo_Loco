@@ -252,6 +252,21 @@ a:hover {
     #game-container {
         width: 100%;
     }
+
+    .btn-rect {
+        font-size: 20px;
+        padding: 10px 15px;
+        border-radius: 10px;
+    }
+
+    .controls-container .controls-img {
+        width: 15px;
+        height: 15px;
+    }
+
+    .controls-text {
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 700px) and (orientation: landscape) {
