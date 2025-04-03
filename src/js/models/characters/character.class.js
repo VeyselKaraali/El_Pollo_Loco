@@ -196,6 +196,7 @@ class Character extends MovableObject {
         if (!this.isDead()) {
             super.jump();
             this.speedY = 30;
+            this.handleJumpAnimation();
             this.playAudioJump();
         }
     }
