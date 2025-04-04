@@ -9,10 +9,10 @@ class DrawableObject {
         this.width = width;
         this.height = height;
         this.offset = {
-            x: 0,
-            y: 0,
-            width: 0,
-            height: 0
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0
         };
     }
 
@@ -83,7 +83,12 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = "1";
             ctx.strokeStyle = "red";
-            ctx.rect(this.x + this.offset.x, this.y + this.offset.y, this.width - this.offset.width, this.height - this.offset.height);
+            ctx.rect(
+                this.x + this.offset.left,
+                this.y + this.offset.top,
+                this.width - this.offset.left - this.offset.right,
+                this.height - this.offset.top - this.offset.bottom
+            );
             ctx.stroke();
         }
     }

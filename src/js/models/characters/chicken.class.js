@@ -34,10 +34,10 @@ class Chicken extends ChickenRegular {
             60
         );
         this.offset = {
-            x: 0,
-            y: 3,
-            width: 0,
-            height: 8
+            top: 5,
+            right: 4,
+            bottom: 7,
+            left: 2
         };
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_DEAD);

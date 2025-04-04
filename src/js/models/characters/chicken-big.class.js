@@ -101,10 +101,10 @@ class ChickenBig extends Enemy {
             400
         );
         this.offset = {
-            x: 20,
-            y: 70,
-            width: 55,
-            height: 130
+            top: 73,
+            right: 35,
+            bottom: 40,
+            left: 35
         };
         this.statusBarHealth = new StatusBarChickenBig();
         this.isNearCharacter = false;

@@ -21,10 +21,10 @@ class Coin extends MovableObject {
     constructor(xPosition, yPosition) {
         super(xPosition, yPosition, 100, 100);
         this.offset = {
-            x: 35,
-            y: 35,
-            width: 70,
-            height: 70
+            top: 35,
+            right: 35,
+            bottom: 35,
+            left: 35
         };
         this.loadImages(this.IMAGES_COIN);
         this.animate();

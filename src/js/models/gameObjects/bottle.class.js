@@ -17,8 +17,9 @@ class Bottle extends MovableObject {
      * @type {Object[]}
      */
     OFFSETS_BOTTLE = [
-        { x: 40, y: 14, width: 60, height: 23 },
-        { x: 30, y: 14, width: 60, height: 23 }
+        { top: 65, right: 20, bottom: 60, left: 40 },
+        { top: 65, right: 30, bottom: 60, left: 30 }
+
     ];
 
     /**
