@@ -15,6 +15,10 @@ class StatusBarCoin extends StatusBar {
         "assets/img/8_statusbars/1_character/2_coin/3.png",
         "assets/img/8_statusbars/1_character/2_coin/4.png",
         "assets/img/8_statusbars/1_character/2_coin/5.png",
+        "assets/img/8_statusbars/1_character/2_coin/6.png",
+        "assets/img/8_statusbars/1_character/2_coin/7.png",
+        "assets/img/8_statusbars/1_character/2_coin/8.png",
+        "assets/img/8_statusbars/1_character/2_coin/9.png",
     ];
 
     /**
@@ -24,7 +28,10 @@ class StatusBarCoin extends StatusBar {
     constructor() {
         super();
         this.loadImages(this.IMAGES);
-        this.y = 80;
+        this.width = 75;
+        this.height = 75;
+        this.x = -10;
+        this.y = 50;
         this.setValue(0);
     }
 }

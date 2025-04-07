@@ -14,7 +14,11 @@ class StatusBarBottle extends StatusBar {
         "assets/img/8_statusbars/1_character/3_bottle/2.png",
         "assets/img/8_statusbars/1_character/3_bottle/3.png",
         "assets/img/8_statusbars/1_character/3_bottle/4.png",
-        "assets/img/8_statusbars/1_character/3_bottle/5.png"
+        "assets/img/8_statusbars/1_character/3_bottle/5.png",
+        "assets/img/8_statusbars/1_character/3_bottle/6.png",
+        "assets/img/8_statusbars/1_character/3_bottle/7.png",
+        "assets/img/8_statusbars/1_character/3_bottle/8.png",
+        "assets/img/8_statusbars/1_character/3_bottle/9.png",
     ];
 
     /**
@@ -24,7 +28,10 @@ class StatusBarBottle extends StatusBar {
     constructor() {
         super();
         this.loadImages(this.IMAGES);
-        this.y = 130;
+        this.width = 75;
+        this.height = 75;
+        this.x = -10;
+        this.y = 100;
         this.setValue(0);
     }
 }

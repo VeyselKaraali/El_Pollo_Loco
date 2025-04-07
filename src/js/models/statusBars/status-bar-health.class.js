@@ -24,7 +24,7 @@ class StatusBarHealth extends StatusBar {
     constructor() {
         super();
         this.loadImages(this.IMAGES);
-        this.y = 30;
+        this.y = 15;
         this.setValue(5);
     }
 }
