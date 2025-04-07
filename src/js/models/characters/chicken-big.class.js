@@ -109,7 +109,7 @@ class ChickenBig extends Enemy {
         this.statusBarHealth = new StatusBarChickenBig();
         this.isNearCharacter = false;
         this.alertCount = 0;
-        this.energyLoss = 0.0325;
+        this.energyLoss = 0.0429;
         this.direction = -1;
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_ALERT);
