@@ -91,7 +91,7 @@ class ObjectUtilsCreation {
         let positions = [];
         while (positions.length < count) {
             let x = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
-            let y = Math.floor(Math.random() * (180 - 20 + 1)) + 20;
+            let y = Math.floor(Math.random() * (180 - 25 + 1)) + 25;
 
             if (positions.every(p => Math.abs(p.x - x) >= minDistance)) {
                 positions.push({ x, y });
