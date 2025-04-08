@@ -31,7 +31,7 @@ class StatusBarBottle extends StatusBar {
         this.width = 75;
         this.height = 75;
         this.x = -10;
-        this.y = 100;
+        this.y = 115;
         this.setValue(0);
     }
 }

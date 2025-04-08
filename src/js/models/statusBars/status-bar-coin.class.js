@@ -31,7 +31,7 @@ class StatusBarCoin extends StatusBar {
         this.width = 75;
         this.height = 75;
         this.x = -10;
-        this.y = 50;
+        this.y = 65;
         this.setValue(0);
     }
 }
