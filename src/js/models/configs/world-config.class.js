@@ -58,7 +58,7 @@ class WorldConfig {
      * Volume level for background music (0.0 - 1.0).
      * @constant {number}
      */
-    static VOLUME_BACKGROUND_MUSIC = 0.025;
+    static VOLUME_BACKGROUND_MUSIC = 0.05;
 
     /**
      * Volume level for sound effects (0.0 - 1.0).
