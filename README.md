@@ -13,7 +13,7 @@
 
 ## 🚀 Live Demo
 
-[VIEW LIVE](https://el-pollo-loco.veysel-karaali.com/)
+[View Live](https://el-pollo-loco.veysel-karaali.com/)
 
 ## 🛠️ Tech Stack
 
