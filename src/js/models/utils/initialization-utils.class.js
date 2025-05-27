@@ -21,6 +21,27 @@ class InitializationUtils {
     static initializeApp() {
         InitializationUtils.setupStateListener();
         KeyboardInputManager.setupEventListeners();
+        InitializationUtils.loadContactInfo();
+    }
+
+    static loadContactInfo() {
+        fetch('./contactData.json')
+            .then(response => response.json())
+            .then(config => {
+                const addressElement = document.getElementById('address');
+                addressElement.innerHTML = `
+          ${config.name}<br>
+          ${config.company}<br>
+          ${config.street}<br>
+          ${config.city}
+        `;
+
+                const emailElement = document.getElementById('email');
+                emailElement.innerHTML = `
+          Email: <a href="mailto:${config.email}">${config.email}</a>
+        `;
+            })
+            .catch(error => console.error('Fehler beim Laden der Konfiguration:', error));
     }
 
     /**
